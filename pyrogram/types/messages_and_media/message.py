@@ -4663,17 +4663,17 @@ class Message(Object, Update):
                 self.id,
             )
             return None
-        elif self.game and not await self._client.storage.is_bot():
+        if self.game and not await self._client.storage.is_bot():
             log.warning(
                 "Users cannot send messages with Game media type. chat_id: %s, message_id: %s",
                 self.chat.id,
                 self.id,
             )
             return None
-        elif self.empty:
+        if self.empty:
             log.warning("Empty messages cannot be copied.")
             return None
-        elif self.text:
+        if self.text:
             return await self._client.send_message(
                 chat_id,
                 text=self.text,
@@ -4691,7 +4691,7 @@ class Message(Object, Update):
                 if reply_markup is object
                 else reply_markup,
             )
-        elif self.media:
+        if self.media:
             send_media = partial(
                 self._client.send_cached_media,
                 chat_id=chat_id,
@@ -4800,23 +4800,22 @@ class Message(Object, Update):
 
             if self.sticker or self.video_note:
                 return await send_media(
-                    file_id=file_id, message_thread_id=message_thread_id
-                )
-            else:
-                if caption is None:
-                    caption = self.caption or ""
-                    caption_entities = self.caption_entities
-
-                return await send_media(
                     file_id=file_id,
-                    caption=caption,
-                    parse_mode=parse_mode,
-                    caption_entities=caption_entities,
-                    has_spoiler=has_spoiler,
                     message_thread_id=message_thread_id,
                 )
-        else:
-            raise ValueError("Can't copy this message")
+            if caption is None:
+                caption = self.caption or ""
+                caption_entities = self.caption_entities
+
+            return await send_media(
+                file_id=file_id,
+                caption=caption,
+                parse_mode=parse_mode,
+                caption_entities=caption_entities,
+                has_spoiler=has_spoiler,
+                message_thread_id=message_thread_id,
+            )
+        raise ValueError("Can't copy this message")
 
     async def delete(self, revoke: bool = True):
         """Bound method *delete* of :obj:`~pyrogram.types.Message`.

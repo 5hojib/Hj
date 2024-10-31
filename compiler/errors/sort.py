@@ -11,12 +11,12 @@ import requests  # requests==2.28.1
 def sort_tsv_files():
     """Sorts TSV files in the 'source' directory by their keys."""
     for p in Path("source").glob("*.tsv"):
-        with open(p) as f:
+        with p.open() as f:  # Replaced open() with Path.open()
             reader = csv.reader(f, delimiter="\t")
-            dct = {k: v for k, v in reader if k != "id"}
+            dct = {k: v for k, v in reader if k != "id"}  # Dictionary comprehension
             keys = sorted(dct)
 
-        with open(p, "w") as f:
+        with p.open("w") as f:  # Replaced open() with Path.open()
             f.write("id\tmessage\n")
             for i, item in enumerate(keys, start=1):
                 f.write(f"{item}\t{dct[item]}")
@@ -83,15 +83,13 @@ def format_description(description: str, base_url: str) -> str:
 def update_tsv_files(error_code: str, dct: dict):
     """Updates the TSV files for the given error code with the provided dictionary of error messages."""
     for p in Path("source/").glob(f"{error_code}*.tsv"):
-        with open(p) as f:
+        with p.open() as f:  # Replaced open() with Path.open()
             reader = csv.reader(f, delimiter="\t")
-            for k, v in reader:
-                if k != "id":
-                    dct[k] = v
+            dct.update({k: v for k, v in reader if k != "id"})  # Dictionary comprehension
 
         keys = sorted(dct)
 
-        with open(p, "w") as f:
+        with p.open("w") as f:  # Replaced open() with Path.open()
             f.write("id\tmessage\n")
             for i, item in enumerate(keys, start=1):
                 f.write(f"{item}\t{dct[item]}\n")
