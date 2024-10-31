@@ -85,7 +85,9 @@ def update_tsv_files(error_code: str, dct: dict):
     for p in Path("source/").glob(f"{error_code}*.tsv"):
         with p.open() as f:  # Replaced open() with Path.open()
             reader = csv.reader(f, delimiter="\t")
-            dct.update({k: v for k, v in reader if k != "id"})  # Dictionary comprehension
+            dct.update(
+                {k: v for k, v in reader if k != "id"}
+            )  # Dictionary comprehension
 
         keys = sorted(dct)
 
