@@ -148,7 +148,7 @@ class Session:
                     self.client.system_version,
                     self.client.lang_code,
                 )
-            except AuthKeyDuplicated as e:
+            except (AuthKeyDuplicated, Unauthorized) as e:
                 await self.stop()
                 raise e
             except (OSError, RPCError):

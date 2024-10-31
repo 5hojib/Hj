@@ -1,12 +1,31 @@
 id	message
+ANONYMOUS_REACTIONS_DISABLED	Sorry, anonymous administrators cannot leave reactions or participate in polls.
 BROADCAST_FORBIDDEN	The request can't be used in channels
 CHANNEL_PUBLIC_GROUP_NA	The channel/supergroup is not available
+CHAT_ACTION_FORBIDDEN	You cannot execute this action.
 CHAT_ADMIN_INVITE_REQUIRED	You don't have rights to invite other users
 CHAT_ADMIN_REQUIRED	The method requires chat admin privileges
 CHAT_FORBIDDEN	You cannot write in this chat
-CHAT_GUEST_SEND_FORBIDDEN	You need to join the discussion group before commentingr
+CHAT_GUEST_SEND_FORBIDDEN	You need to join the discussion group before commenting
+CHAT_SEND_AUDIOS_FORBIDDEN	You can't send audio messages in this chat
+CHAT_SEND_DOCS_FORBIDDEN	You can't send a documents to this chat
+CHAT_SEND_GAME_FORBIDDEN	You can't send a game to this chat
+CHAT_SEND_GIFS_FORBIDDEN	You can't send gifs in this chat
+CHAT_SEND_INLINE_FORBIDDEN	You can't use inline bot to send messages in this chat
+CHAT_SEND_MEDIA_FORBIDDEN	You can't send media in this chat
+CHAT_SEND_PHOTOS_FORBIDDEN	You can't send photos in this chat
+CHAT_SEND_PLAIN_FORBIDDEN	You can't send non-media (text) messages in this chat
+CHAT_SEND_POLL_FORBIDDEN	You can't send polls in this chat
+CHAT_SEND_ROUNDVIDEOS_FORBIDDEN	You can't send round videos to this chat.
+CHAT_SEND_STICKERS_FORBIDDEN	You can't send stickers in this chat
+CHAT_SEND_VIDEOS_FORBIDDEN	You can't send videos in this chat
+CHAT_SEND_VOICES_FORBIDDEN	You can't send voice recordings in this chat
+CHAT_WRITE_FORBIDDEN	You can't write in this chat
 EDIT_BOT_INVITE_FORBIDDEN	Bots' chat invite links can't be edited
+GROUPCALL_ALREADY_STARTED	The groupcall has already started, you can join directly using phone.joinGroupCall
+GROUPCALL_FORBIDDEN	The group call has already ended
 INLINE_BOT_REQUIRED	The action must be performed through an inline bot callback
+LIVE_DISABLED	Story is disabled server-side
 MESSAGE_AUTHOR_REQUIRED	You are not the author of this message
 MESSAGE_DELETE_FORBIDDEN	You don't have rights to delete messages in this chat, most likely because you are not the author of them
 NOT_ALLOWED	Not allowed
@@ -25,22 +44,8 @@ USER_DELETED	You can't send this secret message because the other participant de
 USER_INVALID	The provided user is invalid
 USER_IS_BLOCKED	The user is blocked
 USER_NOT_MUTUAL_CONTACT	The provided user is not a mutual contact
+USER_NOT_PARTICIPANT	You're not a member of this supergroup/channel.
 USER_PRIVACY_RESTRICTED	The user's privacy settings is preventing you to perform this action
 USER_RESTRICTED	You are limited/restricted. You can't perform this action
-CHAT_SEND_AUDIOS_FORBIDDEN	You can't send audio messages in this chat
-CHAT_SEND_DOCS_FORBIDDEN	You can't send a documents to this chat
-CHAT_SEND_GAME_FORBIDDEN	You can't send a game to this chat
-CHAT_SEND_GIFS_FORBIDDEN	You can't send gifs in this chat
-CHAT_SEND_INLINE_FORBIDDEN	You can't use inline bot to send messages in this chat
-CHAT_SEND_MEDIA_FORBIDDEN	You can't send media in this chat
-CHAT_SEND_PHOTOS_FORBIDDEN	You can't send photos in this chat
-CHAT_SEND_PLAIN_FORBIDDEN	You can't send non-media (text) messages in this chat
-CHAT_SEND_POLL_FORBIDDEN	You can't send polls in this chat
-CHAT_SEND_STICKERS_FORBIDDEN	You can't send stickers in this chat
-CHAT_SEND_VIDEOS_FORBIDDEN	You can't send videos in this chat
-CHAT_SEND_VOICES_FORBIDDEN	You can't send voice recordings in this chat
-CHAT_WRITE_FORBIDDEN	You can't write in this chat
-GROUPCALL_ALREADY_STARTED	The groupcall has already started, you can join directly using phone.joinGroupCall
-GROUPCALL_FORBIDDEN	The group call has already ended
-LIVE_DISABLED	Story is disabled server-side
-CHAT_GUEST_SEND_FORBIDDEN	You need to join the discussion group before commenting
+VOICE_MESSAGES_FORBIDDEN	This user's privacy settings forbid you from sending voice messages.
+YOUR_PRIVACY_RESTRICTED	You cannot fetch the read date of this message because you have disallowed other users to do so for *your* messages; to fix, allow other users to see *your* exact last online date OR purchase a [Telegram Premium](https://core.telegram.org/api/premium) subscription.

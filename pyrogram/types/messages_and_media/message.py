@@ -1164,6 +1164,16 @@ class Message(Object, Update):
                         else:
                             document = types.Document._parse(client, doc, file_name)
                             media_type = enums.MessageMediaType.DOCUMENT
+                elif isinstance(media, raw.types.MessageMediaWebPage):
+                    if isinstance(
+                        media.webpage, raw.types.WebPage | raw.types.WebPageEmpty
+                    ):
+                        web_page_preview = types.WebPagePreview._parse(
+                            client, media, message.invert_media
+                        )
+                        media_type = enums.MessageMediaType.WEB_PAGE_PREVIEW
+                    else:
+                        media = None
                 elif isinstance(media, raw.types.MessageMediaPoll):
                     poll = await types.Poll._parse(client, media, users)
                     media_type = enums.MessageMediaType.POLL
@@ -1619,7 +1629,6 @@ class Message(Object, Update):
         caption: str = "",
         parse_mode: enums.ParseMode | None = None,
         caption_entities: list[types.MessageEntity] | None = None,
-        message_effect_id: int | None = None,
         has_spoiler: bool | None = None,
         duration: int = 0,
         width: int = 0,
@@ -1637,6 +1646,7 @@ class Message(Object, Update):
         reply_in_chat_id: int | str | None = None,
         quote_text: str | None = None,
         quote_entities: list[types.MessageEntity] | None = None,
+        message_effect_id: int | None = None,
         progress: Callable | None = None,
         progress_args: tuple = (),
     ) -> Message:
@@ -1816,7 +1826,6 @@ class Message(Object, Update):
         caption: str = "",
         parse_mode: enums.ParseMode | None = None,
         caption_entities: list[types.MessageEntity] | None = None,
-        message_effect_id: int | None = None,
         duration: int = 0,
         performer: str | None = None,
         title: str | None = None,
@@ -1828,6 +1837,7 @@ class Message(Object, Update):
         reply_in_chat_id: int | str | None = None,
         quote_text: str | None = None,
         quote_entities: list[types.MessageEntity] | None = None,
+        message_effect_id: int | None = None,
         reply_markup: types.InlineKeyboardMarkup
         | types.ReplyKeyboardMarkup
         | types.ReplyKeyboardRemove

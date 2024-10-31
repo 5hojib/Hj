@@ -221,7 +221,6 @@ def pyrogram_api() -> None:
             get_forum_topics
             get_forum_topics_by_id
             set_chat_username
-            get_nearby_chats
             archive_chats
             unarchive_chats
             add_chat_members
