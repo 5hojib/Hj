@@ -41,7 +41,7 @@ def scrape_telegram_errors():
         print("No error details found")
         return
 
-    error_url = base_url + match.group(1)
+    error_url = base_url + match[1]
     error_response = requests.get(error_url)
     if error_response.status_code != 200:
         print("Failed to fetch detailed errors")
