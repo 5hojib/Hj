@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          rye pin 3.13
+          rye pin 3.12
           rye sync
 
       - name: Run ruff to lint and format code
