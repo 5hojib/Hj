@@ -1,11 +1,19 @@
-from datetime import datetime
-from typing import List
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
 
 import pyrogram
-from pyrogram import raw, utils
-from pyrogram import types
-from pyrogram.file_id import FileId, FileType, FileUniqueId, FileUniqueType, ThumbnailSource
-from ..object import Object
+from pyrogram import raw, types, utils
+from pyrogram.file_id import (
+    FileId,
+    FileType,
+    FileUniqueId,
+    FileUniqueType,
+)
+from pyrogram.types.object import Object
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 
 class AlternativeVideo(Object):
@@ -54,19 +62,19 @@ class AlternativeVideo(Object):
     def __init__(
         self,
         *,
-        client: "pyrogram.Client" = None,
+        client: pyrogram.Client = None,
         file_id: str,
         file_unique_id: str,
         width: int,
         height: int,
         codec: str,
         duration: int,
-        file_name: str = None,
-        mime_type: str = None,
-        file_size: int = None,
-        supports_streaming: bool = None,
-        date: datetime = None,
-        thumbs: List["types.Thumbnail"] = None
+        file_name: str | None = None,
+        mime_type: str | None = None,
+        file_size: int | None = None,
+        supports_streaming: bool | None = None,
+        date: datetime | None = None,
+        thumbs: list[types.Thumbnail] | None = None,
     ):
         super().__init__(client)
 
@@ -86,31 +94,36 @@ class AlternativeVideo(Object):
     @staticmethod
     def _parse(
         client,
-        video: "raw.types.Document",
-        video_attributes: "raw.types.DocumentAttributeVideo",
-        file_name: str
-    ) -> "AlternativeVideo":
+        video: raw.types.Document,
+        video_attributes: raw.types.DocumentAttributeVideo,
+        file_name: str,
+    ) -> AlternativeVideo:
         return AlternativeVideo(
             file_id=FileId(
                 file_type=FileType.VIDEO,
                 dc_id=video.dc_id,
                 media_id=video.id,
                 access_hash=video.access_hash,
-                file_reference=video.file_reference
-            ).encode() if video else None,
+                file_reference=video.file_reference,
+            ).encode()
+            if video
+            else None,
             file_unique_id=FileUniqueId(
-                file_unique_type=FileUniqueType.DOCUMENT,
-                media_id=video.id
-            ).encode() if video else None,
+                file_unique_type=FileUniqueType.DOCUMENT, media_id=video.id
+            ).encode()
+            if video
+            else None,
             width=video_attributes.w if video_attributes else None,
             height=video_attributes.h if video_attributes else None,
             codec=video_attributes.video_codec if video_attributes else None,
             duration=video_attributes.duration if video_attributes else None,
             file_name=file_name,
             mime_type=video.mime_type if video else None,
-            supports_streaming=video_attributes.supports_streaming if video_attributes else None,
+            supports_streaming=video_attributes.supports_streaming
+            if video_attributes
+            else None,
             file_size=video.size if video else None,
             date=utils.timestamp_to_datetime(video.date) if video else None,
             thumbs=types.Thumbnail._parse(client, video) if video else None,
-            client=client
+            client=client,
         )

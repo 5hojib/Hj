@@ -226,7 +226,7 @@ class Message(Object, Update):
 
         video (:obj:`~pyrogram.types.Video`, *optional*):
             Message is a video, information about the video.
-            
+
         alternative_videos (List of :obj:`~pyrogram.types.AlternativeVideo`, *optional*):
             Alternative qualities of the video, if the message is a video.
 
@@ -488,7 +488,7 @@ class Message(Object, Update):
         invoice: types.Invoice = None,
         story: types.MessageStory | types.Story = None,
         video: types.Video = None,
-        alternative_videos: list["types.AlternativeVideo"] = None,
+        alternative_videos: list[types.AlternativeVideo] | None = None,
         voice: types.Voice = None,
         video_note: types.VideoNote = None,
         web_page_preview: types.WebPagePreview = None,
@@ -1152,16 +1152,31 @@ class Message(Object, Update):
                                 altdocs = media.alt_documents or []
                                 for altdoc in altdocs:
                                     if isinstance(altdoc, raw.types.Document):
-                                        altdoc_attributes = {type(i): i for i in altdoc.attributes}
+                                        altdoc_attributes = {
+                                            type(i): i for i in altdoc.attributes
+                                        }
                                         altdoc_file_name = getattr(
                                             altdoc_attributes.get(
-                                                raw.types.DocumentAttributeFilename, None
-                                            ), "file_name", None
+                                                raw.types.DocumentAttributeFilename,
+                                                None,
+                                            ),
+                                            "file_name",
+                                            None,
                                         )
-                                        altdoc_video_attribute = altdoc_attributes.get(raw.types.DocumentAttributeVideo, None)
+                                        altdoc_video_attribute = (
+                                            altdoc_attributes.get(
+                                                raw.types.DocumentAttributeVideo,
+                                                None,
+                                            )
+                                        )
                                         if altdoc_video_attribute:
                                             alternative_videos.append(
-                                                types.AlternativeVideo._parse(client, altdoc, altdoc_video_attribute, altdoc_file_name)
+                                                types.AlternativeVideo._parse(
+                                                    client,
+                                                    altdoc,
+                                                    altdoc_video_attribute,
+                                                    altdoc_file_name,
+                                                )
                                             )
                         elif raw.types.DocumentAttributeAudio in attributes:
                             audio_attributes = attributes[
@@ -1301,7 +1316,9 @@ class Message(Object, Update):
                 invoice=invoice,
                 story=story,
                 video=video,
-                alternative_videos=types.List(alternative_videos) if alternative_videos else None,
+                alternative_videos=types.List(alternative_videos)
+                if alternative_videos
+                else None,
                 video_note=video_note,
                 web_page_preview=web_page_preview,
                 sticker=sticker,

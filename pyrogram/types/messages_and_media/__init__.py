@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from .alternative_video import AlternativeVideo
 from .animation import Animation
 from .audio import Audio
-from .alternative_video import AlternativeVideo
 from .available_effect import AvailableEffect
 from .contact import Contact
 from .contact_registered import ContactRegistered
