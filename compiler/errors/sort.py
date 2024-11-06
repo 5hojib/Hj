@@ -5,24 +5,22 @@ import re
 import sys
 from pathlib import Path
 
-import requests  # requests==2.28.1
+import requests
 
 if len(sys.argv) != 2:
     sys.exit(1)
 
 if sys.argv[1] == "sort":
     for p in Path("source").glob("*.tsv"):
-        with open(p) as f:
+        with p.open() as f:
             reader = csv.reader(f, delimiter="\t")
             dct = {k: v for k, v in reader if k != "id"}
             keys = sorted(dct)
 
-        with open(p, "w") as f:
+        with p.open("w") as f:
             f.write("id\tmessage\n")
-
             for i, item in enumerate(keys, start=1):
                 f.write(f"{item}\t{dct[item]}")
-
                 if i != len(keys):
                     f.write("\n")
 
@@ -39,7 +37,6 @@ elif sys.argv[1] == "scrape":
         e = d.get("errors", [])
         for h in e:
             dct = {}
-
             j = d.get("errors").get(h)
             for k in j:
                 if k.endswith("_*"):
@@ -54,7 +51,7 @@ elif sys.argv[1] == "scrape":
                 dct[m] = l
 
             for p in Path("source/").glob(f"{h}*.tsv"):
-                with open(p) as f:
+                with p.open() as f:
                     reader = csv.reader(f, delimiter="\t")
                     for k, v in reader:
                         if k != "id":
@@ -63,7 +60,7 @@ elif sys.argv[1] == "scrape":
             keys = sorted(dct)
 
             for p in Path("source/").glob(f"{h}*.tsv"):
-                with open(p, "w") as f:
+                with p.open("w") as f:
                     f.write("id\tmessage\n")
                     for i, item in enumerate(keys, start=1):
                         f.write(f"{item}\t{dct[item]}\n")
