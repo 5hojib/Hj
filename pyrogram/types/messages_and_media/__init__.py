@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from .animation import Animation
 from .audio import Audio
+from .alternative_video import AlternativeVideo
 from .available_effect import AvailableEffect
 from .contact import Contact
 from .contact_registered import ContactRegistered
@@ -62,6 +63,7 @@ from .web_page_empty import WebPageEmpty
 from .web_page_preview import WebPagePreview
 
 __all__ = [
+    "AlternativeVideo",
     "Animation",
     "Audio",
     "AvailableEffect",

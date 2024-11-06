@@ -1,3 +1,4 @@
+# ruff: noqa: E741
 from __future__ import annotations
 
 import csv

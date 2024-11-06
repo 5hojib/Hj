@@ -476,6 +476,7 @@ def pyrogram_api() -> None:
             AvailableEffect
             Document
             Animation
+            AlternativeVideo
             LabeledPrice
             Video
             Voice
