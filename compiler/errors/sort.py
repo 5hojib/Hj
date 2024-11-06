@@ -26,7 +26,7 @@ def sort_tsv_files():
 
 def scrape_telegram_errors():
     """Scrapes error data from Telegram's API and updates corresponding TSV files."""
-    base_url = "https://corefork.telegram.org"
+    base_url = "https://core.telegram.org"
     api_errors_path = "/api/errors"
     response = requests.get(base_url + api_errors_path)
     if response.status_code != 200:
