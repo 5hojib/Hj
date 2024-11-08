@@ -8,7 +8,7 @@ dependencies = [
     "pysocks",
     "aiosqlite",
     "pymediainfo",
-    "pymongo==4.8.0",
+    "pymongo==4.10.1",
     "TgCrypto-pyrofork",
 ]
 requires-python = ">=3.10"
