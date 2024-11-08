@@ -97,18 +97,25 @@ class AlternativeVideo(Object):
         video_attributes: raw.types.DocumentAttributeVideo,
         file_name: str,
     ) -> AlternativeVideo:
-        file_id = FileId(
-            file_type=FileType.VIDEO,
-            dc_id=video.dc_id,
-            media_id=video.id,
-            access_hash=video.access_hash,
-            file_reference=video.file_reference,
-        ).encode() if video else None
+        file_id = (
+            FileId(
+                file_type=FileType.VIDEO,
+                dc_id=video.dc_id,
+                media_id=video.id,
+                access_hash=video.access_hash,
+                file_reference=video.file_reference,
+            ).encode()
+            if video
+            else None
+        )
 
-        file_unique_id = FileUniqueId(
-            file_unique_type=FileUniqueType.DOCUMENT,
-            media_id=video.id
-        ).encode() if video else None
+        file_unique_id = (
+            FileUniqueId(
+                file_unique_type=FileUniqueType.DOCUMENT, media_id=video.id
+            ).encode()
+            if video
+            else None
+        )
 
         return AlternativeVideo(
             client=client,
@@ -116,11 +123,13 @@ class AlternativeVideo(Object):
             file_unique_id=file_unique_id,
             width=video_attributes.w if video_attributes else 0,
             height=video_attributes.h if video_attributes else 0,
-            codec=video_attributes.video_codec if video_attributes else '',
+            codec=video_attributes.video_codec if video_attributes else "",
             duration=video_attributes.duration if video_attributes else 0,
             file_name=file_name,
-            mime_type=video.mime_type if video else '',
-            supports_streaming=video_attributes.supports_streaming if video_attributes else False,
+            mime_type=video.mime_type if video else "",
+            supports_streaming=video_attributes.supports_streaming
+            if video_attributes
+            else False,
             file_size=video.size if video else 0,
             date=utils.timestamp_to_datetime(video.date) if video else None,
             thumbs=types.Thumbnail._parse(client, video) if video else None,
