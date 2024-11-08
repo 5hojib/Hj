@@ -16,7 +16,7 @@ dnspython==2.6.1
     # via pymongo
 pymediainfo==6.1.0
     # via electrogram
-pymongo==4.8.0
+pymongo==4.10.1
     # via electrogram
 pysocks==1.7.1
     # via electrogram
