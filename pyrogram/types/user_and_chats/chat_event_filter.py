@@ -53,7 +53,7 @@ class ChatEventFilter(Object):
         video_chats (``bool``, *optional*):
             True, if video chats events should be returned.
             Defaults to False.
-        
+
         forum_changes (``bool``, *optional*):
             True, if forum-related actions need to be returned.
             Defaults to False.
@@ -154,10 +154,10 @@ class ChatEventFilter(Object):
 
         if self.video_chats:
             group_call = True
-        
+
         if self.forum_changes:
             forum_changes = True
-        
+
         if self.subscription_extensions:
             subscription_extensions = True
 
