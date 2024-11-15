@@ -14,13 +14,13 @@ aiosqlite==0.20.0
     # via electrogram
 dnspython==2.6.1
     # via pymongo
+electrocrypto==1.0.0
+    # via electrogram
 pymediainfo==6.1.0
     # via electrogram
 pymongo==4.9.2
     # via electrogram
 pysocks==1.7.1
-    # via electrogram
-tgcrypto-pyrofork==1.2.6
     # via electrogram
 typing-extensions==4.12.2
     # via aiosqlite
