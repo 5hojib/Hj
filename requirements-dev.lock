@@ -78,7 +78,7 @@ pygments==2.18.0
     # via rich
 pymediainfo==6.1.0
     # via electrogram
-pymongo==4.10.1
+pymongo==4.9.2
     # via electrogram
 pysocks==1.7.1
     # via electrogram
