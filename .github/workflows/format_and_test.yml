@@ -20,20 +20,19 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Install the latest version of rye
-        uses: eifinger/setup-rye@v4
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v3
         with:
-          version: 'latest'
+          version: "latest"
 
       - name: Install dependencies
         run: |
-          rye pin 3.12
-          rye sync
+          uv lock --upgrade
 
       - name: Run ruff to lint and format code
         run: |
-          rye run ruff check . --exit-zero
-          rye fmt
+          uv tool run ruff check . --exit-zero
+          uv tool run ruff format .
           git add -u
 
       - name: Commit and push changes
@@ -49,8 +48,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GX_TOKEN }}
 
-      - name: Generate API
-        run: rye run api
-
       - name: Run tests
-        run: rye run python -m pytest
+        run: uv tool run python -m pytest
