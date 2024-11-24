@@ -10,6 +10,11 @@ from .get_stars_transactions_by_id import GetStarsTransactionsById
 from .refund_stars_payment import RefundStarPayment
 from .send_invoice import SendInvoice
 from .send_payment_form import SendPaymentForm
+from .get_available_gifts import GetAvailableGifts
+from .get_user_gifts import GetUserGifts
+from .sell_gift import SellGift
+from .send_gift import SendGift
+from .toggle_gift_is_saved import ToggleGiftIsSaved
 
 
 class TelegramBusiness(
@@ -17,6 +22,11 @@ class TelegramBusiness(
     AnswerShippingQuery,
     CreateInvoiceLink,
     GetBusinessConnection,
+    GetAvailableGifts,
+    GetUserGifts,
+    SellGift,
+    SendGift,
+    ToggleGiftIsSaved,
     GetStarsTransactions,
     GetStarsTransactionsById,
     RefundStarPayment,

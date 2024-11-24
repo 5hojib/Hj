@@ -132,6 +132,18 @@ class ChatEvent(Object):
             Deleted invite link.
             For :obj:`~pyrogram.enums.ChatEventAction.INVITE_LINK_DELETED` action only.
 
+        created_forum_topic (:obj:`~pyrogram.types.ForumTopic`, *optional*):
+            New forum topic.
+            For :obj:`~pyrogram.enums.ChatEvenAction.CREATED_FORUM_TOPIC` action only.
+
+        old_forum_topic, new_forum_topic (:obj:`~pyrogram.types.ForumTopic`, *optional*):
+            Edited forum topic.
+            For :obj:`~pyrogram.enums.ChatEvenAction.EDITED_FORUM_TOPIC` action only.
+
+        deleted_forum_topic (:obj:`~pyrogram.types.ForumTopic`, *optional*):
+            Deleted forum topic.
+            For :obj:`~pyrogram.enums.ChatEvenAction.DELETED_FORUM_TOPIC` action only.
+
         old_chat_member, new_chat_member (:obj:`~pyrogram.types.ChatMember`, *optional*):
             Affected chat member status of the user.
             For :obj:`~pyrogram.enums.ChatEventAction.MEMBER_SUBSCRIPTION_EXTENDED` action only.
@@ -206,6 +218,10 @@ class ChatEvent(Object):
         has_aggressive_anti_spam_enabled: bool | None = None,
         has_protected_content: bool | None = None,
         is_forum: bool | None = None,
+        created_forum_topic: types.ForumTopic = None,
+        old_forum_topic: types.ForumTopic = None,
+        new_forum_topic: types.ForumTopic = None,
+        deleted_forum_topic: types.ForumTopic = None,
     ):
         super().__init__()
 
@@ -280,6 +296,10 @@ class ChatEvent(Object):
         self.has_aggressive_anti_spam_enabled = has_aggressive_anti_spam_enabled
         self.has_protected_content = has_protected_content
         self.is_forum = is_forum
+        self.created_forum_topic = created_forum_topic
+        self.old_forum_topic = old_forum_topic
+        self.new_forum_topic = new_forum_topic
+        self.deleted_forum_topic = deleted_forum_topic
 
     @staticmethod
     async def _parse(
@@ -360,6 +380,10 @@ class ChatEvent(Object):
         has_aggressive_anti_spam_enabled: bool | None = None
         has_protected_content: bool | None = None
         is_forum: bool | None = None
+        created_forum_topic: types.ForumTopic | None = None
+        old_forum_topic: types.ForumTopic | None = None
+        new_forum_topic: types.ForumTopic | None = None
+        deleted_forum_topic: types.ForumTopic | None = None
 
         if isinstance(action, raw.types.ChannelAdminLogEventActionChangeAbout):
             old_description = action.prev_value
@@ -583,6 +607,17 @@ class ChatEvent(Object):
         elif isinstance(action, raw.types.ChannelAdminLogEventActionToggleForum):
             is_forum = action.new_value
             action = enums.ChatEventAction.CHAT_IS_FORUM_TOGGLED
+        elif isinstance(action, raw.types.ChannelAdminLogEventActionCreateTopic):
+            created_forum_topic = types.ForumTopic._parse(action.topic)
+            action = enums.ChatEventAction.CREATED_FORUM_TOPIC
+        elif isinstance(action, raw.types.ChannelAdminLogEventActionEditTopic):
+            old_forum_topic = types.ForumTopic._parse(action.prev_topic)
+            new_forum_topic = types.ForumTopic._parse(action.new_topic)
+            action = enums.ChatEventAction.EDITED_FORUM_TOPIC
+        elif isinstance(action, raw.types.ChannelAdminLogEventActionDeleteTopic):
+            created_forum_topic = types.ForumTopic._parse(action.topic)
+            action = enums.ChatEventAction.DELETED_FORUM_TOPIC
+        
 
         else:
             action = f"{enums.ChatEventAction.UNKNOWN}-{action.QUALNAME}"
@@ -637,4 +672,8 @@ class ChatEvent(Object):
             has_aggressive_anti_spam_enabled=has_aggressive_anti_spam_enabled,
             has_protected_content=has_protected_content,
             is_forum=is_forum,
+            created_forum_topic=created_forum_topic,
+            old_forum_topic=old_forum_topic,
+            new_forum_topic=new_forum_topic,
+            deleted_forum_topic=deleted_forum_topic,
         )

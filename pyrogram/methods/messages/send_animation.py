@@ -39,6 +39,7 @@ class SendAnimation:
         quote_entities: list[types.MessageEntity] | None = None,
         schedule_date: datetime | None = None,
         protect_content: bool | None = None,
+        allow_paid_broadcast: bool | None = None,
         message_effect_id: int | None = None,
         invert_media: bool | None = None,
         reply_markup: types.InlineKeyboardMarkup
@@ -141,6 +142,9 @@ class SendAnimation:
 
             protect_content (``bool``, *optional*):
                 Protects the contents of the sent message from forwarding and saving.
+
+            allow_paid_broadcast (``bool``, *optional*):
+                Pass True to allow the message to ignore regular broadcast limits for a small fee; for bots only.
 
             invert_media (``bool``, *optional*):
                 Inverts the position of the animation and caption.
@@ -281,6 +285,7 @@ class SendAnimation:
                         random_id=self.rnd_id(),
                         schedule_date=utils.datetime_to_timestamp(schedule_date),
                         noforwards=protect_content,
+                        allow_paid_floodskip=allow_paid_broadcast,
                         effect=message_effect_id,
                         invert_media=invert_media,
                         reply_markup=await reply_markup.write(self)

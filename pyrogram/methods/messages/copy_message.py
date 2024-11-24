@@ -27,6 +27,7 @@ class CopyMessage:
         reply_to_message_id: int | None = None,
         schedule_date: datetime | None = None,
         protect_content: bool | None = None,
+        allow_paid_broadcast: bool | None = None,
         invert_media: bool = False,
         reply_markup: types.InlineKeyboardMarkup
         | types.ReplyKeyboardMarkup
@@ -88,6 +89,9 @@ class CopyMessage:
             protect_content (``bool``, *optional*):
                 Protects the contents of the sent message from forwarding and saving.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                Pass True to allow the message to ignore regular broadcast limits for a small fee; for bots only.
+
             invert_media (``bool``, *optional*):
                 Inverts the position of the media and caption.
 
@@ -118,6 +122,7 @@ class CopyMessage:
             reply_to_message_id=reply_to_message_id,
             schedule_date=schedule_date,
             protect_content=protect_content,
+            allow_paid_broadcast=allow_paid_broadcast,
             invert_media=invert_media,
             reply_markup=reply_markup,
         )

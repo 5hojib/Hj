@@ -344,6 +344,11 @@ def pyrogram_api() -> None:
             get_bot_info
             set_bot_info
             get_collectible_item_info
+            get_available_gifts
+            get_user_gifts
+            sell_gift
+            send_gift
+            toggle_gift_is_saved
         """,
         "business": """
         Telegram Business
@@ -490,6 +495,8 @@ def pyrogram_api() -> None:
             ScreenshotTaken
             Game
             GiftedPremium
+            Gift
+            UserGift
             Giveaway
             GiveawayLaunched
             GiveawayResult
@@ -739,6 +746,7 @@ def pyrogram_api() -> None:
             Message.react
             Message.wait_for_click
             Message.pay
+            UserGift.toggle
         """,
         "chat": """
         Chat

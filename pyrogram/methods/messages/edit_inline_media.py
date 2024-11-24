@@ -22,7 +22,7 @@ class EditInlineMedia:
         media: types.InputMedia,
         reply_markup: types.InlineKeyboardMarkup = None,
     ) -> bool:
-        """Edit inline animation, audio, document, photo or video messages.
+        """Edit animation, audio, document, photo or video messages, or replace text with animation, audio, document, photo or video messages.
 
         When the inline message is edited, a new file can't be uploaded. Use a previously uploaded file via its file_id
         or specify a URL.
