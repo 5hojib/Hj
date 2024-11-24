@@ -17,17 +17,17 @@ from .successful_payment import SuccessfulPayment
 
 __all__ = [
     "ExtendedMediaPreview",
-    "Invoice",
     "InputStarsTransaction",
+    "Invoice",
     "PaidMedia",
     "PaidMediaPreview",
     "PaymentInfo",
     "PaymentRefunded",
     "PreCheckoutQuery",
-    "StarsStatus",
-    "StarsTransaction",
     "ShippingAddress",
     "ShippingOption",
     "ShippingQuery",
+    "StarsStatus",
+    "StarsTransaction",
     "SuccessfulPayment",
 ]

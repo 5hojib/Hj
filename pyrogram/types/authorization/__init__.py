@@ -8,6 +8,6 @@ from .terms_of_service import TermsOfService
 __all__ = [
     "ActiveSession",
     "ActiveSessions",
-    "TermsOfService",
     "SentCode",
+    "TermsOfService",
 ]

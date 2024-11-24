@@ -49,7 +49,7 @@ class GetFolders:
             folder
             for folder in dialog_filters.filters
             if not isinstance(folder, raw.types.DialogFilterDefault)
-            and (is_iterable and folder.id in ids or not is_iterable)
+            and ((is_iterable and folder.id in ids) or not is_iterable)
         ]
 
         raw_peers = {}
