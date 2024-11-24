@@ -28,6 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           uv python install 3.13
+          uv tool install pytest
           uv lock --upgrade
 
       - name: Run ruff to lint and format code
