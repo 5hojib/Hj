@@ -5278,7 +5278,11 @@ class Message(Object, Update):
         """
 
         return await self._client.send_reaction(
-            chat_id=self.chat.id, message_id=self.id, emoji=emoji, big=big, add_to_recent=add_to_recent
+            chat_id=self.chat.id,
+            message_id=self.id,
+            emoji=emoji,
+            big=big,
+            add_to_recent=add_to_recent,
         )
 
     async def retract_vote(

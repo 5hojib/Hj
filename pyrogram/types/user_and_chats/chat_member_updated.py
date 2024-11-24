@@ -35,7 +35,7 @@ class ChatMemberUpdated(Object, Update):
 
         via_join_request (``bool``, *optional*):
             True, if the user joined the chat after sending a direct join request and being approved by an administrator
-        
+
         via_chat_folder_invite_link (``bool``, *optional*):
             True, if the user joined the chat via a chat folder invite link
     """
@@ -52,7 +52,7 @@ class ChatMemberUpdated(Object, Update):
         invite_link: types.ChatInviteLink = None,
         via_join_request: bool | None = None,
         via_chat_folder_invite_link: bool = False,
-        _raw: "raw.base.Update" = None
+        _raw: raw.base.Update = None,
     ) -> None:
         super().__init__(client)
 

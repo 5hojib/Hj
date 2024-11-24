@@ -617,7 +617,6 @@ class ChatEvent(Object):
         elif isinstance(action, raw.types.ChannelAdminLogEventActionDeleteTopic):
             created_forum_topic = types.ForumTopic._parse(action.topic)
             action = enums.ChatEventAction.DELETED_FORUM_TOPIC
-        
 
         else:
             action = f"{enums.ChatEventAction.UNKNOWN}-{action.QUALNAME}"
