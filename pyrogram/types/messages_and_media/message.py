@@ -1304,7 +1304,7 @@ class Message(Object, Update):
 
             if message.via_business_bot_id:
                 sender_business_bot = types.User._parse(
-                    client, users.get(message.via_business_bot_id, None)
+                    client, users.get(message.via_business_bot_id)
                 )
 
             parsed_message = Message(
