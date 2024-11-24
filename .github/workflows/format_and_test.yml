@@ -50,4 +50,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GX_TOKEN }}
 
       - name: Run tests
-        run: uv tool run python -m pytest
+        run: uv run python -m pytest
