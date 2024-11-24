@@ -30,6 +30,8 @@ dnspython==2.6.1
     # via pymongo
 docutils==0.21.2
     # via readme-renderer
+electrocrypto==1.0.0
+    # via electrogram
 filelock==3.15.4
     # via virtualenv
 identify==2.6.0
@@ -78,7 +80,7 @@ pygments==2.18.0
     # via rich
 pymediainfo==6.1.0
     # via electrogram
-pymongo==4.8.0
+pymongo==4.9.2
     # via electrogram
 pysocks==1.7.1
     # via electrogram
@@ -103,8 +105,6 @@ rich==13.7.1
 ruff==0.5.2
 secretstorage==3.3.3
     # via keyring
-tgcrypto-pyrofork==1.2.6
-    # via electrogram
 twine==5.1.1
 typing-extensions==4.12.2
     # via aiosqlite

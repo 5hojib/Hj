@@ -52,6 +52,10 @@ class ChatEvent(Object):
             Previous and new chat username.
             For :obj:`~pyrogram.enums.ChatEventAction.USERNAME_CHANGED` action only.
 
+        old_usernames, new_usernames (List of :obj:`~pyrogram.types.Username`, *optional*):
+            Previous and new chat usernames.
+            For :obj:`~pyrogram.enums.ChatEventAction.USERNAMES_CHANGED` action only.
+
         old_chat_permissions, new_chat_permissions (:obj:`~pyrogram.types.ChatPermissions`, *optional*):
             Previous and new default chat permissions.
             For :obj:`~pyrogram.enums.ChatEventAction.CHAT_PERMISSIONS_CHANGED` action only.
@@ -67,6 +71,18 @@ class ChatEvent(Object):
         invited_member (:obj:`~pyrogram.types.ChatMember`, *optional*):
             New invited chat member.
             For :obj:`~pyrogram.enums.ChatEventAction.MEMBER_INVITED` action only.
+
+        invite_link (:obj:`~pyrogram.types.ChatInviteLink`, *optional*):
+            Invite link used to join the chat.
+            For :obj:`~pyrogram.enums.ChatEventAction.MEMBER_JOINED_BY_LINK` and :obj:`~pyrogram.enums.ChatEventAction.MEMBER_JOINED_BY_REQUEST` actions only.
+
+        via_chat_folder_invite_link (``bool``, *optional*):
+            True, if the user has joined the chat using an invite link for a chat folder.
+            For :obj:`~pyrogram.enums.ChatEventAction.MEMBER_JOINED_BY_LINK` action only.
+
+        approver_user (:obj:`~pyrogram.types.User`, *optional*):
+            User identifier of the chat administrator who approved the user join request
+            For :obj:`~pyrogram.enums.ChatEventAction.MEMBER_JOINED_BY_REQUEST` action only.
 
         old_administrator_privileges, new_administrator_privileges (:obj:`~pyrogram.types.ChatMember`, *optional*):
             Previous and new administrator privileges.
@@ -127,6 +143,27 @@ class ChatEvent(Object):
         deleted_forum_topic (:obj:`~pyrogram.types.ForumTopic`, *optional*):
             Deleted forum topic.
             For :obj:`~pyrogram.enums.ChatEvenAction.DELETED_FORUM_TOPIC` action only.
+
+        old_chat_member, new_chat_member (:obj:`~pyrogram.types.ChatMember`, *optional*):
+            Affected chat member status of the user.
+            For :obj:`~pyrogram.enums.ChatEventAction.MEMBER_SUBSCRIPTION_EXTENDED` action only.
+
+        show_message_sender_enabled (``bool``, *optional*):
+            The show_message_sender setting of a channel was toggled.
+            For :obj:`~pyrogram.enums.ChatEventAction.SHOW_MESSAGE_SENDER_ENABLED` action only.
+
+        has_aggressive_anti_spam_enabled (``bool``, *optional*):
+            The ``has_aggressive_anti_spam_enabled`` setting of a supergroup was toggled.
+            For :obj:`~pyrogram.enums.ChatEventAction.AGGRESSIVE_ANTI_SPAM_TOGGLED` action only.
+
+        has_protected_content (``bool``, *optional*):
+            The ``has_protected_content`` setting of a channel was toggled.
+            For :obj:`~pyrogram.enums.ChatEventAction.PROTECTED_CONTENT_TOGGLED` action only.
+
+        is_forum (``bool``, *optional*):
+            The ``is_forum`` setting of a channel was toggled.
+            For :obj:`~pyrogram.enums.ChatEventAction.CHAT_IS_FORUM_TOGGLED` action only.
+
     """
 
     def __init__(
@@ -148,12 +185,17 @@ class ChatEvent(Object):
         new_title: str | None = None,
         old_username: str | None = None,
         new_username: str | None = None,
+        old_usernames: list[types.Username] | None = None,
+        new_usernames: list[types.Username] | None = None,
         old_chat_permissions: types.ChatPermissions = None,
         new_chat_permissions: types.ChatPermissions = None,
         deleted_message: types.Message = None,
         old_message: types.Message = None,
         new_message: types.Message = None,
         invited_member: types.ChatMember = None,
+        invite_link: types.ChatInviteLink = None,
+        via_chat_folder_invite_link: bool | None = None,
+        approver_user: types.User = None,
         old_administrator_privileges: types.ChatMember = None,
         new_administrator_privileges: types.ChatMember = None,
         old_member_permissions: types.ChatMember = None,
@@ -170,11 +212,17 @@ class ChatEvent(Object):
         new_invite_link: types.ChatInviteLink = None,
         revoked_invite_link: types.ChatInviteLink = None,
         deleted_invite_link: types.ChatInviteLink = None,
+        old_chat_member: types.ChatMember = None,
+        new_chat_member: types.ChatMember = None,
+        show_message_sender_enabled: bool | None = None,
+        has_aggressive_anti_spam_enabled: bool | None = None,
+        has_protected_content: bool | None = None,
+        is_forum: bool | None = None,
         created_forum_topic: types.ForumTopic = None,
         old_forum_topic: types.ForumTopic = None,
         new_forum_topic: types.ForumTopic = None,
         deleted_forum_topic: types.ForumTopic = None,
-    ) -> None:
+    ):
         super().__init__()
 
         self.id = id
@@ -200,6 +248,9 @@ class ChatEvent(Object):
         self.old_username = old_username
         self.new_username = new_username
 
+        self.old_usernames = old_usernames
+        self.new_usernames = new_usernames
+
         self.old_chat_permissions = old_chat_permissions
         self.new_chat_permissions = new_chat_permissions
 
@@ -209,6 +260,9 @@ class ChatEvent(Object):
         self.new_message = new_message
 
         self.invited_member = invited_member
+        self.invite_link = invite_link
+        self.via_chat_folder_invite_link = via_chat_folder_invite_link
+        self.approver_user = approver_user
 
         self.old_administrator_privileges = old_administrator_privileges
         self.new_administrator_privileges = new_administrator_privileges
@@ -235,6 +289,13 @@ class ChatEvent(Object):
         self.revoked_invite_link = revoked_invite_link
         self.deleted_invite_link = deleted_invite_link
 
+        self.old_chat_member = old_chat_member
+        self.new_chat_member = new_chat_member
+
+        self.show_message_sender_enabled = show_message_sender_enabled
+        self.has_aggressive_anti_spam_enabled = has_aggressive_anti_spam_enabled
+        self.has_protected_content = has_protected_content
+        self.is_forum = is_forum
         self.created_forum_topic = created_forum_topic
         self.old_forum_topic = old_forum_topic
         self.new_forum_topic = new_forum_topic
@@ -271,6 +332,9 @@ class ChatEvent(Object):
         old_username: str | None = None
         new_username: str | None = None
 
+        old_usernames: types.List[types.Username] | None = None
+        new_usernames: types.List[types.Username] | None = None
+
         old_chat_permissions: types.ChatPermissions | None = None
         new_chat_permissions: types.ChatPermissions | None = None
 
@@ -280,6 +344,9 @@ class ChatEvent(Object):
         new_message: types.Message | None = None
 
         invited_member: types.ChatMember | None = None
+        invite_link: types.ChatInviteLink | None = None
+        via_chat_folder_invite_link: bool | None = None
+        approver_user: types.User | None = None
 
         old_administrator_privileges: types.ChatMember | None = None
         new_administrator_privileges: types.ChatMember | None = None
@@ -306,6 +373,13 @@ class ChatEvent(Object):
         revoked_invite_link: types.ChatInviteLink | None = None
         deleted_invite_link: types.ChatInviteLink | None = None
 
+        old_chat_member: types.ChatMember | None = None
+        new_chat_member: types.ChatMember | None = None
+
+        show_message_sender_enabled: bool | None = None
+        has_aggressive_anti_spam_enabled: bool | None = None
+        has_protected_content: bool | None = None
+        is_forum: bool | None = None
         created_forum_topic: types.ForumTopic | None = None
         old_forum_topic: types.ForumTopic | None = None
         new_forum_topic: types.ForumTopic | None = None
@@ -317,16 +391,14 @@ class ChatEvent(Object):
             action = enums.ChatEventAction.DESCRIPTION_CHANGED
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionChangeHistoryTTL,
+            action, raw.types.ChannelAdminLogEventActionChangeHistoryTTL
         ):
             old_history_ttl = action.prev_value
             new_history_ttl = action.new_value
             action = enums.ChatEventAction.HISTORY_TTL_CHANGED
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionChangeLinkedChat,
+            action, raw.types.ChannelAdminLogEventActionChangeLinkedChat
         ):
             old_linked_chat = types.Chat._parse_chat(
                 client, chats[action.prev_value]
@@ -349,9 +421,17 @@ class ChatEvent(Object):
             new_username = action.new_value
             action = enums.ChatEventAction.USERNAME_CHANGED
 
+        elif isinstance(action, raw.types.ChannelAdminLogEventActionChangeUsernames):
+            old_usernames = types.List(
+                [types.Username(username=p) for p in action.prev_value]
+            )
+            new_usernames = types.List(
+                [types.Username(username=n) for n in action.new_value]
+            )
+            action = enums.ChatEventAction.USERNAMES_CHANGED
+
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionDefaultBannedRights,
+            action, raw.types.ChannelAdminLogEventActionDefaultBannedRights
         ):
             old_chat_permissions = types.ChatPermissions._parse(
                 action.prev_banned_rights
@@ -377,8 +457,7 @@ class ChatEvent(Object):
             action = enums.ChatEventAction.MESSAGE_EDITED
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionParticipantInvite,
+            action, raw.types.ChannelAdminLogEventActionParticipantInvite
         ):
             invited_member = types.ChatMember._parse(
                 client, action.participant, users, chats
@@ -386,8 +465,7 @@ class ChatEvent(Object):
             action = enums.ChatEventAction.MEMBER_INVITED
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionParticipantToggleAdmin,
+            action, raw.types.ChannelAdminLogEventActionParticipantToggleAdmin
         ):
             old_administrator_privileges = types.ChatMember._parse(
                 client, action.prev_participant, users, chats
@@ -398,8 +476,7 @@ class ChatEvent(Object):
             action = enums.ChatEventAction.ADMINISTRATOR_PRIVILEGES_CHANGED
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionParticipantToggleBan,
+            action, raw.types.ChannelAdminLogEventActionParticipantToggleBan
         ):
             old_member_permissions = types.ChatMember._parse(
                 client, action.prev_participant, users, chats
@@ -415,15 +492,11 @@ class ChatEvent(Object):
             )
             action = enums.ChatEventAction.POLL_STOPPED
 
-        elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionParticipantJoin,
-        ):
+        elif isinstance(action, raw.types.ChannelAdminLogEventActionParticipantJoin):
             action = enums.ChatEventAction.MEMBER_JOINED
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionParticipantLeave,
+            action, raw.types.ChannelAdminLogEventActionParticipantLeave
         ):
             action = enums.ChatEventAction.MEMBER_LEFT
 
@@ -432,15 +505,13 @@ class ChatEvent(Object):
             action = enums.ChatEventAction.INVITES_ENABLED
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionTogglePreHistoryHidden,
+            action, raw.types.ChannelAdminLogEventActionTogglePreHistoryHidden
         ):
             history_hidden = action.new_value
             action = enums.ChatEventAction.HISTORY_HIDDEN
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionToggleSignatures,
+            action, raw.types.ChannelAdminLogEventActionToggleSignatures
         ):
             signatures_enabled = action.new_value
             action = enums.ChatEventAction.SIGNATURES_ENABLED
@@ -453,20 +524,20 @@ class ChatEvent(Object):
         elif isinstance(action, raw.types.ChannelAdminLogEventActionUpdatePinned):
             message = action.message
 
-            if message.pinned:
-                pinned_message = await types.Message._parse(
-                    client, message, users, chats
-                )
-                action = enums.ChatEventAction.MESSAGE_PINNED
-            else:
-                unpinned_message = await types.Message._parse(
-                    client, message, users, chats
-                )
-                action = enums.ChatEventAction.MESSAGE_UNPINNED
+            if isinstance(action.message, raw.types.Message):
+                if message.pinned:
+                    pinned_message = await types.Message._parse(
+                        client, message, users, chats
+                    )
+                    action = enums.ChatEventAction.MESSAGE_PINNED
+                else:
+                    unpinned_message = await types.Message._parse(
+                        client, message, users, chats
+                    )
+                    action = enums.ChatEventAction.MESSAGE_UNPINNED
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionExportedInviteEdit,
+            action, raw.types.ChannelAdminLogEventActionExportedInviteEdit
         ):
             old_invite_link = types.ChatInviteLink._parse(
                 client, action.prev_invite, users
@@ -477,8 +548,7 @@ class ChatEvent(Object):
             action = enums.ChatEventAction.INVITE_LINK_EDITED
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionExportedInviteRevoke,
+            action, raw.types.ChannelAdminLogEventActionExportedInviteRevoke
         ):
             revoked_invite_link = types.ChatInviteLink._parse(
                 client, action.invite, users
@@ -486,23 +556,64 @@ class ChatEvent(Object):
             action = enums.ChatEventAction.INVITE_LINK_REVOKED
 
         elif isinstance(
-            action,
-            raw.types.ChannelAdminLogEventActionExportedInviteDelete,
+            action, raw.types.ChannelAdminLogEventActionExportedInviteDelete
         ):
             deleted_invite_link = types.ChatInviteLink._parse(
                 client, action.invite, users
             )
             action = enums.ChatEventAction.INVITE_LINK_DELETED
 
+        elif isinstance(
+            action, raw.types.ChannelAdminLogEventActionParticipantJoinByInvite
+        ):
+            invite_link = types.ChatInviteLink._parse(client, action.invite, users)
+            via_chat_folder_invite_link = getattr(action, "via_chatlist", None)
+            action = enums.ChatEventAction.MEMBER_JOINED_BY_LINK
+
+        elif isinstance(
+            action, raw.types.ChannelAdminLogEventActionParticipantJoinByRequest
+        ):
+            invite_link = types.ChatInviteLink._parse(client, action.invite, users)
+            approver_user = types.User._parse(client, users[action.approved_by])
+            action = enums.ChatEventAction.MEMBER_JOINED_BY_REQUEST
+
+        elif isinstance(
+            action, raw.types.ChannelAdminLogEventActionParticipantSubExtend
+        ):
+            old_chat_member = types.ChatMember._parse(
+                client, action.prev_participant, users, chats
+            )
+            new_chat_member = types.ChatMember._parse(
+                client, action.new_participant, users, chats
+            )
+            action = enums.ChatEventAction.MEMBER_SUBSCRIPTION_EXTENDED
+
+        elif isinstance(
+            action, raw.types.ChannelAdminLogEventActionToggleSignatureProfiles
+        ):
+            show_message_sender_enabled = action.new_value
+            action = enums.ChatEventAction.SHOW_MESSAGE_SENDER_ENABLED
+
+        elif isinstance(action, raw.types.ChannelAdminLogEventActionToggleAntiSpam):
+            has_aggressive_anti_spam_enabled = action.new_value
+            action = enums.ChatEventAction.AGGRESSIVE_ANTI_SPAM_TOGGLED
+
+        elif isinstance(
+            action, raw.types.ChannelAdminLogEventActionToggleNoForwards
+        ):
+            has_protected_content = action.new_value
+            action = enums.ChatEventAction.PROTECTED_CONTENT_TOGGLED
+
+        elif isinstance(action, raw.types.ChannelAdminLogEventActionToggleForum):
+            is_forum = action.new_value
+            action = enums.ChatEventAction.CHAT_IS_FORUM_TOGGLED
         elif isinstance(action, raw.types.ChannelAdminLogEventActionCreateTopic):
             created_forum_topic = types.ForumTopic._parse(action.topic)
             action = enums.ChatEventAction.CREATED_FORUM_TOPIC
-
         elif isinstance(action, raw.types.ChannelAdminLogEventActionEditTopic):
             old_forum_topic = types.ForumTopic._parse(action.prev_topic)
             new_forum_topic = types.ForumTopic._parse(action.new_topic)
             action = enums.ChatEventAction.EDITED_FORUM_TOPIC
-
         elif isinstance(action, raw.types.ChannelAdminLogEventActionDeleteTopic):
             created_forum_topic = types.ForumTopic._parse(action.topic)
             action = enums.ChatEventAction.DELETED_FORUM_TOPIC
@@ -527,12 +638,17 @@ class ChatEvent(Object):
             new_title=new_title,
             old_username=old_username,
             new_username=new_username,
+            old_usernames=old_usernames,
+            new_usernames=new_usernames,
             old_chat_permissions=old_chat_permissions,
             new_chat_permissions=new_chat_permissions,
             deleted_message=deleted_message,
             old_message=old_message,
             new_message=new_message,
             invited_member=invited_member,
+            invite_link=invite_link,
+            via_chat_folder_invite_link=via_chat_folder_invite_link,
+            approver_user=approver_user,
             old_administrator_privileges=old_administrator_privileges,
             new_administrator_privileges=new_administrator_privileges,
             old_member_permissions=old_member_permissions,
@@ -549,6 +665,12 @@ class ChatEvent(Object):
             new_invite_link=new_invite_link,
             revoked_invite_link=revoked_invite_link,
             deleted_invite_link=deleted_invite_link,
+            old_chat_member=old_chat_member,
+            new_chat_member=new_chat_member,
+            show_message_sender_enabled=show_message_sender_enabled,
+            has_aggressive_anti_spam_enabled=has_aggressive_anti_spam_enabled,
+            has_protected_content=has_protected_content,
+            is_forum=is_forum,
             created_forum_topic=created_forum_topic,
             old_forum_topic=old_forum_topic,
             new_forum_topic=new_forum_topic,

@@ -21,7 +21,7 @@ class EditMessageMedia:
         business_connection_id: str | None = None,
         invert_media: bool = False,
     ) -> types.Message:
-        """Edit animation, audio, document, photo or video messages.
+        """Edit animation, audio, document, photo or video messages, or replace text with animation, audio, document, photo or video messages.
 
         If a message is a part of a message album, then it can be edited only to a photo or a video. Otherwise, the
         message type can be changed arbitrarily.

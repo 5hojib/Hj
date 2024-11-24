@@ -29,6 +29,7 @@ class SendWebPage:
         quote_entities: list[types.MessageEntity] | None = None,
         schedule_date: datetime | None = None,
         protect_content: bool | None = None,
+        allow_paid_broadcast: bool | None = None,
         message_effect_id: int | None = None,
         reply_markup: types.InlineKeyboardMarkup
         | types.ReplyKeyboardMarkup
@@ -102,6 +103,9 @@ class SendWebPage:
             protect_content (``bool``, *optional*):
                 Protects the contents of the sent message from forwarding and saving.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                Pass True to allow the message to ignore regular broadcast limits for a small fee; for bots
+
             message_effect_id (``int`` ``64-bit``, *optional*):
                 Unique identifier of the message effect to be added to the message; for private chats only.
 
@@ -152,6 +156,7 @@ class SendWebPage:
             invert_media=invert_media,
             entities=entities,
             noforwards=protect_content,
+            allow_paid_floodskip=allow_paid_broadcast,
             effect=message_effect_id,
         )
         if business_connection_id is not None:

@@ -27,6 +27,7 @@ class SendMessage:
         quote_entities: list[types.MessageEntity] | None = None,
         schedule_date: datetime | None = None,
         protect_content: bool | None = None,
+        allow_paid_broadcast: bool | None = None,
         invert_media: bool | None = None,
         message_effect_id: int | None = None,
         reply_markup: types.InlineKeyboardMarkup
@@ -95,6 +96,9 @@ class SendMessage:
             protect_content (``bool``, *optional*):
                 Protects the contents of the sent message from forwarding and saving.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                Pass True to allow the message to ignore regular broadcast limits for a small fee; for bots only
+
             invert_media (``bool``, *optional*):
                 Move web page preview to above the message.
 
@@ -121,7 +125,10 @@ class SendMessage:
                 # Reply to a message using its id
                 await app.send_message("me", "this is a reply", reply_to_message_id=123)
 
+            .. code-block:: python
+
                 # For bots only, send messages with keyboards attached
+
                 from pyrogram.types import (
                     ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton)
 
@@ -167,6 +174,7 @@ class SendMessage:
             message=message,
             entities=entities,
             noforwards=protect_content,
+            allow_paid_floodskip=allow_paid_broadcast,
             invert_media=invert_media,
             effect=message_effect_id,
         )

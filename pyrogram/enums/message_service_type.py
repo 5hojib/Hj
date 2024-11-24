@@ -80,6 +80,12 @@ class MessageServiceType(AutoName):
     GIFTED_PREMIUM = auto()
     "Gifted Premium"
 
+    USER_GIFT = auto()
+    "Star gift"
+
+    STAR_GIFT = auto()
+    "Star gift"
+
     GIVEAWAY_LAUNCHED = auto()
     "Giveaway Launch"
 

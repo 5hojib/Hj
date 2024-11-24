@@ -23,6 +23,7 @@ class SendInvoice:
         reply_to_message_id: int | None = None,
         message_thread_id: int | None = None,
         quote_text: str | None = None,
+        allow_paid_broadcast: bool | None = None,
         quote_entities: list[types.MessageEntity] | None = None,
         reply_markup: types.InlineKeyboardMarkup = None,
     ):
@@ -85,6 +86,9 @@ class SendInvoice:
             quote_text (``str``, *optional*):
                 Text to quote.
                 for reply_to_message only.
+
+            allow_paid_broadcast (``bool``, *optional*):
+                Pass True to allow the message to ignore regular broadcast limits for a small fee; for bots only
 
             quote_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
                 List of special entities that appear in quote_text, which can be specified instead of *parse_mode*.
@@ -194,6 +198,7 @@ class SendInvoice:
                     start_param=start_parameter,
                     extended_media=extended_media,
                 ),
+                allow_paid_floodskip=allow_paid_broadcast,
                 random_id=self.rnd_id(),
                 reply_to=reply_to,
                 message="",
