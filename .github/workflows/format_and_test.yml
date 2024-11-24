@@ -7,6 +7,8 @@ on:
 
 jobs:
   lint-format-and-test:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
 
     steps:
