@@ -52,13 +52,13 @@ jobs:
           release_name: Release ${{ env.VERSION }}
           body_path: ./release_notes.txt
 
-      - name: Build
+      - name: Build and publish
         if: env.RELEASE_EXISTS == 'false'
         run: |
           python -m pip install --upgrade pip
           pip install -e '.[dev]'
           hatch build
-
-      - name: Publish
-        if: env.RELEASE_EXISTS == 'false'
-        uses: pypa/gh-action-pypi-publish@release/v1
+          hatch publish
+        env:
+          HATCH_INDEX_USER: __token__
+          HATCH_INDEX_AUTH: ${{ secrets.PYPI_API_TOKEN }}
