@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           uv python install 3.13
-          pip install pytest
+          uv tool install pytest
           uv lock --upgrade
 
       - name: Run ruff to lint and format code
@@ -51,4 +51,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GX_TOKEN }}
 
       - name: Run tests
-        run: uv run python -m pytest
+        run: uv run -m pytest --python 3.13
