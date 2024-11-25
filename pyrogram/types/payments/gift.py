@@ -60,7 +60,7 @@ class Gift(Object):
         last_send_date: datetime | None = None,
         is_limited: bool | None = None,
         is_sold_out: bool | None = None,
-    ):
+    ) -> None:
         super().__init__(client)
 
         self.id = id

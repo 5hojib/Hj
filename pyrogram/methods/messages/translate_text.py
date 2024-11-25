@@ -95,7 +95,8 @@ class TranslateText:
                 to_lang=to_language_code,
                 text=[
                     raw.types.TextWithEntities(
-                        text=message, entities=entities or []
+                        text=message,
+                        entities=entities or [],
                     ),
                 ],
             ),

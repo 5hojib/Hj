@@ -58,7 +58,8 @@ class GetChatMember:
         if isinstance(chat, raw.types.InputPeerChannel):
             r = await self.invoke(
                 raw.functions.channels.GetParticipant(
-                    channel=chat, participant=user
+                    channel=chat,
+                    participant=user,
                 ),
             )
 

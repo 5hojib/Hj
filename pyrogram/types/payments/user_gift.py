@@ -57,7 +57,7 @@ class UserGift(Object):
         gift: types.Gift | None = None,
         message_id: int | None = None,
         sell_star_count: int | None = None,
-    ):
+    ) -> None:
         super().__init__(client)
 
         self.date = date
