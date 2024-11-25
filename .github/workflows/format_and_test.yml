@@ -28,6 +28,8 @@ jobs:
       - name: Install dependencies
         run: |
           uv python install 3.13
+          uv run -m ensurepip --upgrade
+          uv run -m pip install --upgrade pip
           uv tool install pytest
           uv run -m pip install pytest
           uv lock --upgrade
