@@ -1,4 +1,4 @@
-name: Format and Test Code with Rye
+name: Format and test code with uv
 
 on: 
   push:

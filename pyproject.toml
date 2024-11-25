@@ -67,24 +67,6 @@ packages = [
     "pyrogram"
 ]
 
-[tool.rye]
-managed = true
-dev-dependencies = [
-    "ruff",
-    "pytest",
-    "pytest-asyncio",
-    "pytest-cov",
-    "twine",
-    "pre-commit",
-]
-
-[tool.rye.scripts]
-clean = { chain = ["clean:api"] }
-"clean:api" = { cmd = "rm -rf pyrogram/errors/exceptions pyrogram/raw/all.py pyrogram/raw/base pyrogram/raw/functions pyrogram/raw/types" }
-api = { chain = ["api:raw", "api:errors"] }
-"api:raw" = { call = "compiler.api.compiler:start" }
-"api:errors" = { call = "compiler.errors.compiler:start" }
-
 [tool.ruff]
 fix = true
 unsafe-fixes = true
@@ -115,6 +97,10 @@ select = [
     "FA",       # flake8-future-annotations
     "PL",       # pylint
     "ARG",      # flake8-unused-arguments
+    "C90",      # mccabe
+    "ASYNC",    # flake8-async
+    "B",        # flake8-bugbear
+    "COM",      # flake8-commas
 ]
 
 ignore = [
