@@ -747,7 +747,6 @@ def pyrogram_api() -> None:
             Message.react
             Message.wait_for_click
             Message.pay
-            UserGift.toggle
         """,
         "user_gift": """
         UserGift
