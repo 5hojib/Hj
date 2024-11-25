@@ -101,6 +101,7 @@ select = [
     "ASYNC",    # flake8-async
     "B",        # flake8-bugbear
     "COM",      # flake8-commas
+    "ANN",      # flake8-annotations
 ]
 
 ignore = [
