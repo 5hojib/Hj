@@ -29,6 +29,7 @@ jobs:
         run: |
           uv python install 3.13
           uv tool install pytest
+          uv run -m pip install pytest
           uv lock --upgrade
 
       - name: Run ruff to lint and format code
