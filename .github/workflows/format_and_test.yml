@@ -54,4 +54,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GX_TOKEN }}
 
       - name: Run tests
-        run: uv run -m pytest --python 3.13
+        run: uv run -m pytest
