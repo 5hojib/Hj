@@ -67,7 +67,7 @@ class CreateChatInviteLink:
                 usage_limit=member_limit,
                 title=name,
                 request_needed=creates_join_request,
-            )
+            ),
         )
 
         return types.ChatInviteLink._parse(self, r)

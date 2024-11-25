@@ -119,7 +119,8 @@ class Invoice(Object):
 
     @staticmethod
     def _parse(
-        client, invoice: raw.types.MessageMediaInvoice | raw.types.Invoice
+        client,
+        invoice: raw.types.MessageMediaInvoice | raw.types.Invoice,
     ) -> Invoice:
         return Invoice(
             currency=invoice.currency,
@@ -135,7 +136,9 @@ class Invoice(Object):
             is_phone_requested=getattr(invoice, "phone_requested", None),
             is_email_requested=getattr(invoice, "email_requested", None),
             is_shipping_address_requested=getattr(
-                invoice, "shipping_address_requested", None
+                invoice,
+                "shipping_address_requested",
+                None,
             ),
             is_flexible=getattr(invoice, "flexible", None),
             is_phone_to_provider=getattr(invoice, "phone_to_provider", None),

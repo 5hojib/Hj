@@ -151,9 +151,12 @@ class SendCachedMedia:
                 if reply_markup
                 else None,
                 **await utils.parse_text_entities(
-                    self, caption, parse_mode, caption_entities
+                    self,
+                    caption,
+                    parse_mode,
+                    caption_entities,
                 ),
-            )
+            ),
         )
 
         for i in r.updates:

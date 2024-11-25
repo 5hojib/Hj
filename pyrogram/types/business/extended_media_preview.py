@@ -38,7 +38,8 @@ class ExtendedMediaPreview(Object):
 
     @staticmethod
     def _parse(
-        client, media: raw.types.MessageExtendedMediaPreview
+        client,
+        media: raw.types.MessageExtendedMediaPreview,
     ) -> ExtendedMediaPreview:
         thumb = None
         if media.thumb:

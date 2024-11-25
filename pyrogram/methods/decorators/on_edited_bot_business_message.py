@@ -11,7 +11,9 @@ if TYPE_CHECKING:
 
 class OnEditedBotBusinessMessage:
     def on_edited_bot_business_message(
-        self=None, filters=None, group: int = 0
+        self=None,
+        filters=None,
+        group: int = 0,
     ) -> Callable:
         """Decorator for handling edited messages.
 
@@ -40,10 +42,11 @@ class OnEditedBotBusinessMessage:
                 func.handlers.append(
                     (
                         pyrogram.handlers.EditedBotBusinessMessageHandler(
-                            func, self
+                            func,
+                            self,
                         ),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

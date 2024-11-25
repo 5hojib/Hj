@@ -40,7 +40,8 @@ class GetPaymentForm:
 
         if isinstance(message_id, int):
             invoice = raw.types.InputInvoiceMessage(
-                peer=await self.resolve_peer(chat_id), msg_id=message_id
+                peer=await self.resolve_peer(chat_id),
+                msg_id=message_id,
             )
         elif isinstance(message_id, str):
             match = re.match(

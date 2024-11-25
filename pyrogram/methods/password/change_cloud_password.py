@@ -65,7 +65,7 @@ class ChangeCloudPassword:
                     new_password_hash=new_hash,
                     hint=new_hint,
                 ),
-            )
+            ),
         )
 
         return True

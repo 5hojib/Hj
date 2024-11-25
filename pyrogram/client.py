@@ -217,7 +217,7 @@ class Client(Methods):
     PARENT_DIR = Path(sys.argv[0]).parent
 
     INVITE_LINK_RE = re.compile(
-        r"^(?:https?://)?(?:www\.)?(?:t(?:elegram)?\.(?:org|me|dog)/(?:joinchat/|\+))([\w-]+)$"
+        r"^(?:https?://)?(?:www\.)?(?:t(?:elegram)?\.(?:org|me|dog)/(?:joinchat/|\+))([\w-]+)$",
     )
     WORKERS = min(64, (os.cpu_count() or 0) + 4)
     WORKDIR = PARENT_DIR
@@ -305,14 +305,17 @@ class Client(Methods):
         self.protocol_factory = protocol_factory
 
         self.executor = ThreadPoolExecutor(
-            self.workers, thread_name_prefix="Handler"
+            self.workers,
+            thread_name_prefix="Handler",
         )
 
         if storage:
             self.storage = storage
         elif self.session_string:
             self.storage = MemoryStorage(
-                self.name, self.session_string, self.is_telethon_string
+                self.name,
+                self.session_string,
+                self.is_telethon_string,
             )
         elif self.in_memory:
             self.storage = MemoryStorage(self.name)
@@ -325,10 +328,10 @@ class Client(Methods):
         self.media_sessions = {}
         self.media_sessions_lock = asyncio.Lock()
         self.save_file_semaphore = asyncio.Semaphore(
-            self.max_concurrent_transmissions
+            self.max_concurrent_transmissions,
         )
         self.get_file_semaphore = asyncio.Semaphore(
-            self.max_concurrent_transmissions
+            self.max_concurrent_transmissions,
         )
         self.is_connected = None
         self.is_initialized = None
@@ -372,7 +375,7 @@ class Client(Methods):
                 break
 
             if datetime.now() - self.last_update_time > timedelta(
-                seconds=self.UPDATES_WATCHDOG_INTERVAL
+                seconds=self.UPDATES_WATCHDOG_INTERVAL,
             ):
                 await self.invoke(raw.functions.updates.GetState())
 
@@ -383,7 +386,7 @@ class Client(Methods):
         print(f"Welcome to Pyrogram (version {__version__})")
         print(
             f"Pyrogram is free software and comes with ABSOLUTELY NO WARRANTY. Licensed\n"
-            f"under the terms of the {__license__}.\n"
+            f"under the terms of the {__license__}.\n",
         )
 
         while True:
@@ -425,7 +428,7 @@ class Client(Methods):
         }
 
         print(
-            f"The confirmation code has been sent via {sent_code_descriptions[sent_code.type]}"
+            f"The confirmation code has been sent via {sent_code_descriptions[sent_code.type]}",
         )
 
         while True:
@@ -434,7 +437,9 @@ class Client(Methods):
 
             try:
                 signed_in = await self.sign_in(
-                    self.phone_number, sent_code.phone_code_hash, self.phone_code
+                    self.phone_number,
+                    sent_code.phone_code_hash,
+                    self.phone_code,
                 )
             except BadRequest as e:
                 print(e.MESSAGE)
@@ -454,23 +459,23 @@ class Client(Methods):
                     try:
                         if not self.password:
                             confirm = await ainput(
-                                "Confirm password recovery (y/n): "
+                                "Confirm password recovery (y/n): ",
                             )
 
                             if confirm == "y":
                                 email_pattern = await self.send_recovery_code()
                                 print(
-                                    f"The recovery code has been sent to {email_pattern}"
+                                    f"The recovery code has been sent to {email_pattern}",
                                 )
 
                                 while True:
                                     recovery_code = await ainput(
-                                        "Enter recovery code: "
+                                        "Enter recovery code: ",
                                     )
 
                                     try:
                                         return await self.recover_password(
-                                            recovery_code
+                                            recovery_code,
                                         )
                                     except BadRequest as e:
                                         print(e.MESSAGE)
@@ -551,7 +556,8 @@ class Client(Methods):
         self.parse_mode = parse_mode
 
     async def fetch_peers(
-        self, peers: list[raw.types.User | raw.types.Chat | raw.types.Channel]
+        self,
+        peers: list[raw.types.User | raw.types.Chat | raw.types.Channel],
     ) -> bool:
         is_min = False
         parsed_peers = []
@@ -608,7 +614,7 @@ class Client(Methods):
                 continue
 
             parsed_peers.append(
-                (peer_id, access_hash, peer_type, username, phone_number)
+                (peer_id, access_hash, peer_type, username, phone_number),
             )
 
         await self.storage.update_peers(parsed_peers)
@@ -624,7 +630,7 @@ class Client(Methods):
                 (
                     await self.fetch_peers(updates.users),
                     await self.fetch_peers(updates.chats),
-                )
+                ),
             )
 
             users = {u.id: u for u in updates.users}
@@ -648,7 +654,7 @@ class Client(Methods):
                             None,
                             updates.date,
                             updates.seq,
-                        )
+                        ),
                     )
 
                 if isinstance(update, raw.types.UpdateChannelTooLong):
@@ -662,26 +668,27 @@ class Client(Methods):
                             diff = await self.invoke(
                                 raw.functions.updates.GetChannelDifference(
                                     channel=await self.resolve_peer(
-                                        utils.get_channel_id(channel_id)
+                                        utils.get_channel_id(channel_id),
                                     ),
                                     filter=raw.types.ChannelMessagesFilter(
                                         ranges=[
                                             raw.types.MessageRange(
                                                 min_id=update.message.id,
                                                 max_id=update.message.id,
-                                            )
-                                        ]
+                                            ),
+                                        ],
                                     ),
                                     pts=pts - pts_count,
                                     limit=pts,
-                                )
+                                ),
                             )
                         except ChannelPrivate:
                             pass
                         else:
                             if (
                                 not isinstance(
-                                    diff, raw.types.updates.ChannelDifferenceEmpty
+                                    diff,
+                                    raw.types.updates.ChannelDifferenceEmpty,
                                 )
                                 and diff
                             ):
@@ -690,17 +697,20 @@ class Client(Methods):
 
                 self.dispatcher.updates_queue.put_nowait((update, users, chats))
         elif isinstance(
-            updates, raw.types.UpdateShortMessage | raw.types.UpdateShortChatMessage
+            updates,
+            raw.types.UpdateShortMessage | raw.types.UpdateShortChatMessage,
         ):
             if not self.skip_updates:
                 await self.storage.update_state(
-                    (0, updates.pts, None, updates.date, None)
+                    (0, updates.pts, None, updates.date, None),
                 )
 
             diff = await self.invoke(
                 raw.functions.updates.GetDifference(
-                    pts=updates.pts - updates.pts_count, date=updates.date, qts=-1
-                )
+                    pts=updates.pts - updates.pts_count,
+                    date=updates.date,
+                    qts=-1,
+                ),
             )
 
             if diff.new_messages:
@@ -713,11 +723,11 @@ class Client(Methods):
                         ),
                         {u.id: u for u in diff.users},
                         {c.id: c for c in diff.chats},
-                    )
+                    ),
                 )
             elif diff.other_updates:  # The other_updates list can be empty
                 self.dispatcher.updates_queue.put_nowait(
-                    (diff.other_updates[0], {}, {})
+                    (diff.other_updates[0], {}, {}),
                 )
         elif isinstance(updates, raw.types.UpdateShort):
             self.dispatcher.updates_queue.put_nowait((updates.update, {}, {}))
@@ -733,13 +743,13 @@ class Client(Methods):
                 await self.storage.auth_key() is None,
                 await self.storage.user_id() is None,
                 await self.storage.is_bot() is None,
-            ]
+            ],
         )
 
         if session_empty:
             if not self.api_id or not self.api_hash:
                 raise AttributeError(
-                    "The API key is required for new authorizations."
+                    "The API key is required for new authorizations.",
                 )
 
             await self.storage.api_id(self.api_id)
@@ -750,8 +760,10 @@ class Client(Methods):
             await self.storage.test_mode(self.test_mode)
             await self.storage.auth_key(
                 await Auth(
-                    self, await self.storage.dc_id(), await self.storage.test_mode()
-                ).create()
+                    self,
+                    await self.storage.dc_id(),
+                    await self.storage.test_mode(),
+                ).create(),
             )
             await self.storage.user_id(None)
             await self.storage.is_bot(None)
@@ -762,7 +774,7 @@ class Client(Methods):
                 while True:
                     try:
                         value = int(
-                            await ainput("Enter the api_id part of the API key: ")
+                            await ainput("Enter the api_id part of the API key: "),
                         )
 
                         if value <= 0:
@@ -808,7 +820,8 @@ class Client(Methods):
                         try:
                             for handler, group in getattr(module, name).handlers:
                                 if isinstance(handler, Handler) and isinstance(
-                                    group, int
+                                    group,
+                                    int,
                                 ):
                                     self.add_handler(handler, group)
 
@@ -855,7 +868,8 @@ class Client(Methods):
                         try:
                             for handler, group in getattr(module, name).handlers:
                                 if isinstance(handler, Handler) and isinstance(
-                                    group, int
+                                    group,
+                                    int,
                                 ):
                                     self.add_handler(handler, group)
 
@@ -909,7 +923,8 @@ class Client(Methods):
                         try:
                             for handler, group in getattr(module, name).handlers:
                                 if isinstance(handler, Handler) and isinstance(
-                                    group, int
+                                    group,
+                                    int,
                                 ):
                                     self.remove_handler(handler, group)
 
@@ -966,7 +981,12 @@ class Client(Methods):
 
         try:
             async for chunk in self.get_file(
-                file_id, file_size, 0, 0, progress, progress_args
+                file_id,
+                file_size,
+                0,
+                0,
+                progress,
+                progress_args,
             ):
                 file.write(chunk)
         except BaseException as e:
@@ -1005,7 +1025,8 @@ class Client(Methods):
             if file_type == FileType.CHAT_PHOTO:
                 if file_id.chat_id > 0:
                     peer = raw.types.InputPeerUser(
-                        user_id=file_id.chat_id, access_hash=file_id.chat_access_hash
+                        user_id=file_id.chat_id,
+                        access_hash=file_id.chat_access_hash,
                     )
                 elif file_id.chat_access_hash == 0:
                     peer = raw.types.InputPeerChat(chat_id=-file_id.chat_id)
@@ -1059,18 +1080,21 @@ class Client(Methods):
 
                 if dc_id != await self.storage.dc_id():
                     exported_auth = await self.invoke(
-                        raw.functions.auth.ExportAuthorization(dc_id=dc_id)
+                        raw.functions.auth.ExportAuthorization(dc_id=dc_id),
                     )
 
                     await session.invoke(
                         raw.functions.auth.ImportAuthorization(
-                            id=exported_auth.id, bytes=exported_auth.bytes
-                        )
+                            id=exported_auth.id,
+                            bytes=exported_auth.bytes,
+                        ),
                     )
 
                 r = await session.invoke(
                     raw.functions.upload.GetFile(
-                        location=location, offset=offset_bytes, limit=chunk_size
+                        location=location,
+                        offset=offset_bytes,
+                        limit=chunk_size,
                     ),
                     sleep_threshold=30,
                 )
@@ -1118,7 +1142,9 @@ class Client(Methods):
                         self,
                         r.dc_id,
                         await Auth(
-                            self, r.dc_id, await self.storage.test_mode()
+                            self,
+                            r.dc_id,
+                            await self.storage.test_mode(),
                         ).create(),
                         await self.storage.test_mode(),
                         is_media=True,
@@ -1134,18 +1160,19 @@ class Client(Methods):
                                     file_token=r.file_token,
                                     offset=offset_bytes,
                                     limit=chunk_size,
-                                )
+                                ),
                             )
 
                             if isinstance(
-                                r2, raw.types.upload.CdnFileReuploadNeeded
+                                r2,
+                                raw.types.upload.CdnFileReuploadNeeded,
                             ):
                                 try:
                                     await session.invoke(
                                         raw.functions.upload.ReuploadCdnFile(
                                             file_token=r.file_token,
                                             request_token=r2.request_token,
-                                        )
+                                        ),
                                     )
                                 except VolumeLocNotFound:
                                     break
@@ -1159,14 +1186,15 @@ class Client(Methods):
                                 r.encryption_key,
                                 bytearray(
                                     r.encryption_iv[:-4]
-                                    + (offset_bytes // 16).to_bytes(4, "big")
+                                    + (offset_bytes // 16).to_bytes(4, "big"),
                                 ),
                             )
 
                             hashes = await session.invoke(
                                 raw.functions.upload.GetCdnFileHashes(
-                                    file_token=r.file_token, offset=offset_bytes
-                                )
+                                    file_token=r.file_token,
+                                    offset=offset_bytes,
+                                ),
                             )
 
                             for i, h in enumerate(hashes):
@@ -1199,7 +1227,8 @@ class Client(Methods):
                                     await func()
                                 else:
                                     await self.loop.run_in_executor(
-                                        self.executor, func
+                                        self.executor,
+                                        func,
                                     )
 
                             if len(chunk) < chunk_size or current >= total:

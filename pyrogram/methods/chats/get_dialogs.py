@@ -75,7 +75,11 @@ class GetDialogs:
 
                 chat_id = utils.get_peer_id(message.peer_id)
                 messages[chat_id] = await types.Message._parse(
-                    self, message, users, chats, replies=1
+                    self,
+                    message,
+                    users,
+                    chats,
+                    replies=1,
                 )
 
             dialogs = []
@@ -85,7 +89,7 @@ class GetDialogs:
                     continue
 
                 dialogs.append(
-                    types.Dialog._parse(self, dialog, messages, users, chats)
+                    types.Dialog._parse(self, dialog, messages, users, chats),
                 )
 
             if not dialogs:

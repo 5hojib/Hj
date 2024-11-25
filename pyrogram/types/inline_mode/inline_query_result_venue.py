@@ -98,7 +98,8 @@ class InlineQueryResultVenue(InlineQueryResult):
                 if self.input_message_content
                 else raw.types.InputBotInlineMessageMediaVenue(
                     geo_point=raw.types.InputGeoPoint(
-                        lat=self.latitude, long=self.longitude
+                        lat=self.latitude,
+                        long=self.longitude,
                     ),
                     title=self.title,
                     address=self.address,

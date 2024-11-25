@@ -50,13 +50,13 @@ class AnswerShippingQuery:
                 raw.functions.messages.SetBotShippingResults(
                     query_id=int(shipping_query_id),
                     shipping_options=[so.write() for so in shipping_options],
-                )
+                ),
             )
         else:
             r = await self.invoke(
                 raw.functions.messages.SetBotShippingResults(
                     query_id=int(shipping_query_id),
                     error=error_message or None,
-                )
+                ),
             )
         return r

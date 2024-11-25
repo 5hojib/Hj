@@ -39,9 +39,9 @@ MARKDOWN_RE = re.compile(
                         SPOILER_DELIM,
                     ]
                 ]
-            ]
-        )
-    )
+            ],
+        ),
+    ),
 )
 
 OPENING_TAG = "<{}>"
@@ -220,13 +220,13 @@ class Markdown:
                         (
                             start_tag,
                             start_offset,
-                        )
+                        ),
                     )
                     entities_offsets.append(
                         (
                             end_tag,
                             end_offset,
-                        )
+                        ),
                     )
                     last_length = last_length + 1
                 continue
@@ -247,13 +247,13 @@ class Markdown:
                 (
                     start_tag,
                     start,
-                )
+                ),
             )
             entities_offsets.append(
                 (
                     end_tag,
                     end,
-                )
+                ),
             )
 
         entities_offsets = (

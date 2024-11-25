@@ -41,7 +41,7 @@ class ResendCode:
             raw.functions.auth.ResendCode(
                 phone_number=phone_number,
                 phone_code_hash=phone_code_hash,
-            )
+            ),
         )
 
         return types.SentCode._parse(r)

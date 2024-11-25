@@ -46,7 +46,7 @@ class TCPIntermediateO(TCP):
 
     async def send(self, data: bytes, *args) -> None:
         await super().send(
-            aes.ctr256_encrypt(pack("<i", len(data)) + data, *self.encrypt)
+            aes.ctr256_encrypt(pack("<i", len(data)) + data, *self.encrypt),
         )
 
     async def recv(self, length: int = 0) -> bytes | None:

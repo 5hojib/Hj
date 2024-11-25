@@ -6,7 +6,8 @@ from pyrogram import raw, types
 
 class DeleteContacts:
     async def delete_contacts(
-        self: pyrogram.Client, user_ids: int | str | list[int | str]
+        self: pyrogram.Client,
+        user_ids: int | str | list[int | str],
     ) -> types.User | list[types.User] | None:
         """Delete contacts from your Telegram address book.
 
@@ -36,8 +37,8 @@ class DeleteContacts:
 
         r = await self.invoke(
             raw.functions.contacts.DeleteContacts(
-                id=[await self.resolve_peer(i) for i in user_ids]
-            )
+                id=[await self.resolve_peer(i) for i in user_ids],
+            ),
         )
 
         if not r.updates:

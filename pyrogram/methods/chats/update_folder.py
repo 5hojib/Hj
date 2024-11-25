@@ -122,5 +122,5 @@ class UpdateFolder:
                     emoticon=emoji,
                     color=color.value if color else None,
                 ),
-            )
+            ),
         )

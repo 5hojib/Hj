@@ -44,5 +44,5 @@ class AnswerPreCheckoutQuery:
                 query_id=int(pre_checkout_query_id),
                 success=success or None,
                 error=error or None,
-            )
+            ),
         )

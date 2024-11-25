@@ -127,7 +127,7 @@ class DownloadMedia:
                     break
             else:
                 raise ValueError(
-                    "This message doesn't contain any downloadable media"
+                    "This message doesn't contain any downloadable media",
                 )
         else:
             media = message
@@ -186,7 +186,7 @@ class DownloadMedia:
                 file_size,
                 progress,
                 progress_args,
-            )
+            ),
         )
 
         if block:

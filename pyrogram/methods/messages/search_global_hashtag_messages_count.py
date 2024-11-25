@@ -30,7 +30,7 @@ class SearchGlobalHashtagMessagesCount:
                 offset_peer=raw.types.InputPeerEmpty(),
                 offset_id=0,
                 limit=1,
-            )
+            ),
         )
 
         if hasattr(r, "count"):

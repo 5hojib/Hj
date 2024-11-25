@@ -77,7 +77,7 @@ class StreamMedia:
                     break
             else:
                 raise ValueError(
-                    "This message doesn't contain any downloadable media"
+                    "This message doesn't contain any downloadable media",
                 )
         else:
             media = message
@@ -90,7 +90,7 @@ class StreamMedia:
         if offset < 0:
             if file_size == 0:
                 raise ValueError(
-                    "Negative offsets are not supported for file ids, pass a Message object instead"
+                    "Negative offsets are not supported for file ids, pass a Message object instead",
                 )
 
             chunks = math.ceil(file_size / 1024 / 1024)

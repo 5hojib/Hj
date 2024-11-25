@@ -7,7 +7,9 @@ from pyrogram.utils import compute_password_check
 
 class DeleteAccount:
     async def delete_account(
-        self: pyrogram.Client, reason: str = "", password: str | None = None
+        self: pyrogram.Client,
+        reason: str = "",
+        password: str | None = None,
     ) -> bool:
         """Deletes the account of the current user, deleting all information associated with the user from the server.
 
@@ -32,11 +34,12 @@ class DeleteAccount:
             raw.functions.account.DeleteAccount(
                 reason=reason,
                 password=compute_password_check(
-                    await self.invoke(raw.functions.account.GetPassword()), password
+                    await self.invoke(raw.functions.account.GetPassword()),
+                    password,
                 )
                 if password
                 else None,
-            )
+            ),
         )
 
         return bool(r)

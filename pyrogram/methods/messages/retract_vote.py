@@ -6,7 +6,9 @@ from pyrogram import raw, types
 
 class RetractVote:
     async def retract_vote(
-        self: pyrogram.Client, chat_id: int | str, message_id: int
+        self: pyrogram.Client,
+        chat_id: int | str,
+        message_id: int,
     ) -> types.Poll:
         """Retract your vote in a poll.
 
@@ -35,7 +37,7 @@ class RetractVote:
                 peer=await self.resolve_peer(chat_id),
                 msg_id=message_id,
                 options=[],
-            )
+            ),
         )
 
         return await types.Poll._parse(self, r.updates[0], r.users)

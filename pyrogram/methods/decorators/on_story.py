@@ -39,7 +39,7 @@ class OnStory:
                     (
                         pyrogram.handlers.StoryHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

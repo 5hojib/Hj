@@ -6,7 +6,9 @@ from pyrogram import raw
 
 class ReopenForumTopic:
     async def reopen_forum_topic(
-        self: pyrogram.Client, chat_id: int | str, topic_id: int
+        self: pyrogram.Client,
+        chat_id: int | str,
+        topic_id: int,
     ) -> bool:
         """Reopen a forum topic.
 
@@ -33,6 +35,6 @@ class ReopenForumTopic:
                 channel=await self.resolve_peer(chat_id),
                 topic_id=topic_id,
                 closed=False,
-            )
+            ),
         )
         return True

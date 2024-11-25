@@ -39,6 +39,6 @@ class UpdateBirthday:
         birthday = await birthday.write()
 
         r = await self.invoke(
-            raw.functions.account.UpdateBirthday(birthday=birthday)
+            raw.functions.account.UpdateBirthday(birthday=birthday),
         )
         return bool(r)

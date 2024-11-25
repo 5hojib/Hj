@@ -30,7 +30,7 @@ class GetChatInviteLink:
             raw.functions.messages.GetExportedChatInvite(
                 peer=await self.resolve_peer(chat_id),
                 link=invite_link,
-            )
+            ),
         )
 
         users = {i.id: i for i in r.users}

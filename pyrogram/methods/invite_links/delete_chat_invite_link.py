@@ -31,5 +31,5 @@ class DeleteChatInviteLink:
             raw.functions.messages.DeleteExportedChatInvite(
                 peer=await self.resolve_peer(chat_id),
                 link=invite_link,
-            )
+            ),
         )

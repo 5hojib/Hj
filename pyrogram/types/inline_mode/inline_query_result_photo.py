@@ -91,8 +91,9 @@ class InlineQueryResultPhoto(InlineQueryResult):
             mime_type="image/jpeg",
             attributes=[
                 raw.types.DocumentAttributeImageSize(
-                    w=self.photo_width, h=self.photo_height
-                )
+                    w=self.photo_width,
+                    h=self.photo_height,
+                ),
             ],
         )
 

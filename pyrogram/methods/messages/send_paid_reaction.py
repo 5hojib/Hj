@@ -51,7 +51,7 @@ class SendPaidReaction:
                 random_id=self.rnd_id(),
                 count=star_count,
                 private=is_anonymous,
-            )
+            ),
         )
         users = {i.id: i for i in r.users}
         for i in r.updates:

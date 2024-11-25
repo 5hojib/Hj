@@ -63,7 +63,9 @@ class MessageEntity(Object):
 
     @staticmethod
     def _parse(
-        client, entity: raw.base.MessageEntity, users: dict
+        client,
+        entity: raw.base.MessageEntity,
+        users: dict,
     ) -> MessageEntity | None:
         # Special case for InputMessageEntityMentionName -> MessageEntityType.TEXT_MENTION
         # This happens in case of UpdateShortSentMessage inside send_message() where entities are parsed from the input

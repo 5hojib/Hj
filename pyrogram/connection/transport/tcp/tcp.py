@@ -81,7 +81,9 @@ class TCP:
         host, port = destination
         family = socket.AF_INET6 if self.ipv6 else socket.AF_INET
         self.reader, self.writer = await asyncio.open_connection(
-            host=host, port=port, family=family
+            host=host,
+            port=port,
+            family=family,
         )
 
     async def _connect(self, destination: tuple[str, int]) -> None:
@@ -124,7 +126,8 @@ class TCP:
         while len(data) < length:
             try:
                 chunk = await asyncio.wait_for(
-                    self.reader.read(length - len(data)), TCP.TIMEOUT
+                    self.reader.read(length - len(data)),
+                    TCP.TIMEOUT,
                 )
             except (OSError, asyncio.TimeoutError):
                 return None

@@ -188,8 +188,9 @@ class SendVoice:
                         file=file,
                         attributes=[
                             raw.types.DocumentAttributeAudio(
-                                voice=True, duration=duration
-                            )
+                                voice=True,
+                                duration=duration,
+                            ),
                         ],
                     )
                 elif re.match("^https?://", voice):
@@ -207,8 +208,9 @@ class SendVoice:
                     file=file,
                     attributes=[
                         raw.types.DocumentAttributeAudio(
-                            voice=True, duration=duration
-                        )
+                            voice=True,
+                            duration=duration,
+                        ),
                     ],
                 )
 
@@ -239,7 +241,7 @@ class SendVoice:
                             raw.functions.InvokeWithBusinessConnection(
                                 connection_id=business_connection_id,
                                 query=rpc,
-                            )
+                            ),
                         )
                     else:
                         r = await self.invoke(rpc)

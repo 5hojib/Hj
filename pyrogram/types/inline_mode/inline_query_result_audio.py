@@ -90,7 +90,7 @@ class InlineQueryResultAudio(InlineQueryResult):
                     duration=self.audio_duration,
                     title=self.title,
                     performer=self.performer,
-                )
+                ),
             ],
         )
 

@@ -31,7 +31,7 @@ class DeleteUserHistory:
             raw.functions.channels.DeleteParticipantHistory(
                 channel=await self.resolve_peer(chat_id),
                 participant=await self.resolve_peer(user_id),
-            )
+            ),
         )
 
         # Deleting messages you don't have right onto won't raise any error.

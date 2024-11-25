@@ -45,8 +45,8 @@ class MessageStory(Object):
             chat_id = utils.get_channel_id(message_story.peer.channel_id)
             chat = await client.invoke(
                 raw.functions.channels.GetChannels(
-                    id=[await client.resolve_peer(chat_id)]
-                )
+                    id=[await client.resolve_peer(chat_id)],
+                ),
             )
             sender_chat = types.Chat._parse_chat(client, chat.chats[0])
         else:

@@ -19,7 +19,8 @@ class MediaArea(Object):
         self.coordinates = coordinates
 
     async def _parse(
-        self: pyrogram.Client, media_area: raw.base.MediaArea
+        self: pyrogram.Client,
+        media_area: raw.base.MediaArea,
     ) -> MediaArea:
         if isinstance(media_area, raw.types.MediaAreaChannelPost):
             return await types.MediaAreaChannelPost._parse(self, media_area)

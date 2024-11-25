@@ -38,7 +38,7 @@ class OnChatMemberUpdated:
                     (
                         pyrogram.handlers.ChatMemberUpdatedHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

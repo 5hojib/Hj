@@ -16,7 +16,8 @@ DESTINATION_PATH = REPO_HOME_PATH / "pyrogram" / "raw"
 SECTION_RE = re.compile(r"---(\w+)---")
 LAYER_RE = re.compile(r"//\sLAYER\s(\d+)")
 COMBINATOR_RE = re.compile(
-    r"^([\w.]+)#([0-9a-f]+)\s(?:.*)=\s([\w<>.]+);$", re.MULTILINE
+    r"^([\w.]+)#([0-9a-f]+)\s(?:.*)=\s([\w<>.]+);$",
+    re.MULTILINE,
 )
 ARGS_RE = re.compile(r"[^{](\w+):([\w?!.<>#]+)")
 FLAGS_RE = re.compile(r"flags(\d?)\.(\d+)\?")
@@ -327,7 +328,7 @@ def start() -> None:
                     qualname=qualtype,
                     types=", ".join([f'"raw.types.{c}"' for c in constructors]),
                     doc_name=snake(type).replace("_", "-"),
-                )
+                ),
             )
 
     for c in combinators:
@@ -341,7 +342,7 @@ def start() -> None:
 
         fields = (
             "\n        ".join(
-                [f"self.{i[0]} = {i[0]}  # {i[1]}" for i in sorted_args]
+                [f"self.{i[0]} = {i[0]}  # {i[1]}" for i in sorted_args],
             )
             if sorted_args
             else "pass"
@@ -364,7 +365,7 @@ def start() -> None:
             arg_docs = arg_docs["params"].get(arg_name, "N/A") if arg_docs else "N/A"
 
             docstring_args.append(
-                f'{arg_name} ({get_docstring_arg_type(arg_type)}{", *optional*" if is_optional else ""}):\n            {arg_docs}\n'
+                f'{arg_name} ({get_docstring_arg_type(arg_type)}{", *optional*" if is_optional else ""}):\n            {arg_docs}\n',
             )
 
         if c.section == "types":
@@ -393,7 +394,7 @@ def start() -> None:
 
         if c.section == "functions":
             docstring += "\n    Returns:\n        " + get_docstring_arg_type(
-                c.qualtype
+                c.qualtype,
             )
         else:
             references, count = get_references(c.qualname, "constructors")
@@ -417,14 +418,14 @@ def start() -> None:
                             continue
 
                         if flag.group(3) == "true" or flag.group(3).startswith(
-                            "Vector"
+                            "Vector",
                         ):
                             write_flags.append(
-                                f"{arg_name} |= (1 << {flag.group(2)}) if self.{i[0]} else 0"
+                                f"{arg_name} |= (1 << {flag.group(2)}) if self.{i[0]} else 0",
                             )
                         else:
                             write_flags.append(
-                                f"{arg_name} |= (1 << {flag.group(2)}) if self.{i[0]} is not None else 0"
+                                f"{arg_name} |= (1 << {flag.group(2)}) if self.{i[0]} is not None else 0",
                             )
 
                 write_flags = "\n        ".join(
@@ -432,7 +433,7 @@ def start() -> None:
                         f"{arg_name} = 0",
                         "\n        ".join(write_flags),
                         f"b.write(Int({arg_name}))\n        ",
-                    ]
+                    ],
                 )
 
                 write_types += write_flags
@@ -555,7 +556,7 @@ def start() -> None:
 
             if not namespace:
                 f.write(
-                    f"from . import {', '.join(filter(bool, namespaces_to_types))}"
+                    f"from . import {', '.join(filter(bool, namespaces_to_types))}",
                 )
 
             all.extend(filter(bool, namespaces_to_types))
@@ -583,7 +584,7 @@ def start() -> None:
 
             if not namespace:
                 f.write(
-                    f"from . import {', '.join(filter(bool, namespaces_to_constructors))}\n"
+                    f"from . import {', '.join(filter(bool, namespaces_to_constructors))}\n",
                 )
 
             all.extend(filter(bool, namespaces_to_constructors))
@@ -595,7 +596,8 @@ def start() -> None:
 
     for namespace, types in namespaces_to_functions.items():
         with open(
-            DESTINATION_PATH / "functions" / namespace / "__init__.py", "w"
+            DESTINATION_PATH / "functions" / namespace / "__init__.py",
+            "w",
         ) as f:
             f.write(f"{WARNING}\n\n")
 
@@ -613,7 +615,7 @@ def start() -> None:
 
             if not namespace:
                 f.write(
-                    f"from . import {', '.join(filter(bool, namespaces_to_functions))}"
+                    f"from . import {', '.join(filter(bool, namespaces_to_functions))}",
                 )
 
             all.extend(filter(bool, namespaces_to_functions))

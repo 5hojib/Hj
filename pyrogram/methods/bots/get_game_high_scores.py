@@ -47,7 +47,7 @@ class GetGameHighScores:
                 peer=await self.resolve_peer(chat_id),
                 id=message_id,
                 user_id=await self.resolve_peer(user_id),
-            )
+            ),
         )
 
         return types.List(

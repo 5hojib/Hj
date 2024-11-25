@@ -83,7 +83,7 @@ class BanChatMember:
                         embed_links=True,
                         manage_topics=True,
                     ),
-                )
+                ),
             )
         else:
             r = await self.invoke(
@@ -91,7 +91,7 @@ class BanChatMember:
                     chat_id=abs(chat_id),
                     user_id=user_peer,
                     revoke_history=revoke_messages,
-                )
+                ),
             )
 
         for i in r.updates:

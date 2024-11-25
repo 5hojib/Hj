@@ -121,9 +121,9 @@ class CopyMediaGroup:
                         if message.caption
                         and message.caption != "None"
                         and type(captions) is not str
-                        else ""
+                        else "",
                     ),
-                )
+                ),
             )
 
         r = await self.invoke(

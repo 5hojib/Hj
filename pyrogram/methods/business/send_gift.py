@@ -73,13 +73,14 @@ class SendGift:
         )
 
         form = await self.invoke(
-            raw.functions.payments.GetPaymentForm(invoice=invoice)
+            raw.functions.payments.GetPaymentForm(invoice=invoice),
         )
 
         await self.invoke(
             raw.functions.payments.SendStarsForm(
-                form_id=form.form_id, invoice=invoice
-            )
+                form_id=form.form_id,
+                invoice=invoice,
+            ),
         )
 
         return True

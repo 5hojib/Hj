@@ -91,7 +91,7 @@ class Photo(Object):
                             w=p.w,
                             h=p.h,
                             size=max(p.sizes),
-                        )
+                        ),
                     )
 
             photos.sort(key=lambda p: p.size)

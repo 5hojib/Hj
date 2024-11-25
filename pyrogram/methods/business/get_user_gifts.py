@@ -53,7 +53,9 @@ class GetUserGifts:
         while True:
             r = await self.invoke(
                 raw.functions.payments.GetUserStarGifts(
-                    user_id=peer, offset=offset, limit=limit
+                    user_id=peer,
+                    offset=offset,
+                    limit=limit,
                 ),
                 sleep_threshold=max(60, self.sleep_threshold),
             )

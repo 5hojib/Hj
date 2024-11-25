@@ -92,7 +92,7 @@ class ForwardMessages:
                 noforwards=protect_content,
                 allow_paid_floodskip=allow_paid_broadcast,
                 drop_author=drop_author,
-            )
+            ),
         )
 
         users = {i.id: i for i in r.users}

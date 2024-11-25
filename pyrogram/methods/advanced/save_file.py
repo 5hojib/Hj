@@ -104,7 +104,9 @@ class SaveFile:
                     bytes=chunk,
                 )
             return raw.functions.upload.SaveFilePart(
-                file_id=file_id, file_part=file_part, bytes=chunk
+                file_id=file_id,
+                file_part=file_part,
+                bytes=chunk,
             )
 
         part_size = 512 * 1024
@@ -127,7 +129,7 @@ class SaveFile:
 
             if file_size > file_size_limit_mib * 1024 * 1024:
                 raise ValueError(
-                    f"Can't upload files bigger than {file_size_limit_mib} MiB"
+                    f"Can't upload files bigger than {file_size_limit_mib} MiB",
                 )
 
             file_total_parts = math.ceil(file_size / part_size)
@@ -165,7 +167,7 @@ class SaveFile:
                 while True:
                     chunk = await next_chunk_task
                     next_chunk_task = self.loop.create_task(
-                        self.preload(fp, part_size)
+                        self.preload(fp, part_size),
                     )
 
                     if not chunk:
@@ -175,8 +177,12 @@ class SaveFile:
 
                     await queue.put(
                         create_rpc(
-                            chunk, file_part, is_big, file_id, file_total_parts
-                        )
+                            chunk,
+                            file_part,
+                            is_big,
+                            file_id,
+                            file_total_parts,
+                        ),
                     )
 
                     if is_missing_part:

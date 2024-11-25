@@ -137,7 +137,9 @@ class ActiveSession(Object):
             is_password_pending=getattr(session, "password_pending", None),
             is_unconfirmed=getattr(session, "unconfirmed", None),
             can_accept_secret_chats=not getattr(
-                session, "encrypted_requests_disabled", False
+                session,
+                "encrypted_requests_disabled",
+                False,
             ),
             can_accept_calls=not getattr(session, "call_requests_disabled", False),
             is_official_application=getattr(session, "official_app", None),

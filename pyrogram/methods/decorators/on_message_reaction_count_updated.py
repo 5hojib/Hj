@@ -11,7 +11,9 @@ if TYPE_CHECKING:
 
 class OnMessageReactionCountUpdated:
     def on_message_reaction_count_updated(
-        self=None, filters=None, group: int = 0
+        self=None,
+        filters=None,
+        group: int = 0,
     ) -> Callable:
         """Decorator for handling anonymous reaction changes on messages.
 
@@ -30,7 +32,8 @@ class OnMessageReactionCountUpdated:
             if isinstance(self, pyrogram.Client):
                 self.add_handler(
                     pyrogram.handlers.MessageReactionCountUpdatedHandler(
-                        func, filters
+                        func,
+                        filters,
                     ),
                     group,
                 )
@@ -41,10 +44,11 @@ class OnMessageReactionCountUpdated:
                 func.handlers.append(
                     (
                         pyrogram.handlers.MessageReactionCountUpdatedHandler(
-                            func, self
+                            func,
+                            self,
                         ),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

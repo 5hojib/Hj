@@ -166,7 +166,9 @@ class Dispatcher:
         async def callback_query_parser(update, users, chats):
             return (
                 await pyrogram.types.CallbackQuery._parse(
-                    self.client, update, users
+                    self.client,
+                    update,
+                    users,
                 ),
                 CallbackQueryHandler,
             )
@@ -198,7 +200,10 @@ class Dispatcher:
         async def chat_member_updated_parser(update, users, chats):
             return (
                 pyrogram.types.ChatMemberUpdated._parse(
-                    self.client, update, users, chats
+                    self.client,
+                    update,
+                    users,
+                    chats,
                 ),
                 ChatMemberUpdatedHandler,
             )
@@ -206,7 +211,10 @@ class Dispatcher:
         async def chat_join_request_parser(update, users, chats):
             return (
                 pyrogram.types.ChatJoinRequest._parse(
-                    self.client, update, users, chats
+                    self.client,
+                    update,
+                    users,
+                    chats,
                 ),
                 ChatJoinRequestHandler,
             )
@@ -214,7 +222,9 @@ class Dispatcher:
         async def story_parser(update, users, chats):
             return (
                 await pyrogram.types.Story._parse(
-                    self.client, update.story, update.peer
+                    self.client,
+                    update.story,
+                    update.peer,
                 ),
                 StoryHandler,
             )
@@ -222,7 +232,9 @@ class Dispatcher:
         async def shipping_query_parser(update, users, chats):
             return (
                 await pyrogram.types.ShippingQuery._parse(
-                    self.client, update, users
+                    self.client,
+                    update,
+                    users,
                 ),
                 ShippingQueryHandler,
             )
@@ -230,7 +242,9 @@ class Dispatcher:
         async def pre_checkout_query_parser(update, users, chats):
             return (
                 await pyrogram.types.PreCheckoutQuery._parse(
-                    self.client, update, users
+                    self.client,
+                    update,
+                    users,
                 ),
                 PreCheckoutQueryHandler,
             )
@@ -238,7 +252,10 @@ class Dispatcher:
         async def message_bot_na_reaction_parser(update, users, chats):
             return (
                 pyrogram.types.MessageReactionUpdated._parse(
-                    self.client, update, users, chats
+                    self.client,
+                    update,
+                    users,
+                    chats,
                 ),
                 MessageReactionUpdatedHandler,
             )
@@ -246,7 +263,10 @@ class Dispatcher:
         async def message_bot_a_reaction_parser(update, users, chats):
             return (
                 pyrogram.types.MessageReactionCountUpdated._parse(
-                    self.client, update, users, chats
+                    self.client,
+                    update,
+                    users,
+                    chats,
                 ),
                 MessageReactionCountUpdatedHandler,
             )
@@ -254,7 +274,8 @@ class Dispatcher:
         async def bot_business_connect_parser(update, users, chats):
             return (
                 await pyrogram.types.BotBusinessConnection._parse(
-                    self.client, update.connection
+                    self.client,
+                    update.connection,
                 ),
                 BotBusinessConnectHandler,
             )
@@ -289,11 +310,11 @@ class Dispatcher:
 
     async def start(self) -> None:
         if not self.client.no_updates:
-            for i in range(self.client.workers):
+            for _i in range(self.client.workers):
                 self.locks_list.append(asyncio.Lock())
 
                 self.handler_worker_tasks.append(
-                    self.loop.create_task(self.handler_worker(self.locks_list[-1]))
+                    self.loop.create_task(self.handler_worker(self.locks_list[-1])),
                 )
 
             log.info("Started %s HandlerTasks", self.client.workers)
@@ -327,7 +348,7 @@ class Dispatcher:
                                     pts=local_pts,
                                     date=local_date,
                                     qts=0,
-                                )
+                                ),
                             )
                         except (
                             errors.ChannelPrivate,
@@ -380,7 +401,7 @@ class Dispatcher:
                                     ),
                                     users,
                                     chats,
-                                )
+                                ),
                             )
 
                         for update in diff.other_updates:
@@ -440,7 +461,7 @@ class Dispatcher:
             try:
                 if group not in self.groups:
                     raise ValueError(
-                        f"Group {group} does not exist. Handler was not removed."
+                        f"Group {group} does not exist. Handler was not removed.",
                     )
 
                 self.groups[group].remove(handler)
@@ -479,7 +500,8 @@ class Dispatcher:
                             if isinstance(handler, handler_type):
                                 try:
                                     if await handler.check(
-                                        self.client, parsed_update
+                                        self.client,
+                                        parsed_update,
                                     ):
                                         args = (parsed_update,)
                                 except Exception as e:

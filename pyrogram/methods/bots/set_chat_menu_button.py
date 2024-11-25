@@ -32,7 +32,7 @@ class SetChatMenuButton:
                     if menu_button
                     else (await types.MenuButtonDefault().write(self))
                 ),
-            )
+            ),
         )
 
         return True

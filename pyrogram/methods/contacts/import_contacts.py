@@ -31,5 +31,5 @@ class ImportContacts:
                     InputPhoneContact("+1-789-012-3456", "Baz")])
         """
         return await self.invoke(
-            raw.functions.contacts.ImportContacts(contacts=contacts)
+            raw.functions.contacts.ImportContacts(contacts=contacts),
         )

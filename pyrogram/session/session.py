@@ -113,7 +113,8 @@ class Session:
                 self.recv_task = asyncio.create_task(self.recv_worker())
 
                 await self.send(
-                    raw.functions.Ping(ping_id=0), timeout=self.START_TIMEOUT
+                    raw.functions.Ping(ping_id=0),
+                    timeout=self.START_TIMEOUT,
                 )
 
                 if not self.is_cdn:
@@ -181,7 +182,8 @@ class Session:
             if self.ping_task:
                 try:
                     await asyncio.wait_for(
-                        self.ping_task, timeout=self.RECONN_TIMEOUT
+                        self.ping_task,
+                        timeout=self.RECONN_TIMEOUT,
                     )
                 except asyncio.TimeoutError:
                     self.ping_task.cancel()
@@ -190,13 +192,15 @@ class Session:
             if self.connection:
                 with contextlib.suppress(Exception):
                     await asyncio.wait_for(
-                        self.connection.close(), timeout=self.RECONN_TIMEOUT
+                        self.connection.close(),
+                        timeout=self.RECONN_TIMEOUT,
                     )
 
             if self.recv_task:
                 try:
                     await asyncio.wait_for(
-                        self.recv_task, timeout=self.RECONN_TIMEOUT
+                        self.recv_task,
+                        timeout=self.RECONN_TIMEOUT,
                     )
                 except asyncio.TimeoutError:
                     self.recv_task.cancel()
@@ -227,7 +231,7 @@ class Session:
                 and (now - self.last_reconnect_attempt) < self.RECONNECT_THRESHOLD
             ):
                 to_wait = self.RECONNECT_THRESHOLD + int(
-                    self.RECONNECT_THRESHOLD - (now - self.last_reconnect_attempt)
+                    self.RECONNECT_THRESHOLD - (now - self.last_reconnect_attempt),
                 )
                 log.warning(
                     "Client [%s] is reconnecting too frequently, sleeping for %s seconds",
@@ -303,12 +307,12 @@ class Session:
             try:
                 if self.stored_msg_ids and msg.msg_id < self.stored_msg_ids[0]:
                     raise SecurityCheckMismatch(
-                        "The msg_id is lower than all the stored values"
+                        "The msg_id is lower than all the stored values",
                     )
 
                 if msg.msg_id in self.stored_msg_ids:
                     raise SecurityCheckMismatch(
-                        "The msg_id is equal to any of the stored values"
+                        "The msg_id is equal to any of the stored values",
                     )
 
                 time_diff = (msg.msg_id - MsgId()) / 2**32
@@ -316,13 +320,13 @@ class Session:
                 if time_diff > 30:
                     raise SecurityCheckMismatch(
                         "The msg_id belongs to over 30 seconds in the future. "
-                        "Most likely the client time has to be synchronized."
+                        "Most likely the client time has to be synchronized.",
                     )
 
                 if time_diff < -300:
                     raise SecurityCheckMismatch(
                         "The msg_id belongs to over 300 seconds in the past. "
-                        "Most likely the client time has to be synchronized."
+                        "Most likely the client time has to be synchronized.",
                     )
             except SecurityCheckMismatch as e:
                 log.info("Discarding packet: %s", e)
@@ -332,7 +336,8 @@ class Session:
                 bisect.insort(self.stored_msg_ids, msg.msg_id)
 
             if isinstance(
-                msg.body, raw.types.MsgDetailedInfo | raw.types.MsgNewDetailedInfo
+                msg.body,
+                raw.types.MsgDetailedInfo | raw.types.MsgNewDetailedInfo,
             ):
                 self.pending_acks.add(msg.body.answer_msg_id)
                 continue
@@ -343,7 +348,8 @@ class Session:
             msg_id = None
 
             if isinstance(
-                msg.body, raw.types.BadMsgNotification | raw.types.BadServerSalt
+                msg.body,
+                raw.types.BadMsgNotification | raw.types.BadServerSalt,
             ):
                 msg_id = msg.body.bad_msg_id
             elif isinstance(msg.body, FutureSalts | raw.types.RpcResult):
@@ -362,7 +368,8 @@ class Session:
 
             try:
                 await self.send(
-                    raw.types.MsgsAck(msg_ids=list(self.pending_acks)), False
+                    raw.types.MsgsAck(msg_ids=list(self.pending_acks)),
+                    False,
                 )
             except OSError:
                 pass
@@ -379,7 +386,8 @@ class Session:
 
             try:
                 await asyncio.wait_for(
-                    self.ping_task_event.wait(), self.PING_INTERVAL
+                    self.ping_task_event.wait(),
+                    self.PING_INTERVAL,
                 )
             except asyncio.TimeoutError:
                 pass
@@ -389,7 +397,8 @@ class Session:
             try:
                 await self.send(
                     raw.functions.PingDelayDisconnect(
-                        ping_id=0, disconnect_delay=self.WAIT_TIMEOUT + 10
+                        ping_id=0,
+                        disconnect_delay=self.WAIT_TIMEOUT + 10,
                     ),
                     False,
                 )
@@ -418,7 +427,7 @@ class Session:
                     if error_code == 404:
                         raise Unauthorized(
                             "Auth key not found in the system. You must delete your session file "
-                            "and log in again with your phone number or bot token."
+                            "and log in again with your phone number or bot token.",
                         )
 
                     log.warning(

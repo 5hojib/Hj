@@ -11,7 +11,9 @@ if TYPE_CHECKING:
 
 class OnMessageReactionUpdated:
     def on_message_reaction_updated(
-        self=None, filters=None, group: int = 0
+        self=None,
+        filters=None,
+        group: int = 0,
     ) -> Callable:
         """Decorator for handling reaction changes on messages.
 
@@ -40,7 +42,7 @@ class OnMessageReactionUpdated:
                     (
                         pyrogram.handlers.MessageReactionUpdatedHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

@@ -44,7 +44,7 @@ class ExportFolderLink:
                 chatlist=raw.types.InputChatlistDialogFilter(filter_id=folder_id),
                 title=folder.title,
                 peers=[await self.resolve_peer(i.id) for i in peers],
-            )
+            ),
         )
 
         return r.invite.url

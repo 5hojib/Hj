@@ -49,7 +49,8 @@ class Reaction(Object):
     def _parse(client: pyrogram.Client, reaction: raw.base.Reaction) -> Reaction:
         if isinstance(reaction, raw.types.ReactionEmoji):
             return Reaction(
-                client=client, type=ReactionTypeEmoji(emoji=reaction.emoticon)
+                client=client,
+                type=ReactionTypeEmoji(emoji=reaction.emoticon),
             )
 
         if isinstance(reaction, raw.types.ReactionCustomEmoji):
@@ -64,7 +65,8 @@ class Reaction(Object):
 
     @staticmethod
     def _parse_count(
-        client: pyrogram.Client, reaction_count: raw.base.ReactionCount
+        client: pyrogram.Client,
+        reaction_count: raw.base.ReactionCount,
     ) -> Reaction:
         reaction = Reaction._parse(client, reaction_count.reaction)
         reaction.count = reaction_count.count
@@ -178,7 +180,11 @@ class ReactionCount(Object):
     """
 
     def __init__(
-        self, *, type: ReactionType, total_count: int, chosen_order: int
+        self,
+        *,
+        type: ReactionType,
+        total_count: int,
+        chosen_order: int,
     ) -> None:
         super().__init__()
         self.type = type

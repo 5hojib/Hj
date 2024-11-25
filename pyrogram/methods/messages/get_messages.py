@@ -93,7 +93,7 @@ class GetMessages:
 
             if ids is None:
                 raise ValueError(
-                    "No argument supplied. Either pass message_ids or reply_to_message_ids"
+                    "No argument supplied. Either pass message_ids or reply_to_message_ids",
                 )
 
             peer = await self.resolve_peer(chat_id)
@@ -136,7 +136,7 @@ class GetMessages:
 
             elif not self.me.is_bot and len(linkps) == 5 and linkps[3] == "m":
                 r = await self.invoke(
-                    raw.functions.account.ResolveBusinessChatLink(slug=linkps[4])
+                    raw.functions.account.ResolveBusinessChatLink(slug=linkps[4]),
                 )
                 users = {i.id: i for i in r.users}
                 entities = [
@@ -159,14 +159,15 @@ class GetMessages:
                 raw_chat_id = linkps[3]
                 if raw_chat_id == "m":
                     raise ValueError(
-                        "Invalid ClientType used to parse this message link"
+                        "Invalid ClientType used to parse this message link",
                     )
                 message_id = int(linkps[4])
 
             return await self.get_messages(
-                chat_id=raw_chat_id, message_ids=message_id
+                chat_id=raw_chat_id,
+                message_ids=message_id,
             )
 
         raise ValueError(
-            "No argument supplied. Either pass link OR (chat_id, message_ids or reply_to_message_ids)"
+            "No argument supplied. Either pass link OR (chat_id, message_ids or reply_to_message_ids)",
         )

@@ -256,7 +256,7 @@ class SendPhoto:
                             raw.functions.InvokeWithBusinessConnection(
                                 connection_id=business_connection_id,
                                 query=rpc,
-                            )
+                            ),
                         )
                     else:
                         r = await self.invoke(rpc)

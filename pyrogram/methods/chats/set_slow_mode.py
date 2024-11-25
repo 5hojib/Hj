@@ -40,7 +40,7 @@ class SetSlowMode:
             raw.functions.channels.ToggleSlowMode(
                 channel=await self.resolve_peer(chat_id),
                 seconds=seconds or 0,
-            )
+            ),
         )
 
         return True

@@ -55,7 +55,7 @@ class GetChatJoinRequests:
                     offset_user=offset_user,
                     requested=True,
                     q=query,
-                )
+                ),
             )
 
             if not r.importers:

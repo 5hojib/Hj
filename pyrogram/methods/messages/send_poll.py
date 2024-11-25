@@ -192,7 +192,10 @@ class SendPoll:
         ).values()
         q, q_entities = (
             await pyrogram.utils.parse_text_entities(
-                self, question, None, question_entities
+                self,
+                question,
+                None,
+                question_entities,
             )
         ).values()
 
@@ -202,11 +205,13 @@ class SendPoll:
                 poll=raw.types.Poll(
                     id=self.rnd_id(),
                     question=raw.types.TextWithEntities(
-                        text=q, entities=q_entities or []
+                        text=q,
+                        entities=q_entities or [],
                     ),
                     answers=[
                         await types.PollOption(
-                            text=option.text, entities=option.entities
+                            text=option.text,
+                            entities=option.entities,
                         ).write(self, i)
                         for i, option in enumerate(options)
                     ],
@@ -236,8 +241,9 @@ class SendPoll:
         if business_connection_id is not None:
             r = await self.invoke(
                 raw.functions.InvokeWithBusinessConnection(
-                    connection_id=business_connection_id, query=rpc
-                )
+                    connection_id=business_connection_id,
+                    query=rpc,
+                ),
             )
         else:
             r = await self.invoke(rpc)

@@ -14,7 +14,8 @@ log = logging.getLogger(__name__)
 
 class GetPeerStories:
     async def get_peer_stories(
-        self: pyrogram.Client, chat_id: int | str
+        self: pyrogram.Client,
+        chat_id: int | str,
     ) -> AsyncGenerator[types.Story, None] | None:
         """Get all active stories from an user/channel by using user identifiers.
 

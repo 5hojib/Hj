@@ -235,7 +235,7 @@ class FileId:
                 thumbnail_source = ThumbnailSource(thumbnail_source)
             except ValueError:
                 raise ValueError(
-                    f"Unknown thumbnail_source {thumbnail_source} of file_id {file_id}"
+                    f"Unknown thumbnail_source {thumbnail_source} of file_id {file_id}",
                 )
 
             if thumbnail_source == ThumbnailSource.LEGACY:
@@ -257,7 +257,8 @@ class FileId:
 
             if thumbnail_source == ThumbnailSource.THUMBNAIL:
                 thumbnail_file_type, thumbnail_size, local_id = struct.unpack(
-                    "<iii", buffer.read(12)
+                    "<iii",
+                    buffer.read(12),
                 )
                 thumbnail_size = chr(thumbnail_size)
 
@@ -281,7 +282,8 @@ class FileId:
                 ThumbnailSource.CHAT_PHOTO_BIG,
             ):
                 chat_id, chat_access_hash, local_id = struct.unpack(
-                    "<qqi", buffer.read(20)
+                    "<qqi",
+                    buffer.read(20),
                 )
 
                 return FileId(
@@ -301,7 +303,8 @@ class FileId:
 
             if thumbnail_source == ThumbnailSource.STICKER_SET_THUMBNAIL:
                 sticker_set_id, sticker_set_access_hash, local_id = struct.unpack(
-                    "<qqi", buffer.read(20)
+                    "<qqi",
+                    buffer.read(20),
                 )
 
                 return FileId(
@@ -370,7 +373,7 @@ class FileId:
                         self.thumbnail_file_type,
                         ord(self.thumbnail_size),
                         self.local_id,
-                    )
+                    ),
                 )
             elif self.thumbnail_source in (
                 ThumbnailSource.CHAT_PHOTO_SMALL,
@@ -382,7 +385,7 @@ class FileId:
                         self.chat_id,
                         self.chat_access_hash,
                         self.local_id,
-                    )
+                    ),
                 )
             elif self.thumbnail_source == ThumbnailSource.STICKER_SET_THUMBNAIL:
                 buffer.write(
@@ -391,7 +394,7 @@ class FileId:
                         self.sticker_set_id,
                         self.sticker_set_access_hash,
                         self.local_id,
-                    )
+                    ),
                 )
         elif file_type in DOCUMENT_TYPES:
             buffer.write(struct.pack("<ii", minor, major))
@@ -440,7 +443,7 @@ class FileUniqueId:
             file_unique_type = FileUniqueType(file_unique_type)
         except ValueError:
             raise ValueError(
-                f"Unknown file_unique_type {file_unique_type} of file_unique_id {file_unique_id}"
+                f"Unknown file_unique_type {file_unique_type} of file_unique_id {file_unique_id}",
             )
 
         if file_unique_type == FileUniqueType.WEB:
@@ -463,7 +466,7 @@ class FileUniqueId:
             return FileUniqueId(file_unique_type=file_unique_type, media_id=media_id)
 
         raise ValueError(
-            f"Unknown decoder for file_unique_type {file_unique_type} of file_unique_id {file_unique_id}"
+            f"Unknown decoder for file_unique_type {file_unique_type} of file_unique_id {file_unique_id}",
         )
 
     def encode(self):
@@ -480,7 +483,7 @@ class FileUniqueId:
             string = struct.pack("<iq", self.file_unique_type, self.media_id)
         else:
             raise ValueError(
-                f"Unknown encoder for file_unique_type {self.file_unique_type}"
+                f"Unknown encoder for file_unique_type {self.file_unique_type}",
             )
 
         return b64_encode(rle_encode(string))

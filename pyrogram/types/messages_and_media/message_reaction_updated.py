@@ -89,7 +89,8 @@ class MessageReactionUpdated(Object, Update):
             from_user = types.User._parse(client, users[raw_actor_peer_id])
         else:
             actor_chat = types.Chat._parse_channel_chat(
-                client, chats[raw_actor_peer_id]
+                client,
+                chats[raw_actor_peer_id],
             )
 
         return MessageReactionUpdated(

@@ -47,7 +47,7 @@ class SignUp:
                 first_name=first_name,
                 last_name=last_name,
                 phone_code_hash=phone_code_hash,
-            )
+            ),
         )
 
         await self.storage.user_id(r.user.id)

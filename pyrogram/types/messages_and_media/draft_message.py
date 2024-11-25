@@ -147,7 +147,10 @@ class DraftMessage(Object):
 
                         if video_attributes.round_message:
                             video_note = types.VideoNote._parse(
-                                client, doc, video_attributes, media.ttl_seconds
+                                client,
+                                doc,
+                                video_attributes,
+                                media.ttl_seconds,
                             )
                             media_type = enums.MessageMediaType.VIDEO_NOTE
 
@@ -158,7 +161,10 @@ class DraftMessage(Object):
 
                         if audio_attributes.voice:
                             voice = types.Voice._parse(
-                                client, doc, audio_attributes, media.ttl_seconds
+                                client,
+                                doc,
+                                audio_attributes,
+                                media.ttl_seconds,
                             )
                             media_type = enums.MessageMediaType.VOICE
 
@@ -196,7 +202,9 @@ class DraftMessage(Object):
             video_note=video_note,
             voice=voice,
             show_caption_above_media=getattr(
-                raw_draft_message, "invert_media", False
+                raw_draft_message,
+                "invert_media",
+                False,
             ),
             file_name=file_name,
             media=media_type,

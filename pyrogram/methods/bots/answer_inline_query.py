@@ -96,5 +96,5 @@ class AnswerInlineQuery:
                 )
                 if switch_pm_text
                 else None,
-            )
+            ),
         )

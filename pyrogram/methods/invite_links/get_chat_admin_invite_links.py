@@ -68,7 +68,7 @@ class GetChatAdminInviteLinks:
                     revoked=revoked,
                     offset_date=offset_date,
                     offset_link=offset_link,
-                )
+                ),
             )
 
             if not r.invites:

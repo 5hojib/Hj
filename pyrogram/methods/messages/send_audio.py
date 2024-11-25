@@ -222,7 +222,7 @@ class SendAudio:
                                 title=title,
                             ),
                             raw.types.DocumentAttributeFilename(
-                                file_name=file_name or Path(audio).name
+                                file_name=file_name or Path(audio).name,
                             ),
                         ],
                     )
@@ -249,7 +249,7 @@ class SendAudio:
                             title=title,
                         ),
                         raw.types.DocumentAttributeFilename(
-                            file_name=file_name or audio.name
+                            file_name=file_name or audio.name,
                         ),
                     ],
                 )
@@ -281,7 +281,7 @@ class SendAudio:
                             raw.functions.InvokeWithBusinessConnection(
                                 connection_id=business_connection_id,
                                 query=rpc,
-                            )
+                            ),
                         )
                     else:
                         r = await self.invoke(rpc)

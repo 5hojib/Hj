@@ -234,18 +234,20 @@ class SendAnimation:
                                 h=height,
                             ),
                             raw.types.DocumentAttributeFilename(
-                                file_name=file_name or Path(animation).name
+                                file_name=file_name or Path(animation).name,
                             ),
                             raw.types.DocumentAttributeAnimated(),
                         ],
                     )
                 elif re.match("^https?://", animation):
                     media = raw.types.InputMediaDocumentExternal(
-                        url=animation, spoiler=has_spoiler
+                        url=animation,
+                        spoiler=has_spoiler,
                     )
                 else:
                     media = utils.get_input_media_from_file_id(
-                        animation, FileType.ANIMATION
+                        animation,
+                        FileType.ANIMATION,
                     )
                     media.spoiler = has_spoiler
             else:
@@ -269,7 +271,7 @@ class SendAnimation:
                             h=height,
                         ),
                         raw.types.DocumentAttributeFilename(
-                            file_name=file_name or animation.name
+                            file_name=file_name or animation.name,
                         ),
                         raw.types.DocumentAttributeAnimated(),
                     ],
@@ -303,13 +305,15 @@ class SendAnimation:
                             raw.functions.InvokeWithBusinessConnection(
                                 connection_id=business_connection_id,
                                 query=rpc,
-                            )
+                            ),
                         )
                     else:
                         r = await self.invoke(rpc)
                 except FilePartMissing as e:
                     await self.save_file(
-                        animation, file_id=file.id, file_part=e.value
+                        animation,
+                        file_id=file.id,
+                        file_part=e.value,
                     )
                 else:
                     for i in r.updates:
@@ -341,8 +345,9 @@ class SendAnimation:
 
                                 await self.invoke(
                                     raw.functions.messages.SaveGif(
-                                        id=document_id, unsave=True
-                                    )
+                                        id=document_id,
+                                        unsave=True,
+                                    ),
                                 )
 
                             return message

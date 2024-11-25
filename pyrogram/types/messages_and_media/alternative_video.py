@@ -111,7 +111,8 @@ class AlternativeVideo(Object):
 
         file_unique_id = (
             FileUniqueId(
-                file_unique_type=FileUniqueType.DOCUMENT, media_id=video.id
+                file_unique_type=FileUniqueType.DOCUMENT,
+                media_id=video.id,
             ).encode()
             if video
             else None

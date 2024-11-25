@@ -176,7 +176,7 @@ class SendSticker:
                         file=file,
                         attributes=[
                             raw.types.DocumentAttributeFilename(
-                                file_name=Path(sticker).name
+                                file_name=Path(sticker).name,
                             ),
                             raw.types.DocumentAttributeSticker(
                                 alt=emoji,
@@ -188,7 +188,8 @@ class SendSticker:
                     media = raw.types.InputMediaDocumentExternal(url=sticker)
                 else:
                     media = utils.get_input_media_from_file_id(
-                        sticker, FileType.STICKER
+                        sticker,
+                        FileType.STICKER,
                     )
             else:
                 file = await self.save_file(
@@ -200,7 +201,7 @@ class SendSticker:
                     mime_type=self.guess_mime_type(sticker.name) or "image/webp",
                     file=file,
                     attributes=[
-                        raw.types.DocumentAttributeFilename(file_name=sticker.name)
+                        raw.types.DocumentAttributeFilename(file_name=sticker.name),
                     ],
                 )
 
@@ -226,7 +227,7 @@ class SendSticker:
                             raw.functions.InvokeWithBusinessConnection(
                                 connection_id=business_connection_id,
                                 query=rpc,
-                            )
+                            ),
                         )
                     else:
                         r = await self.invoke(rpc)

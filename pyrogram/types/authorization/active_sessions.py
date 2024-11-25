@@ -37,6 +37,6 @@ class ActiveSessions(Object):
                 [
                     types.ActiveSession._parse(active)
                     for active in authorizations.authorizations
-                ]
+                ],
             ),
         )

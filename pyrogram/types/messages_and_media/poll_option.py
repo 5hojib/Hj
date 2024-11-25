@@ -41,12 +41,16 @@ class PollOption(Object):
     async def write(self, client, i):
         option, entities = (
             await pyrogram.utils.parse_text_entities(
-                client, self.text, None, self.entities
+                client,
+                self.text,
+                None,
+                self.entities,
             )
         ).values()
         return pyrogram.raw.types.PollAnswer(
             text=pyrogram.raw.types.TextWithEntities(
-                text=option, entities=entities or []
+                text=option,
+                entities=entities or [],
             ),
             option=bytes([i]),
         )

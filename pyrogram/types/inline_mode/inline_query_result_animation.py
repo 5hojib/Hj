@@ -102,7 +102,7 @@ class InlineQueryResultAnimation(InlineQueryResult):
                     w=self.animation_width,
                     h=self.animation_height,
                     duration=self.animation_duration,
-                )
+                ),
             ],
         )
 

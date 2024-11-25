@@ -53,7 +53,8 @@ class Thumbnail(Object):
 
     @staticmethod
     def _parse(
-        client, media: raw.types.Photo | raw.types.Document
+        client,
+        media: raw.types.Photo | raw.types.Document,
     ) -> list[Thumbnail] | None:
         if isinstance(media, raw.types.Photo):
             raw_thumbs = [
@@ -97,7 +98,7 @@ class Thumbnail(Object):
                     height=thumb.h,
                     file_size=thumb.size,
                     client=client,
-                )
+                ),
             )
 
         return parsed_thumbs or None

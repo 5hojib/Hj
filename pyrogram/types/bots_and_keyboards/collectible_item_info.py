@@ -52,7 +52,7 @@ class CollectibleItemInfo(Object):
     ) -> CollectibleItemInfo:
         return CollectibleItemInfo(
             purchase_date=utils.timestamp_to_datetime(
-                collectible_info.purchase_date
+                collectible_info.purchase_date,
             ),
             currency=collectible_info.currency,
             amount=collectible_info.amount,

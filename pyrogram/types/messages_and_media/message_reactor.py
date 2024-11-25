@@ -55,7 +55,8 @@ class MessageReactor(Object):
         from_user = None
         if not is_anonymous:
             from_user = types.User._parse(
-                client, users.get(message_reactor.peer_id.user_id)
+                client,
+                users.get(message_reactor.peer_id.user_id),
             )
 
         return MessageReactor(

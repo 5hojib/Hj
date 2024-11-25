@@ -86,12 +86,13 @@ class SendInlineBotResult:
                 random_id=self.rnd_id(),
                 silent=disable_notification or None,
                 reply_to=reply_to,
-            )
+            ),
         )
 
         for i in r.updates:
             if isinstance(
-                i, raw.types.UpdateNewMessage | raw.types.UpdateNewChannelMessage
+                i,
+                raw.types.UpdateNewMessage | raw.types.UpdateNewChannelMessage,
             ):
                 return await types.Message._parse(
                     self,

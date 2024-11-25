@@ -37,5 +37,5 @@ class GetAvailableEffects:
                     documents.get(effect.effect_sticker_id, None),
                 )
                 for effect in r.effects
-            ]
+            ],
         )

@@ -11,7 +11,9 @@ if TYPE_CHECKING:
 
 class DeleteScheduledMessages:
     async def delete_scheduled_messages(
-        self: pyrogram.Client, chat_id: int | str, message_ids: int | Iterable[int]
+        self: pyrogram.Client,
+        chat_id: int | str,
+        message_ids: int | Iterable[int],
     ) -> int:
         """Delete scheduled messages.
 
@@ -43,7 +45,7 @@ class DeleteScheduledMessages:
         message_ids = list(message_ids) if is_iterable else [message_ids]
 
         r = await self.invoke(
-            raw.functions.channels.DeleteMessages(peer=peer, id=message_ids)
+            raw.functions.channels.DeleteMessages(peer=peer, id=message_ids),
         )
 
         return r.messages if is_iterable else r.messages[0]

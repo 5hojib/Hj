@@ -56,7 +56,9 @@ class PreCheckoutQuery(Object, Update):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client, pre_checkout_query, users
+        client: pyrogram.Client,
+        pre_checkout_query,
+        users,
     ) -> PreCheckoutQuery:
         # Try to decode pre-checkout query payload into string. If that fails, fallback to bytes instead of decoding by
         # ignoring/replacing errors, this way, button clicks will still work.

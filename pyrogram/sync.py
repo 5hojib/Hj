@@ -27,7 +27,8 @@ def async_to_sync(obj, name) -> None:
                 item, done = loop.run_until_complete(anext(agen))
             else:
                 item, done = asyncio.run_coroutine_threadsafe(
-                    anext(agen), loop
+                    anext(agen),
+                    loop,
                 ).result()
 
             if done:
@@ -62,7 +63,7 @@ def async_to_sync(obj, name) -> None:
 
                 async def coro_wrapper():
                     return await asyncio.wrap_future(
-                        asyncio.run_coroutine_threadsafe(coroutine, main_loop)
+                        asyncio.run_coroutine_threadsafe(coroutine, main_loop),
                     )
 
                 return coro_wrapper()
@@ -99,7 +100,7 @@ for class_name in dir(types):
 
 # Special case for idle and compose, because they are not inside Methods
 async_to_sync(idle_module, "idle")
-idle = getattr(idle_module, "idle")
+idle = idle_module.idle
 
 async_to_sync(compose_module, "compose")
-compose = getattr(compose_module, "compose")
+compose = compose_module.compose

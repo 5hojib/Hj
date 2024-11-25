@@ -59,7 +59,7 @@ class SearchMessagesCount:
                 from_id=(await self.resolve_peer(from_user) if from_user else None),
                 hash=0,
                 top_msg_id=thread_id,
-            )
+            ),
         )
 
         if hasattr(r, "count"):

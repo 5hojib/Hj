@@ -43,7 +43,7 @@ class GetBotCommands:
             raw.functions.bots.GetBotCommands(
                 scope=await scope.write(self),
                 lang_code=language_code,
-            )
+            ),
         )
 
         return types.List(types.BotCommand.read(c) for c in r)

@@ -116,8 +116,9 @@ class CreateInvoiceLink:
                     size=photo_size,
                     attributes=[
                         raw.types.DocumentAttributeImageSize(
-                            w=photo_width, h=photo_height
-                        )
+                            w=photo_width,
+                            h=photo_height,
+                        ),
                     ],
                 )
                 if photo_url
@@ -139,10 +140,10 @@ class CreateInvoiceLink:
                 payload=payload.encode() if isinstance(payload, str) else payload,
                 provider=provider_token,
                 provider_data=raw.types.DataJSON(
-                    data=provider_data if provider_data else "{}"
+                    data=provider_data if provider_data else "{}",
                 ),
                 start_param=start_parameter,
-            )
+            ),
         )
         r = await self.invoke(rpc)
         return r.url

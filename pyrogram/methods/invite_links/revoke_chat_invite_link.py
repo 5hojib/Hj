@@ -36,7 +36,7 @@ class RevokeChatInviteLink:
                 peer=await self.resolve_peer(chat_id),
                 link=invite_link,
                 revoked=True,
-            )
+            ),
         )
 
         users = {i.id: i for i in r.users}

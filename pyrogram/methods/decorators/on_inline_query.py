@@ -39,7 +39,7 @@ class OnInlineQuery:
                     (
                         pyrogram.handlers.InlineQueryHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

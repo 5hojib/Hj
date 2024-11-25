@@ -12,7 +12,8 @@ log = logging.getLogger(__name__)
 
 class ResolvePeer:
     async def resolve_peer(
-        self: pyrogram.Client, peer_id: int | str
+        self: pyrogram.Client,
+        peer_id: int | str,
     ) -> raw.base.InputPeer | raw.base.InputUser | raw.base.InputChannel:
         """Get the InputPeer of a known peer id.
         Useful whenever an InputPeer type is required.
@@ -56,7 +57,7 @@ class ResolvePeer:
                         return await self.storage.get_peer_by_username(peer_id)
                     except KeyError:
                         await self.invoke(
-                            raw.functions.contacts.ResolveUsername(username=peer_id)
+                            raw.functions.contacts.ResolveUsername(username=peer_id),
                         )
 
                         return await self.storage.get_peer_by_username(peer_id)
@@ -72,9 +73,9 @@ class ResolvePeer:
                 await self.fetch_peers(
                     await self.invoke(
                         raw.functions.users.GetUsers(
-                            id=[raw.types.InputUser(user_id=peer_id, access_hash=0)]
-                        )
-                    )
+                            id=[raw.types.InputUser(user_id=peer_id, access_hash=0)],
+                        ),
+                    ),
                 )
             elif peer_type == "chat":
                 await self.invoke(raw.functions.messages.GetChats(id=[-peer_id]))
@@ -85,9 +86,9 @@ class ResolvePeer:
                             raw.types.InputChannel(
                                 channel_id=utils.get_channel_id(peer_id),
                                 access_hash=0,
-                            )
-                        ]
-                    )
+                            ),
+                        ],
+                    ),
                 )
 
             try:

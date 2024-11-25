@@ -6,7 +6,9 @@ from pyrogram import raw, types
 
 class CreateChannel:
     async def create_channel(
-        self: pyrogram.Client, title: str, description: str = ""
+        self: pyrogram.Client,
+        title: str,
+        description: str = "",
     ) -> types.Chat:
         """Create a new broadcast channel.
 
@@ -29,8 +31,10 @@ class CreateChannel:
         """
         r = await self.invoke(
             raw.functions.channels.CreateChannel(
-                title=title, about=description, broadcast=True
-            )
+                title=title,
+                about=description,
+                broadcast=True,
+            ),
         )
 
         return types.Chat._parse_chat(self, r.chats[0])

@@ -75,10 +75,10 @@ class CreateStickerSet:
                 title=title,
                 short_name=short_name,
                 stickers=[
-                    raw.types.InputStickerSetItem(document=media, emoji=emoji)
+                    raw.types.InputStickerSetItem(document=media, emoji=emoji),
                 ],
                 masks=masks,
-            )
+            ),
         )
 
         return types.StickerSet._parse(r.set)

@@ -6,7 +6,8 @@ from pyrogram import raw, types
 
 class GetBotDefaultPrivileges:
     async def get_bot_default_privileges(
-        self: pyrogram.Client, for_channels: bool | None = None
+        self: pyrogram.Client,
+        for_channels: bool | None = None,
     ) -> types.ChatPrivileges | None:
         """Get the current default privileges of the bot.
 
@@ -27,7 +28,7 @@ class GetBotDefaultPrivileges:
         """
 
         bot_info = await self.invoke(
-            raw.functions.users.GetFullUser(id=raw.types.InputUserSelf())
+            raw.functions.users.GetFullUser(id=raw.types.InputUserSelf()),
         )
 
         field = (

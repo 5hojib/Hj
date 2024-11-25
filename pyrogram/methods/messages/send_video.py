@@ -240,7 +240,7 @@ class SendVideo:
                                 h=height,
                             ),
                             raw.types.DocumentAttributeFilename(
-                                file_name=file_name or Path(video).name
+                                file_name=file_name or Path(video).name,
                             ),
                         ],
                     )
@@ -252,7 +252,9 @@ class SendVideo:
                     )
                 else:
                     media = utils.get_input_media_from_file_id(
-                        video, FileType.VIDEO, ttl_seconds=ttl_seconds
+                        video,
+                        FileType.VIDEO,
+                        ttl_seconds=ttl_seconds,
                     )
                     media.spoiler = has_spoiler
             else:
@@ -277,7 +279,7 @@ class SendVideo:
                             h=height,
                         ),
                         raw.types.DocumentAttributeFilename(
-                            file_name=file_name or video.name
+                            file_name=file_name or video.name,
                         ),
                     ],
                 )
@@ -310,7 +312,7 @@ class SendVideo:
                             raw.functions.InvokeWithBusinessConnection(
                                 connection_id=business_connection_id,
                                 query=rpc,
-                            )
+                            ),
                         )
                     else:
                         r = await self.invoke(rpc)

@@ -39,7 +39,7 @@ class OnBotBusinessMessage:
                     (
                         pyrogram.handlers.BotBusinessMessageHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

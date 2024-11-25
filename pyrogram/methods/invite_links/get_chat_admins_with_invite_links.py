@@ -27,8 +27,8 @@ class GetChatAdminsWithInviteLinks:
         """
         r = await self.invoke(
             raw.functions.messages.GetAdminsWithInvites(
-                peer=await self.resolve_peer(chat_id)
-            )
+                peer=await self.resolve_peer(chat_id),
+            ),
         )
 
         users = {i.id: i for i in r.users}

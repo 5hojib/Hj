@@ -42,8 +42,9 @@ class SetChatUsername:
             return bool(
                 await self.invoke(
                     raw.functions.channels.UpdateUsername(
-                        channel=peer, username=username or ""
-                    )
-                )
+                        channel=peer,
+                        username=username or "",
+                    ),
+                ),
             )
         raise ValueError(f'The chat_id "{chat_id}" belongs to a user or chat')

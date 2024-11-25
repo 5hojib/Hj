@@ -41,14 +41,14 @@ def get_input_media_from_file_id(
     except Exception:
         raise ValueError(
             f'Failed to decode "{file_id}". The value does not represent an existing local file, '
-            f"HTTP URL, or valid file id."
+            f"HTTP URL, or valid file id.",
         )
 
     file_type = decoded.file_type
 
     if expected_file_type is not None and file_type != expected_file_type:
         raise ValueError(
-            f"Expected {expected_file_type.name}, got {file_type.name} file id instead"
+            f"Expected {expected_file_type.name}, got {file_type.name} file id instead",
         )
 
     if file_type in (FileType.THUMBNAIL, FileType.CHAT_PHOTO):
@@ -104,10 +104,11 @@ async def parse_messages(
                         users,
                         chats,
                         is_scheduled=isinstance(
-                            u, raw.types.UpdateNewScheduledMessage
+                            u,
+                            raw.types.UpdateNewScheduledMessage,
                         ),
                         replies=1,
-                    )
+                    ),
                 )
 
             elif isinstance(u, raw.types.UpdateBotNewBusinessMessage):
@@ -118,11 +119,13 @@ async def parse_messages(
                         users,
                         chats,
                         business_connection_id=getattr(
-                            u, "connection_id", business_connection_id
+                            u,
+                            "connection_id",
+                            business_connection_id,
                         ),
                         raw_reply_to_message=u.reply_to_message,
                         replies=0,
-                    )
+                    ),
                 )
 
         return types.List(parsed_messages)
@@ -144,14 +147,16 @@ async def parse_messages(
                 replies=1,
             )
             for message in messages.messages
-        ]
+        ],
     )
 
     return types.List(parsed_messages)
 
 
 def parse_deleted_messages(
-    client, update, business_connection_id: str | None = None
+    client,
+    update,
+    business_connection_id: str | None = None,
 ) -> list[types.Message]:
     messages = update.messages
     channel_id = getattr(update, "channel_id", None)
@@ -180,7 +185,10 @@ def pack_inline_message_id(
 ):
     if isinstance(msg_id, raw.types.InputBotInlineMessageID):
         inline_message_id_packed = struct.pack(
-            "<iqq", msg_id.dc_id, msg_id.id, msg_id.access_hash
+            "<iqq",
+            msg_id.dc_id,
+            msg_id.id,
+            msg_id.access_hash,
         )
     else:
         inline_message_id_packed = struct.pack(
@@ -204,7 +212,9 @@ def unpack_inline_message_id(
         unpacked = struct.unpack("<iqq", decoded)
 
         return raw.types.InputBotInlineMessageID(
-            dc_id=unpacked[0], id=unpacked[1], access_hash=unpacked[2]
+            dc_id=unpacked[0],
+            id=unpacked[1],
+            access_hash=unpacked[2],
         )
     unpacked = struct.unpack("<iqiq", decoded)
 
@@ -282,7 +292,7 @@ def sha256(data: bytes) -> bytes:
 
 
 def xor(a: bytes, b: bytes) -> bytes:
-    return bytes(i ^ j for i, j in zip(a, b))
+    return bytes(i ^ j for i, j in zip(a, b, strict=False))
 
 
 def compute_password_hash(
@@ -297,7 +307,8 @@ def compute_password_hash(
 
 
 def compute_password_check(
-    r: raw.types.account.Password, password: str
+    r: raw.types.account.Password,
+    password: str,
 ) -> raw.types.InputCheckPasswordSRP:
     algo = r.current_algo
 
@@ -349,7 +360,7 @@ def compute_password_check(
         + sha256(algo.salt2)
         + A_bytes
         + B_bytes
-        + K_bytes
+        + K_bytes,
     )
 
     return raw.types.InputCheckPasswordSRP(srp_id=srp_id, A=A_bytes, M1=M1_bytes)
@@ -385,7 +396,9 @@ def datetime_to_timestamp(dt: datetime | None) -> int | None:
 
 
 async def run_sync(
-    func: Callable[..., TypeVar("Result")], *args: Any, **kwargs: Any
+    func: Callable[..., TypeVar("Result")],
+    *args: Any,
+    **kwargs: Any,
 ) -> TypeVar("Result"):
     loop = asyncio.get_event_loop()
     return await loop.run_in_executor(None, functools.partial(func, *args, **kwargs))

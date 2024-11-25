@@ -28,7 +28,7 @@ class OnRawUpdate:
                     func.handlers = []
 
                 func.handlers.append(
-                    (pyrogram.handlers.RawUpdateHandler(func), group)
+                    (pyrogram.handlers.RawUpdateHandler(func), group),
                 )
 
             return func

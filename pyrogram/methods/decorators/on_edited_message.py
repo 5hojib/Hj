@@ -39,7 +39,7 @@ class OnEditedMessage:
                     (
                         pyrogram.handlers.EditedMessageHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

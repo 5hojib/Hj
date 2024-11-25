@@ -91,7 +91,8 @@ class PaymentForm(Object):
             description=payment_form.description,
             invoice=types.Invoice._parse(client, payment_form.invoice),
             provider=types.User._parse(
-                client, users.get(getattr(payment_form, "provider_id", None))
+                client,
+                users.get(getattr(payment_form, "provider_id", None)),
             ),
             url=getattr(payment_form, "url", None),
             can_save_credentials=getattr(payment_form, "can_save_credentials", None),

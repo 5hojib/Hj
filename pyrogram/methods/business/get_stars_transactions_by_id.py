@@ -63,6 +63,6 @@ class GetStarsTransactionsById:
         )
 
         r = await self.invoke(
-            raw.functions.payments.GetStarsTransactionsByID(peer=peer, id=ids)
+            raw.functions.payments.GetStarsTransactionsByID(peer=peer, id=ids),
         )
         return types.StarsStatus._parse(self, r)

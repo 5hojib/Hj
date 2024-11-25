@@ -45,7 +45,7 @@ class VotePoll:
                 peer=await self.resolve_peer(chat_id),
                 msg_id=message_id,
                 options=[poll.options[option].data for option in options],
-            )
+            ),
         )
 
         return await types.Poll._parse(self, r.updates[0], r.users)

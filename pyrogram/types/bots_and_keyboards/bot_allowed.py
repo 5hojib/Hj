@@ -39,7 +39,8 @@ class BotAllowed(Object):
 
     @staticmethod
     def _parse(
-        client: pyrogram.Client, bot_allowed: raw.types.BotAllowed
+        client: pyrogram.Client,
+        bot_allowed: raw.types.BotAllowed,
     ) -> BotAllowed:
         bot_app = getattr(bot_allowed, "app", None)
         return BotAllowed(

@@ -55,10 +55,10 @@ class AddStickerToSet:
         r = await self.invoke(
             raw.functions.stickers.AddStickerToSet(
                 stickerset=raw.types.InputStickerSetShortName(
-                    short_name=set_short_name
+                    short_name=set_short_name,
                 ),
                 sticker=raw.types.InputStickerSetItem(document=media, emoji=emoji),
-            )
+            ),
         )
 
         return types.StickerSet._parse(r.set)

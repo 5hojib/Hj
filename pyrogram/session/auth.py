@@ -133,7 +133,7 @@ class Auth:
                         q=q.to_bytes(4, "big"),
                         public_key_fingerprint=public_key_fingerprint,
                         encrypted_data=encrypted_data,
-                    )
+                    ),
                 )
 
                 encrypted_answer = server_dh_params.encrypted_answer
@@ -155,7 +155,9 @@ class Auth:
                 server_nonce = int.from_bytes(server_nonce, "little", signed=True)
 
                 answer_with_hash = aes.ige256_decrypt(
-                    encrypted_answer, tmp_aes_key, tmp_aes_iv
+                    encrypted_answer,
+                    tmp_aes_key,
+                    tmp_aes_iv,
                 )
                 answer = answer_with_hash[20:]
 
@@ -185,7 +187,9 @@ class Auth:
                 padding = urandom(-(len(data) + len(sha)) % 16)
                 data_with_hash = sha + data + padding
                 encrypted_data = aes.ige256_encrypt(
-                    data_with_hash, tmp_aes_key, tmp_aes_iv
+                    data_with_hash,
+                    tmp_aes_key,
+                    tmp_aes_iv,
                 )
 
                 log.debug("Send set_client_DH_params")
@@ -194,7 +198,7 @@ class Auth:
                         nonce=nonce,
                         server_nonce=server_nonce,
                         encrypted_data=encrypted_data,
-                    )
+                    ),
                 )
 
                 g_a = int.from_bytes(server_dh_inner_data.g_a, "big")
@@ -209,13 +213,16 @@ class Auth:
 
                 g_b = int.from_bytes(g_b, "big")
                 SecurityCheckMismatch.check(
-                    1 < g < dh_prime - 1, "1 < g < dh_prime - 1"
+                    1 < g < dh_prime - 1,
+                    "1 < g < dh_prime - 1",
                 )
                 SecurityCheckMismatch.check(
-                    1 < g_a < dh_prime - 1, "1 < g_a < dh_prime - 1"
+                    1 < g_a < dh_prime - 1,
+                    "1 < g_a < dh_prime - 1",
                 )
                 SecurityCheckMismatch.check(
-                    1 < g_b < dh_prime - 1, "1 < g_b < dh_prime - 1"
+                    1 < g_b < dh_prime - 1,
+                    "1 < g_b < dh_prime - 1",
                 )
                 SecurityCheckMismatch.check(
                     2 ** (2048 - 64) < g_a < dh_prime - 2 ** (2048 - 64),
@@ -235,7 +242,8 @@ class Auth:
                 log.debug("SHA1 hash values check: OK")
 
                 SecurityCheckMismatch.check(
-                    nonce == res_pq.nonce, "nonce == res_pq.nonce"
+                    nonce == res_pq.nonce,
+                    "nonce == res_pq.nonce",
                 )
                 server_nonce = int.from_bytes(server_nonce, "little", signed=True)
                 SecurityCheckMismatch.check(

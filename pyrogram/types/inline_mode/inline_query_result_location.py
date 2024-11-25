@@ -95,7 +95,8 @@ class InlineQueryResultLocation(InlineQueryResult):
                 if self.input_message_content
                 else raw.types.InputBotInlineMessageMediaGeo(
                     geo_point=raw.types.InputGeoPoint(
-                        lat=self.latitude, long=self.longitude
+                        lat=self.latitude,
+                        long=self.longitude,
                     ),
                     heading=self.heading,
                     period=self.live_period,

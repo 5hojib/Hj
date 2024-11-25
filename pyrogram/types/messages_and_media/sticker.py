@@ -125,17 +125,18 @@ class Sticker(Object):
                 await invoke(
                     raw.functions.messages.GetStickerSet(
                         stickerset=raw.types.InputStickerSetID(
-                            id=set_id, access_hash=set_access_hash
+                            id=set_id,
+                            access_hash=set_access_hash,
                         ),
                         hash=0,
-                    )
+                    ),
                 )
             ).set.short_name
 
             Sticker.cache[(set_id, set_access_hash)] = name
 
             if len(Sticker.cache) > 250:
-                for i in range(50):
+                for _i in range(50):
                     Sticker.cache.pop(next(iter(Sticker.cache)))
 
             return name
@@ -158,7 +159,8 @@ class Sticker(Object):
         )
 
         image_size_attributes = document_attributes.get(
-            raw.types.DocumentAttributeImageSize, None
+            raw.types.DocumentAttributeImageSize,
+            None,
         )
         file_name = getattr(
             document_attributes.get(raw.types.DocumentAttributeFilename, None),
@@ -166,7 +168,8 @@ class Sticker(Object):
             None,
         )
         video_attributes = document_attributes.get(
-            raw.types.DocumentAttributeVideo, None
+            raw.types.DocumentAttributeVideo,
+            None,
         )
 
         sticker_set = sticker_attributes.stickerset
@@ -177,7 +180,8 @@ class Sticker(Object):
                 sticker_set.access_hash,
             )
             set_name = await Sticker._get_sticker_set_name(
-                client.invoke, input_sticker_set_id
+                client.invoke,
+                input_sticker_set_id,
             )
         else:
             set_name = None

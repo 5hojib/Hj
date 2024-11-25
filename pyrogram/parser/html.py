@@ -71,7 +71,7 @@ class Parser(HTMLParser):
             self.tag_entities[tag] = []
 
         self.tag_entities[tag].append(
-            entity(offset=len(self.text), length=0, **extra)
+            entity(offset=len(self.text), length=0, **extra),
         )
 
     def handle_data(self, data) -> None:
@@ -132,7 +132,7 @@ class HTML:
                 try:
                     if self.client is not None:
                         entity.user_id = await self.client.resolve_peer(
-                            entity.user_id
+                            entity.user_id,
                         )
                 except PeerIdInvalid:
                     continue

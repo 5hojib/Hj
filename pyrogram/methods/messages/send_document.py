@@ -206,15 +206,16 @@ class SendDocument:
                         thumb=thumb,
                         attributes=[
                             raw.types.DocumentAttributeFilename(
-                                file_name=file_name or Path(document).name
-                            )
+                                file_name=file_name or Path(document).name,
+                            ),
                         ],
                     )
                 elif re.match("^https?://", document):
                     media = raw.types.InputMediaDocumentExternal(url=document)
                 else:
                     media = utils.get_input_media_from_file_id(
-                        document, FileType.DOCUMENT
+                        document,
+                        FileType.DOCUMENT,
                     )
             else:
                 thumb = await self.save_file(thumb)
@@ -230,8 +231,8 @@ class SendDocument:
                     thumb=thumb,
                     attributes=[
                         raw.types.DocumentAttributeFilename(
-                            file_name=file_name or document.name
-                        )
+                            file_name=file_name or document.name,
+                        ),
                     ],
                 )
 
@@ -262,13 +263,15 @@ class SendDocument:
                             raw.functions.InvokeWithBusinessConnection(
                                 connection_id=business_connection_id,
                                 query=rpc,
-                            )
+                            ),
                         )
                     else:
                         r = await self.invoke(rpc)
                 except FilePartMissing as e:
                     await self.save_file(
-                        document, file_id=file.id, file_part=e.value
+                        document,
+                        file_id=file.id,
+                        file_part=e.value,
                     )
                 else:
                     for i in r.updates:

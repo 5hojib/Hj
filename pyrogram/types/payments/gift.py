@@ -90,10 +90,10 @@ class Gift(Object):
             remaining_count=getattr(star_gift, "availability_remains", None),
             total_count=getattr(star_gift, "availability_total", None),
             first_send_date=utils.timestamp_to_datetime(
-                getattr(star_gift, "first_sale_date", None)
+                getattr(star_gift, "first_sale_date", None),
             ),
             last_send_date=utils.timestamp_to_datetime(
-                getattr(star_gift, "last_sale_date", None)
+                getattr(star_gift, "last_sale_date", None),
             ),
             is_limited=getattr(star_gift, "limited", None),
             is_sold_out=getattr(star_gift, "sold_out", None),

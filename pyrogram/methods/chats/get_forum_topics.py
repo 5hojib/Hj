@@ -14,7 +14,9 @@ log = logging.getLogger(__name__)
 
 class GetForumTopics:
     async def get_forum_topics(
-        self: pyrogram.Client, chat_id: int | str, limit: int = 0
+        self: pyrogram.Client,
+        chat_id: int | str,
+        limit: int = 0,
     ) -> AsyncGenerator[types.ForumTopic, None] | None:
         """Get one or more topic from a chat.
 

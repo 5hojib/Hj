@@ -6,7 +6,9 @@ from pyrogram import raw
 
 class GetDialogsCount:
     async def get_dialogs_count(
-        self: pyrogram.Client, pinned_only: bool = False, chat_list: int = 0
+        self: pyrogram.Client,
+        pinned_only: bool = False,
+        chat_list: int = 0,
     ) -> int:
         """Get the total count of your dialogs.
 
@@ -34,9 +36,9 @@ class GetDialogsCount:
             return len(
                 (
                     await self.invoke(
-                        raw.functions.messages.GetPinnedDialogs(folder_id=chat_list)
+                        raw.functions.messages.GetPinnedDialogs(folder_id=chat_list),
                     )
-                ).dialogs
+                ).dialogs,
             )
         r = await self.invoke(
             raw.functions.messages.GetDialogs(
@@ -46,7 +48,7 @@ class GetDialogsCount:
                 limit=1,
                 hash=0,
                 folder_id=chat_list,
-            )
+            ),
         )
 
         if isinstance(r, raw.types.messages.Dialogs):

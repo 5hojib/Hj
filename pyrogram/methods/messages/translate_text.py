@@ -42,7 +42,7 @@ class TranslateText:
                 to_lang=to_language_code,
                 peer=await self.resolve_peer(chat_id),
                 id=ids,
-            )
+            ),
         )
 
         return (
@@ -94,9 +94,11 @@ class TranslateText:
             raw.functions.messages.TranslateText(
                 to_lang=to_language_code,
                 text=[
-                    raw.types.TextWithEntities(text=message, entities=entities or [])
+                    raw.types.TextWithEntities(
+                        text=message, entities=entities or []
+                    ),
                 ],
-            )
+            ),
         )
 
         return (

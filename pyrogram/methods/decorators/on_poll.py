@@ -39,7 +39,7 @@ class OnPoll:
                     (
                         pyrogram.handlers.PollHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

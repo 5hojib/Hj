@@ -44,8 +44,9 @@ class SetPrivacy:
         """
         r = await self.invoke(
             raw.functions.account.SetPrivacy(
-                key=key.value(), rules=[await rule.write(self) for rule in rules]
-            )
+                key=key.value(),
+                rules=[await rule.write(self) for rule in rules],
+            ),
         )
 
         users = {i.id: i for i in r.users}

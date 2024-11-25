@@ -42,8 +42,8 @@ class MediaAreaChannelPost(MediaArea):
             (
                 await self.invoke(
                     raw.functions.channels.GetChannels(
-                        id=[await self.resolve_peer(channel_id)]
-                    )
+                        id=[await self.resolve_peer(channel_id)],
+                    ),
                 )
             ).chats[0],
         )

@@ -18,14 +18,18 @@ class TranslatedText(Object):
     """
 
     def __init__(
-        self, *, text: str, entities: list[types.MessageEntity] | None = None
+        self,
+        *,
+        text: str,
+        entities: list[types.MessageEntity] | None = None,
     ) -> None:
         self.text = text
         self.entities = entities
 
     @staticmethod
     def _parse(
-        client, translate_result: raw.types.TextWithEntities
+        client,
+        translate_result: raw.types.TextWithEntities,
     ) -> TranslatedText:
         entities = [
             types.MessageEntity._parse(client, entity, {})

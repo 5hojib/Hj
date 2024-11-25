@@ -11,7 +11,9 @@ if TYPE_CHECKING:
 
 class OnDeletedBotBusinessMessages:
     def on_deleted_bot_business_messages(
-        self=None, filters=None, group: int = 0
+        self=None,
+        filters=None,
+        group: int = 0,
     ) -> Callable:
         """Decorator for handling deleted bot business messages.
 
@@ -31,7 +33,8 @@ class OnDeletedBotBusinessMessages:
             if isinstance(self, pyrogram.Client):
                 self.add_handler(
                     pyrogram.handlers.DeletedBotBusinessMessagesHandler(
-                        func, filters
+                        func,
+                        filters,
                     ),
                     group,
                 )
@@ -42,10 +45,11 @@ class OnDeletedBotBusinessMessages:
                 func.handlers.append(
                     (
                         pyrogram.handlers.DeletedBotBusinessMessagesHandler(
-                            func, self
+                            func,
+                            self,
                         ),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

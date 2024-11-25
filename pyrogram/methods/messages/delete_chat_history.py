@@ -59,11 +59,12 @@ class DeleteChatHistory:
             r = await self.invoke(
                 raw.functions.channels.DeleteHistory(
                     channel=raw.types.InputChannel(
-                        channel_id=peer.channel_id, access_hash=peer.access_hash
+                        channel_id=peer.channel_id,
+                        access_hash=peer.access_hash,
                     ),
                     max_id=max_id,
                     for_everyone=revoke,
-                )
+                ),
             )
         else:
             r = await self.invoke(
@@ -74,7 +75,7 @@ class DeleteChatHistory:
                     revoke=revoke,
                     min_date=utils.datetime_to_timestamp(min_date),
                     max_date=utils.datetime_to_timestamp(max_date),
-                )
+                ),
             )
 
         return (

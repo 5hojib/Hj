@@ -50,5 +50,5 @@ class SetBotCommands:
                 commands=[c.write() for c in commands],
                 scope=await scope.write(self),
                 lang_code=language_code,
-            )
+            ),
         )

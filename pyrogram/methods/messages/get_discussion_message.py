@@ -38,7 +38,7 @@ class GetDiscussionMessage:
             raw.functions.messages.GetDiscussionMessage(
                 peer=await self.resolve_peer(chat_id),
                 msg_id=message_id,
-            )
+            ),
         )
 
         users = {u.id: u for u in r.users}

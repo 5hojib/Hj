@@ -70,8 +70,8 @@ class Giveaway(Object):
             try:
                 chat = await client.invoke(
                     raw.functions.channels.GetChannels(
-                        id=[await client.resolve_peer(chat_id)]
-                    )
+                        id=[await client.resolve_peer(chat_id)],
+                    ),
                 )
             except FloodWait as e:
                 await asyncio.sleep(e.value)

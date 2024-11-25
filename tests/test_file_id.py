@@ -18,7 +18,8 @@ def check(file_id: str, expected_file_type: FileType) -> None:
 
 
 def check_unique(
-    file_unique_id: str, expected_file_unique_type: FileUniqueType
+    file_unique_id: str,
+    expected_file_unique_type: FileUniqueType,
 ) -> None:
     decoded = FileUniqueId.decode(file_unique_id)
 

@@ -30,8 +30,8 @@ class CheckPassword:
                 password=compute_password_check(
                     await self.invoke(raw.functions.account.GetPassword()),
                     password,
-                )
-            )
+                ),
+            ),
         )
 
         await self.storage.user_id(r.user.id)

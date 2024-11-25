@@ -202,15 +202,20 @@ class Story(Object, Update):
 
                     if raw.types.DocumentAttributeAnimated in attributes:
                         video_attributes = attributes.get(
-                            raw.types.DocumentAttributeVideo, None
+                            raw.types.DocumentAttributeVideo,
+                            None,
                         )
                         animation = types.Animation._parse(
-                            client, doc, video_attributes, None
+                            client,
+                            doc,
+                            video_attributes,
+                            None,
                         )
                         media_type = enums.MessageMediaType.ANIMATION
                     elif raw.types.DocumentAttributeVideo in attributes:
                         video_attributes = attributes.get(
-                            raw.types.DocumentAttributeVideo, None
+                            raw.types.DocumentAttributeVideo,
+                            None,
                         )
                         video = types.Video._parse(
                             client,
@@ -228,8 +233,8 @@ class Story(Object, Update):
             chat_id = utils.get_channel_id(peer.channel_id)
             chat = await client.invoke(
                 raw.functions.channels.GetChannels(
-                    id=[await client.resolve_peer(chat_id)]
-                )
+                    id=[await client.resolve_peer(chat_id)],
+                ),
             )
             sender_chat = types.Chat._parse_chat(client, chat.chats[0])
         elif isinstance(peer, raw.types.InputPeerSelf):
@@ -240,16 +245,16 @@ class Story(Object, Update):
         from_id = getattr(stories, "from_id", None)
         if from_id is not None:
             if getattr(from_id, "user_id", None) is not None:
-                from_user = await client.get_users(getattr(from_id, "user_id"))
+                from_user = await client.get_users(from_id.user_id)
             elif getattr(from_id, "channel_id", None) is not None:
                 chat = await client.invoke(
                     raw.functions.channels.GetChannels(
                         id=[
                             await client.resolve_peer(
-                                utils.get_channel_id(getattr(from_id, "channel_id"))
-                            )
-                        ]
-                    )
+                                utils.get_channel_id(from_id.channel_id),
+                            ),
+                        ],
+                    ),
                 )
                 sender_chat = types.Chat._parse_chat(client, chat.chats[0])
             elif getattr(from_id, "chat_id", None) is not None:
@@ -257,10 +262,10 @@ class Story(Object, Update):
                     raw.functions.channels.GetChannels(
                         id=[
                             await client.resolve_peer(
-                                utils.get_channel_id(getattr(from_id, "chat_id"))
-                            )
-                        ]
-                    )
+                                utils.get_channel_id(from_id.chat_id),
+                            ),
+                        ],
+                    ),
                 )
                 sender_chat = types.Chat._parse_chat(client, chat.chats[0])
 
@@ -291,7 +296,8 @@ class Story(Object, Update):
 
         if stories.fwd_from is not None:
             forward_from = await types.StoryForwardHeader._parse(
-                client, stories.fwd_from
+                client,
+                stories.fwd_from,
             )
 
         media_areas = None
@@ -331,7 +337,9 @@ class Story(Object, Update):
         )
 
     async def react(
-        self, reaction: int | str | None = None, add_to_recent: bool = True
+        self,
+        reaction: int | str | None = None,
+        add_to_recent: bool = True,
     ) -> types.MessageReactions:
         """Bound method *react* of :obj:`~pyrogram.types.Story`.
 

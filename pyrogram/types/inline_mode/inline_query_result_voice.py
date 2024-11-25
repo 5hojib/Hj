@@ -74,7 +74,7 @@ class InlineQueryResultVoice(InlineQueryResult):
                 raw.types.DocumentAttributeAudio(
                     duration=self.voice_duration,
                     title=self.title,
-                )
+                ),
             ],
         )
 
