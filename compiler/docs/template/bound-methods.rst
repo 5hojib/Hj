@@ -36,6 +36,19 @@ Message
 
     {message_toctree}
 
+UserGift
+--------
+
+.. hlist::
+    :columns: 1
+
+    {user_gift_hlist}
+
+.. toctree::
+    :hidden:
+
+    {user_gift_toctree}
+
 Story
 -----
 
