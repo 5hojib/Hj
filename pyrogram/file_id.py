@@ -207,7 +207,9 @@ class FileId:
         try:
             file_type = FileType(file_type)
         except ValueError as e:
-            raise ValueError(f"Unknown file_type {file_type} of file_id {file_id}") from e
+            raise ValueError(
+                f"Unknown file_type {file_type} of file_id {file_id}"
+            ) from e
 
         if has_web_location:
             url = String.read(buffer)

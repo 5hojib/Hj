@@ -15,7 +15,7 @@ class RestrictChatMember:
         chat_id: int | str,
         user_id: int | str,
         permissions: types.ChatPermissions,
-        until_date: datetime = None,
+        until_date: datetime | None = None,
     ) -> types.Chat:
         """Restrict a user in a supergroup.
 

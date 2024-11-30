@@ -14,7 +14,7 @@ class BanChatMember:
         self: pyrogram.Client,
         chat_id: int | str,
         user_id: int | str,
-        until_date: datetime = None,
+        until_date: datetime | None = None,
         revoke_messages: bool | None = None,
     ) -> types.Message | bool:
         """Ban a user from a group, a supergroup or a channel.

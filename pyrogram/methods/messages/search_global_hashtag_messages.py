@@ -15,7 +15,7 @@ class SearchGlobalHashtagMessages:
         self: pyrogram.Client,
         hashtag: str = "",
         offset_id: int = 0,
-        offset_date: datetime = None,
+        offset_date: datetime | None = None,
         limit: int = 0,
     ) -> AsyncGenerator[types.Message, None]:
         """Searches for public channel posts with the given hashtag. For optimal performance, the number of returned messages is chosen by Telegram Server and can be smaller than the specified limit.
