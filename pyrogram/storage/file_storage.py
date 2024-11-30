@@ -62,7 +62,7 @@ class FileStorage(SQLiteStorage):
     def _update_from_five_impl(self):
         with self.conn:
             self.conn.executescript(
-                "CREATE INDEX idx_usernames_id ON usernames (id);"
+                "CREATE INDEX idx_usernames_id ON usernames (id);",
             )
 
     def _connect_impl(self, path):
@@ -78,31 +78,36 @@ class FileStorage(SQLiteStorage):
 
         if version == 1:
             await self.loop.run_in_executor(
-                self.executor, self._update_from_one_impl
+                self.executor,
+                self._update_from_one_impl,
             )
             version += 1
 
         if version == 2:
             await self.loop.run_in_executor(
-                self.executor, self._update_from_two_impl
+                self.executor,
+                self._update_from_two_impl,
             )
             version += 1
 
         if version == 3:
             await self.loop.run_in_executor(
-                self.executor, self._update_from_three_impl
+                self.executor,
+                self._update_from_three_impl,
             )
             version += 1
 
         if version == 4:
             await self.loop.run_in_executor(
-                self.executor, self._update_from_four_impl
+                self.executor,
+                self._update_from_four_impl,
             )
             version += 1
 
         if version == 5:
             await self.loop.run_in_executor(
-                self.executor, self._update_from_five_impl
+                self.executor,
+                self._update_from_five_impl,
             )
             version += 1
 

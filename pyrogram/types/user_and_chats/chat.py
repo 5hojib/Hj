@@ -919,7 +919,7 @@ class Chat(Object):
     async def ban_member(
         self,
         user_id: int | str,
-        until_date: datetime = None,
+        until_date: datetime | None = None,
         revoke_messages: bool | None = None,
     ) -> types.Message | bool:
         """Bound method *ban_member* of :obj:`~pyrogram.types.Chat`.
@@ -1012,7 +1012,7 @@ class Chat(Object):
         self,
         user_id: int | str,
         permissions: types.ChatPermissions,
-        until_date: datetime = None,
+        until_date: datetime | None = None,
     ) -> types.Chat:
         """Bound method *unban_member* of :obj:`~pyrogram.types.Chat`.
 
