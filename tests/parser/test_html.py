@@ -143,9 +143,15 @@ def test_html_unparse_blockquote():
     from pyrogram"""
     text = """Quote text
     from pyrogram"""
-    entities = pyrogram.types.List([pyrogram.types.MessageEntity(type=pyrogram.enums.MessageEntityType.BLOCKQUOTE, offset=0,
-                                                                 length=10)])
+    entities = pyrogram.types.List(
+        [
+            pyrogram.types.MessageEntity(
+                type=pyrogram.enums.MessageEntityType.BLOCKQUOTE, offset=0, length=10
+            )
+        ]
+    )
     assert HTML.unparse(text=text, entities=entities) == expected
+
 
 def test_html_unparse_mixed() -> None:
     expected = (

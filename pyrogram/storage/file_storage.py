@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import logging
-import os
 import sqlite3
 from pathlib import Path
 
@@ -60,7 +61,9 @@ class FileStorage(SQLiteStorage):
 
     def _update_from_five_impl(self):
         with self.conn:
-            self.conn.executescript("CREATE INDEX idx_usernames_id ON usernames (id);")
+            self.conn.executescript(
+                "CREATE INDEX idx_usernames_id ON usernames (id);"
+            )
 
     def _connect_impl(self, path):
         self.conn = sqlite3.connect(str(path), timeout=1, check_same_thread=False)
@@ -74,23 +77,33 @@ class FileStorage(SQLiteStorage):
         version = await self.version()
 
         if version == 1:
-            await self.loop.run_in_executor(self.executor, self._update_from_one_impl)
+            await self.loop.run_in_executor(
+                self.executor, self._update_from_one_impl
+            )
             version += 1
 
         if version == 2:
-            await self.loop.run_in_executor(self.executor, self._update_from_two_impl)
+            await self.loop.run_in_executor(
+                self.executor, self._update_from_two_impl
+            )
             version += 1
 
         if version == 3:
-            await self.loop.run_in_executor(self.executor, self._update_from_three_impl)
+            await self.loop.run_in_executor(
+                self.executor, self._update_from_three_impl
+            )
             version += 1
 
         if version == 4:
-            await self.loop.run_in_executor(self.executor, self._update_from_four_impl)
+            await self.loop.run_in_executor(
+                self.executor, self._update_from_four_impl
+            )
             version += 1
 
         if version == 5:
-            await self.loop.run_in_executor(self.executor, self._update_from_five_impl)
+            await self.loop.run_in_executor(
+                self.executor, self._update_from_five_impl
+            )
             version += 1
 
         await self.version(version)

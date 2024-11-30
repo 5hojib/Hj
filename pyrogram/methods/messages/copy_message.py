@@ -25,7 +25,7 @@ class CopyMessage:
         disable_notification: bool | None = None,
         message_thread_id: int | None = None,
         reply_to_message_id: int | None = None,
-        reply_to_chat_id: int = None,
+        reply_to_chat_id: int | None = None,
         schedule_date: datetime | None = None,
         protect_content: bool | None = None,
         allow_paid_broadcast: bool | None = None,

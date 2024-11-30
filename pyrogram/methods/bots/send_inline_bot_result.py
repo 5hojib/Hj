@@ -54,7 +54,7 @@ class SendInlineBotResult:
             quote_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
                 List of special entities that appear in quote_text, which can be specified instead of *parse_mode*.
                 for reply_to_message only.
-                
+
             reply_to_story_id (``int``, *optional*):
                 If the message is a reply, ID of the target story.
 

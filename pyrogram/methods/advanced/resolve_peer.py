@@ -46,7 +46,6 @@ class ResolvePeer:
             return await self.storage.get_peer_by_id(peer_id)
         except KeyError:
             if isinstance(peer_id, str):
-
                 peer_id = re.sub(r"[@+\s]", "", peer_id.lower())
                 peer_id = re.sub(r"https://t.me/", "", peer_id.lower())
 

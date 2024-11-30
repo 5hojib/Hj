@@ -4808,7 +4808,7 @@ class Message(Object, Update):
         quote_text: str | None = None,
         quote_entities: list[types.MessageEntity] | None = None,
         reply_to_message_id: int | None = None,
-        reply_to_chat_id: int = None,
+        reply_to_chat_id: int | None = None,
         schedule_date: datetime | None = None,
         protect_content: bool | None = None,
         allow_paid_broadcast: bool | None = None,
@@ -5217,7 +5217,7 @@ class Message(Object, Update):
                 button = keyboard[y][x]
             except IndexError:
                 raise ValueError(
-                    f"The button at position ({x}, {y}) doesn't exist"
+                    f"The button at position ({x}, {y}) doesn't exist",
                 ) from None
         elif isinstance(x, str) and y is None:
             label = x.encode("utf-16", "surrogatepass").decode("utf-16")
@@ -5231,7 +5231,7 @@ class Message(Object, Update):
                 )
             except IndexError:
                 raise ValueError(
-                    f"The button with label '{x}' doesn't exists"
+                    f"The button with label '{x}' doesn't exists",
                 ) from None
         else:
             raise ValueError("Invalid arguments")
