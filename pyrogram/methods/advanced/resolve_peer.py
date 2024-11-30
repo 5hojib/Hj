@@ -40,12 +40,12 @@ class ResolvePeer:
         if not self.is_connected:
             raise ConnectionError("Client has not been started yet")
 
+        if peer_id in ("self", "me"):
+            return raw.types.InputPeerSelf()
         try:
             return await self.storage.get_peer_by_id(peer_id)
         except KeyError:
             if isinstance(peer_id, str):
-                if peer_id in ("self", "me"):
-                    return raw.types.InputPeerSelf()
 
                 peer_id = re.sub(r"[@+\s]", "", peer_id.lower())
                 peer_id = re.sub(r"https://t.me/", "", peer_id.lower())

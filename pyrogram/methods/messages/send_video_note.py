@@ -88,7 +88,7 @@ class SendVideoNote:
                 If the message is a reply, ID of the original message.
 
             reply_to_story_id (``int``, *optional*):
-                Unique identifier for the target story.
+                If the message is a reply, ID of the target story.
 
             message_effect_id (``int`` ``64-bit``, *optional*):
                 Unique identifier of the message effect to be added to the message; for private chats only.

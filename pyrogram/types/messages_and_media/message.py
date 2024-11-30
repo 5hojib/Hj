@@ -4808,6 +4808,7 @@ class Message(Object, Update):
         quote_text: str | None = None,
         quote_entities: list[types.MessageEntity] | None = None,
         reply_to_message_id: int | None = None,
+        reply_to_chat_id: int = None,
         schedule_date: datetime | None = None,
         protect_content: bool | None = None,
         allow_paid_broadcast: bool | None = None,
@@ -4875,6 +4876,11 @@ class Message(Object, Update):
             reply_to_message_id (``int``, *optional*):
                 If the message is a reply, ID of the original message.
 
+            reply_to_chat_id (``int``, *optional*):
+                Unique identifier for the origin chat.
+                for reply to message from another chat.
+                You can also use chat public link in form of *t.me/<username>* (str).
+
             schedule_date (:py:obj:`~datetime.datetime`, *optional*):
                 Date when the message will be automatically sent.
 
@@ -4926,6 +4932,7 @@ class Message(Object, Update):
                 disable_notification=disable_notification,
                 message_thread_id=message_thread_id,
                 reply_to_message_id=reply_to_message_id,
+                reply_to_chat_id=reply_to_chat_id,
                 quote_text=quote_text,
                 quote_entities=quote_entities,
                 schedule_date=schedule_date,
@@ -4942,6 +4949,7 @@ class Message(Object, Update):
                 disable_notification=disable_notification,
                 message_thread_id=message_thread_id,
                 reply_to_message_id=reply_to_message_id,
+                reply_to_chat_id=reply_to_chat_id,
                 schedule_date=schedule_date,
                 has_spoiler=has_spoiler,
                 protect_content=protect_content,
@@ -5037,6 +5045,7 @@ class Message(Object, Update):
                     disable_notification=disable_notification,
                     message_thread_id=message_thread_id,
                     reply_to_message_id=reply_to_message_id,
+                    reply_to_chat_id=reply_to_chat_id,
                     quote_text=quote_text,
                     quote_entities=quote_entities,
                     schedule_date=schedule_date,
@@ -5373,7 +5382,7 @@ class Message(Object, Update):
         block: bool = True,
         progress: Callable | None = None,
         progress_args: tuple = (),
-    ) -> str:
+    ) -> str | BinaryIO:
         """Bound method *download* of :obj:`~pyrogram.types.Message`.
 
         Use as a shortcut for:

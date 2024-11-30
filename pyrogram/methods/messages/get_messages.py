@@ -16,6 +16,7 @@ log = logging.getLogger(__name__)
 class GetMessages:
     async def get_messages(
         self: pyrogram.Client,
+        *,
         chat_id: int | str | None = None,
         message_ids: int | Iterable[int] | None = None,
         reply_to_message_ids: int | Iterable[int] | None = None,
@@ -29,10 +30,10 @@ class GetMessages:
 
         .. include:: /_includes/usable-by/users-bots.rst
 
-        You must use exactly one of ``chat_id`` OR ``link``.
+        You must use exactly one of ``message_ids`` OR (``chat_id``, ``message_ids``) OR (``chat_id``, ``reply_to_message_ids``) OR ``link``.
 
         Parameters:
-            chat_id (``int`` | ``str``):
+            chat_id (``int`` | ``str``, *optional*):
                 Unique identifier (int) or username (str) of the target chat.
                 For your personal cloud (Saved Messages) you can simply use "me" or "self".
                 For a contact that exists in your Telegram address book you can use his phone number (str).
@@ -54,7 +55,7 @@ class GetMessages:
             is_scheduled (``bool``, *optional*):
                 Whether to get scheduled messages. Defaults to False.
 
-            link (``str``):
+            link (``str``, *optional*):
                 A link of the message, usually can be copied using ``Copy Link`` functionality OR obtained using :obj:`~pyrogram.raw.types.Message.link` OR  :obj:`~pyrogram.raw.functions.channels.ExportMessageLink`
 
         Returns:
@@ -78,6 +79,9 @@ class GetMessages:
 
                 # Get the replied-to message of a message
                 await app.get_messages(chat_id=chat_id, reply_to_message_ids=message_id)
+                
+                # Get message from link
+                await app.get_messages(link=link)
 
         Raises:
             ValueError: In case of invalid arguments.
