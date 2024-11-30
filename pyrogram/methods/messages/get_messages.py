@@ -16,7 +16,6 @@ log = logging.getLogger(__name__)
 class GetMessages:
     async def get_messages(
         self: pyrogram.Client,
-        *,
         chat_id: int | str | None = None,
         message_ids: int | Iterable[int] | None = None,
         reply_to_message_ids: int | Iterable[int] | None = None,
