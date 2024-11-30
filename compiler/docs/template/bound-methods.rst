@@ -42,12 +42,12 @@ UserGift
 .. hlist::
     :columns: 1
 
-    {user_gift_hlist}
+    {usergift_hlist}
 
 .. toctree::
     :hidden:
 
-    {user_gift_toctree}
+    {usergift_toctree}
 
 Story
 -----

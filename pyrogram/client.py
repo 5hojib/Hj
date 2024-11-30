@@ -1246,11 +1246,9 @@ class Client(Methods):
             finally:
                 await session.stop()
 
-    @functools.lru_cache(maxsize=128)
     def guess_mime_type(self, filename: str) -> str | None:
         return self.mimetypes.guess_type(filename)[0]
 
-    @functools.lru_cache(maxsize=128)
     def guess_extension(self, mime_type: str) -> str | None:
         return self.mimetypes.guess_extension(mime_type)
 

@@ -114,7 +114,7 @@ class Markdown:
             placeholders[placeholder] = code_section
             text = text.replace(code_section, placeholder, 1)
 
-        for i, match in enumerate(re.finditer(MARKDOWN_RE, text)):
+        for _i, match in enumerate(re.finditer(MARKDOWN_RE, text)):
             start, _ = match.span()
             delim, text_url, url = match.groups()
             full = match.group(0)

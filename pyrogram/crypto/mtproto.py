@@ -65,7 +65,7 @@ def unpack(
         if e.args[0] == 0:
             raise ConnectionError(
                 "Received empty data. Check your internet connection.",
-            )
+            ) from e
 
         left = data.read().hex()
 
@@ -75,7 +75,7 @@ def unpack(
 
         raise ValueError(
             f"The server sent an unknown constructor: {hex(e.args[0])}\n{left}",
-        )
+        ) from e
 
     SecurityCheckMismatch.check(
         msg_key == sha256(auth_key[96 : 96 + 32] + data.getvalue()).digest()[8:24],

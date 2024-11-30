@@ -7,7 +7,7 @@ from pyrogram import raw, types
 class DeleteBotCommands:
     async def delete_bot_commands(
         self: pyrogram.Client,
-        scope: types.BotCommandScope = types.BotCommandScopeDefault(),
+        scope: types.BotCommandScope = None,
         language_code: str = "",
     ) -> bool:
         """Delete the list of the bot's commands for the given scope and user language.
@@ -37,6 +37,8 @@ class DeleteBotCommands:
                 # Delete commands
                 await app.delete_bot_commands()
         """
+        if scope is None:
+            scope = types.BotCommandScopeDefault()
 
         return await self.invoke(
             raw.functions.bots.ResetBotCommands(

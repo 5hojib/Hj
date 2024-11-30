@@ -717,7 +717,7 @@ class Message(Object, Update):
         )
 
     @staticmethod
-    async def _parse(
+    async def _parse( # noqa: C901
         client: pyrogram.Client,
         message: raw.base.Message,
         users: dict,
@@ -5202,12 +5202,12 @@ class Message(Object, Update):
             try:
                 button = [button for row in keyboard for button in row][x]
             except IndexError:
-                raise ValueError(f"The button at index {x} doesn't exist")
+                raise ValueError(f"The button at index {x} doesn't exist") from None
         elif isinstance(x, int) and isinstance(y, int):
             try:
                 button = keyboard[y][x]
             except IndexError:
-                raise ValueError(f"The button at position ({x}, {y}) doesn't exist")
+                raise ValueError(f"The button at position ({x}, {y}) doesn't exist") from None
         elif isinstance(x, str) and y is None:
             label = x.encode("utf-16", "surrogatepass").decode("utf-16")
 
@@ -5219,7 +5219,7 @@ class Message(Object, Update):
                     if label == button.text
                 )
             except IndexError:
-                raise ValueError(f"The button with label '{x}' doesn't exists")
+                raise ValueError(f"The button with label '{x}' doesn't exists") from None
         else:
             raise ValueError("Invalid arguments")
 

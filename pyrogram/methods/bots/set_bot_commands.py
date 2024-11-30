@@ -8,7 +8,7 @@ class SetBotCommands:
     async def set_bot_commands(
         self: pyrogram.Client,
         commands: list[types.BotCommand],
-        scope: types.BotCommandScope = types.BotCommandScopeDefault(),
+        scope: types.BotCommandScope = None,
         language_code: str = "",
     ) -> bool:
         """Set the list of the bot's commands.
@@ -44,6 +44,8 @@ class SetBotCommands:
                     BotCommand("start", "Start the bot"),
                     BotCommand("settings", "Bot settings")])
         """
+        if scope is None:
+            scope = types.BotCommandScopeDefault()
 
         return await self.invoke(
             raw.functions.bots.SetBotCommands(

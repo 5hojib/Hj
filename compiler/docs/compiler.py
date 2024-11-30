@@ -748,7 +748,7 @@ def pyrogram_api() -> None:
             Message.wait_for_click
             Message.pay
         """,
-        "user_gift": """
+        "usergift": """
         UserGift
             UserGift.toggle
         """,

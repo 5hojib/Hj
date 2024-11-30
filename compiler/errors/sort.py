@@ -63,5 +63,5 @@ elif sys.argv[1] == "scrape":
             for p in Path("source/").glob(f"{h}*.tsv"):
                 with p.open("w") as f:
                     f.write("id\tmessage\n")
-                    for i, item in enumerate(keys, start=1):
+                    for _i, item in enumerate(keys, start=1):
                         f.write(f"{item}\t{dct[item]}\n")

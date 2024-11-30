@@ -95,8 +95,8 @@ class TCP:
     async def connect(self, address: tuple[str, int]) -> None:
         try:
             await asyncio.wait_for(self._connect(address), TCP.TIMEOUT)
-        except asyncio.TimeoutError:
-            raise TimeoutError("Connection timed out")
+        except asyncio.TimeoutError as err:
+            raise TimeoutError("Connection timed out") from err
 
     async def close(self) -> None:
         if self.writer is None:
@@ -118,7 +118,7 @@ class TCP:
                 await self.writer.drain()
             except Exception as e:
                 log.info("Send exception: %s %s", type(e).__name__, e)
-                raise OSError(e)
+                raise OSError(e) from e
 
     async def recv(self, length: int = 0) -> bytes | None:
         data = b""

@@ -425,7 +425,7 @@ class Dispatcher:
 
     async def stop(self) -> None:
         if not self.client.no_updates:
-            for i in range(self.client.workers):
+            for _i in range(self.client.workers):
                 self.updates_queue.put_nowait(None)
 
             for i in self.handler_worker_tasks:

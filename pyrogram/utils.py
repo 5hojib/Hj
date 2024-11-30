@@ -42,7 +42,7 @@ def get_input_media_from_file_id(
         raise ValueError(
             f'Failed to decode "{file_id}". The value does not represent an existing local file, '
             f"HTTP URL, or valid file id.",
-        )
+        ) from None
 
     file_type = decoded.file_type
 

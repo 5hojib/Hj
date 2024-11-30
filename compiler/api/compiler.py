@@ -184,7 +184,7 @@ def get_references(t: str, kind: str):
     return ("\n            ".join(items), len(items)) if items else (None, 0)
 
 
-def start() -> None:
+def start() -> None: # noqa: C901
     shutil.rmtree(DESTINATION_PATH / "types", ignore_errors=True)
     shutil.rmtree(DESTINATION_PATH / "functions", ignore_errors=True)
     shutil.rmtree(DESTINATION_PATH / "base", ignore_errors=True)
