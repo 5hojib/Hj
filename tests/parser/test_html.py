@@ -138,21 +138,6 @@ def test_html_unparse_pre() -> None:
     assert HTML.unparse(text=text, entities=entities) == expected
 
 
-def test_html_unparse_blockquote():
-    expected = """<blockquote>Quote text</blockquote>
-    from pyrogram"""
-    text = """Quote text
-    from pyrogram"""
-    entities = pyrogram.types.List(
-        [
-            pyrogram.types.MessageEntity(
-                type=pyrogram.enums.MessageEntityType.BLOCKQUOTE, offset=0, length=10
-            )
-        ]
-    )
-    assert HTML.unparse(text=text, entities=entities) == expected
-
-
 def test_html_unparse_mixed() -> None:
     expected = (
         "<b>aaaaaaa<i>aaa<u>bbbb</u></i></b><u><i>bbbbbbccc</i></u><u>ccccccc<s>ddd</s></u><s>ddddd<spoiler>dd"

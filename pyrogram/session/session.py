@@ -543,7 +543,7 @@ class Session:
 
         while retries > 0:
             if self.currently_restarting:
-                while self.currently_restarting:
+                while self.currently_restarting: # noqa: ASYNC110
                     await asyncio.sleep(1)
 
             if self.instant_stop:

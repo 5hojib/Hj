@@ -977,7 +977,7 @@ class Client(Methods):
             .as_posix()
             + ".temp"
         )
-        file = BytesIO() if in_memory else Path(temp_file_path).open("wb")
+        file = BytesIO() if in_memory else Path(temp_file_path).open("wb") # noqa: ASYNC230
 
         try:
             async for chunk in self.get_file(
