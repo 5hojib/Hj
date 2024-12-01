@@ -100,7 +100,7 @@ select = [
     "TID",      # flake8-tidy-imports
     "ARG",      # flake8-unused-arguments
     "C90",      # mccabe
-    "COM",      # flake8-commas
+    # "COM",      # flake8-commas
     "FURB",     # refurb
     "PERF",     # perflint
     "ASYNC",    # flake8-async
