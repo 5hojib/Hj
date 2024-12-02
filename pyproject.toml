@@ -92,8 +92,8 @@ select = [
     "UP",       # pyupgrade
     "FA",       # flake8-future-annotations
     "PL",       # pylint
-    "PIE"       # flake8-pie
-    "PYI"       # flake8-pyi
+    "PIE",       # flake8-pie
+    "PYI",       # flake8-pyi
     "PTH",      # flake8-use-pathlib
     "RET",      # flake8-return
     "RUF",      # ruff
