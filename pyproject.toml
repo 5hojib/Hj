@@ -92,6 +92,8 @@ select = [
     "UP",       # pyupgrade
     "FA",       # flake8-future-annotations
     "PL",       # pylint
+    "PIE"       # flake8-pie
+    "PYI"       # flake8-pyi
     "PTH",      # flake8-use-pathlib
     "RET",      # flake8-return
     "RUF",      # ruff
@@ -100,7 +102,7 @@ select = [
     "TID",      # flake8-tidy-imports
     "ARG",      # flake8-unused-arguments
     "C90",      # mccabe
-    # "COM",      # flake8-commas
+    "COM",      # flake8-commas
     "FURB",     # refurb
     "PERF",     # perflint
     "ASYNC",    # flake8-async
