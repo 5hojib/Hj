@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections import namedtuple
 from typing import NamedTuple
 
 PublicKey = NamedTuple("PublicKey", ["m", "e"])
