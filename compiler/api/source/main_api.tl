@@ -1945,6 +1945,17 @@ botVerification#f93cd45c bot_id:long icon:long description:string = BotVerificat
 
 ---functions---
 
+invokeAfterMsg#cb9f372d {X:Type} msg_id:long query:!X = X;
+invokeAfterMsgs#3dc4b4f0 {X:Type} msg_ids:Vector<long> query:!X = X;
+initConnection#c1cd5ea9 {X:Type} flags:# api_id:int device_model:string system_version:string app_version:string system_lang_code:string lang_pack:string lang_code:string proxy:flags.0?InputClientProxy params:flags.1?JSONValue query:!X = X;
+invokeWithLayer#da9b0d0d {X:Type} layer:int query:!X = X;
+invokeWithoutUpdates#bf9459b7 {X:Type} query:!X = X;
+invokeWithMessagesRange#365275f2 {X:Type} range:MessageRange query:!X = X;
+invokeWithTakeout#aca9fd2e {X:Type} takeout_id:long query:!X = X;
+invokeWithBusinessConnection#dd289f8e {X:Type} connection_id:string query:!X = X;
+invokeWithGooglePlayIntegrity#1df92984 {X:Type} nonce:string token:string query:!X = X;
+invokeWithApnsSecret#dae54f8 {X:Type} nonce:string secret:string query:!X = X;
+
 auth.sendCode#a677244f phone_number:string api_id:int api_hash:string settings:CodeSettings = auth.SentCode;
 auth.signUp#aac7b717 flags:# no_joined_notifications:flags.0?true phone_number:string phone_code_hash:string first_name:string last_name:string = auth.Authorization;
 auth.signIn#8d52a951 flags:# phone_number:string phone_code_hash:string phone_code:flags.0?string email_verification:flags.1?EmailVerification = auth.Authorization;
