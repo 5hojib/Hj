@@ -149,7 +149,7 @@ class SQLiteStorage(Storage):
                 (user[0],),
             )
         await self.conn.executemany(
-            "REPLACE INTO usernames (peer_id, id)" "VALUES (?, ?)",
+            "REPLACE INTO usernames (peer_id, id)VALUES (?, ?)",
             usernames,
         )
 

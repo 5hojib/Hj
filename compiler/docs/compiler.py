@@ -83,7 +83,7 @@ def generate(source_path, base) -> None:
 
     for k, v in sorted(all_entities.items()):
         v = sorted(v)
-        entities = [f'{i} <{snake(i).replace("_", "-")}>' for i in v]
+        entities = [f"{i} <{snake(i).replace('_', '-')}>" for i in v]
 
         if k != base:
             inner_path = base + "/" + k + "/index" + ".rst"
