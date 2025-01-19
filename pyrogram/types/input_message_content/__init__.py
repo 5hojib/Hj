@@ -12,12 +12,12 @@ from .input_text_message_content import InputTextMessageContent
 from .input_venue_message_content import InputVenueMessageContent
 
 __all__ = [
+    "InputContactMessageContent",
+    "InputInvoiceMessageContent",
+    "InputLocationMessageContent",
     "InputMessageContent",
     "InputReplyToMessage",
     "InputReplyToStory",
     "InputTextMessageContent",
-    "InputLocationMessageContent",
     "InputVenueMessageContent",
-    "InputContactMessageContent",
-    "InputInvoiceMessageContent",
 ]

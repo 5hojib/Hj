@@ -6,7 +6,8 @@ from pyrogram import raw, types
 
 class GetCommonChats:
     async def get_common_chats(
-        self: pyrogram.Client, user_id: int | str
+        self: pyrogram.Client,
+        user_id: int | str,
     ) -> list[types.Chat]:
         """Get the common chats you have with a user.
 
@@ -40,7 +41,7 @@ class GetCommonChats:
                     user_id=peer,
                     max_id=0,
                     limit=100,
-                )
+                ),
             )
 
             return types.List([types.Chat._parse_chat(self, x) for x in r.chats])

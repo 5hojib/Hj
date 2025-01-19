@@ -54,7 +54,7 @@ class GetChatInviteLinkJoiners:
                     limit=limit,
                     offset_date=offset_date,
                     offset_user=offset_user,
-                )
+                ),
             )
 
             if not r.importers:

@@ -46,6 +46,6 @@ class SetBotInfo:
                 name=name,
                 about=about,
                 description=description,
-            )
+            ),
         )
         return bool(r)

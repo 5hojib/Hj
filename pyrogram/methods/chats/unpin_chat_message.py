@@ -38,7 +38,7 @@ class UnpinChatMessage:
                 peer=await self.resolve_peer(chat_id),
                 id=message_id,
                 unpin=True,
-            )
+            ),
         )
 
         return True

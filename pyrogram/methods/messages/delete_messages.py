@@ -58,11 +58,11 @@ class DeleteMessages:
 
         if isinstance(peer, raw.types.InputPeerChannel):
             r = await self.invoke(
-                raw.functions.channels.DeleteMessages(channel=peer, id=message_ids)
+                raw.functions.channels.DeleteMessages(channel=peer, id=message_ids),
             )
         else:
             r = await self.invoke(
-                raw.functions.messages.DeleteMessages(id=message_ids, revoke=revoke)
+                raw.functions.messages.DeleteMessages(id=message_ids, revoke=revoke),
             )
 
         return r.pts_count

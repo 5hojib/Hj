@@ -88,7 +88,9 @@ class StarsTransaction(Object):
 
     @staticmethod
     def _parse(
-        client, transaction: raw.types.StarsTransaction, users: dict
+        client,
+        transaction: raw.types.StarsTransaction,
+        users: dict,
     ) -> StarsTransaction:
         chat_id = utils.get_raw_peer_id(transaction.peer.peer)
         chat = types.User._parse(client, users.get(chat_id))
@@ -107,7 +109,7 @@ class StarsTransaction(Object):
             title=transaction.title,
             description=transaction.description,
             transaction_date=utils.timestamp_to_datetime(
-                transaction.transaction_date
+                transaction.transaction_date,
             ),
             transaction_url=transaction.transaction_url,
             payload=payload,

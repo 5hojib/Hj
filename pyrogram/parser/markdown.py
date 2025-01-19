@@ -39,9 +39,9 @@ MARKDOWN_RE = re.compile(
                         SPOILER_DELIM,
                     ]
                 ]
-            ]
-        )
-    )
+            ],
+        ),
+    ),
 )
 
 OPENING_TAG = "<{}>"
@@ -114,7 +114,7 @@ class Markdown:
             placeholders[placeholder] = code_section
             text = text.replace(code_section, placeholder, 1)
 
-        for i, match in enumerate(re.finditer(MARKDOWN_RE, text)):
+        for _i, match in enumerate(re.finditer(MARKDOWN_RE, text)):
             start, _ = match.span()
             delim, text_url, url = match.groups()
             full = match.group(0)
@@ -220,13 +220,13 @@ class Markdown:
                         (
                             start_tag,
                             start_offset,
-                        )
+                        ),
                     )
                     entities_offsets.append(
                         (
                             end_tag,
                             end_offset,
-                        )
+                        ),
                     )
                     last_length = last_length + 1
                 continue
@@ -247,13 +247,13 @@ class Markdown:
                 (
                     start_tag,
                     start,
-                )
+                ),
             )
             entities_offsets.append(
                 (
                     end_tag,
                     end,
-                )
+                ),
             )
 
         entities_offsets = (

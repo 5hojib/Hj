@@ -57,7 +57,7 @@ class UserGift(Object):
         gift: types.Gift | None = None,
         message_id: int | None = None,
         sell_star_count: int | None = None,
-    ):
+    ) -> None:
         super().__init__(client)
 
         self.date = date
@@ -72,7 +72,9 @@ class UserGift(Object):
 
     @staticmethod
     async def _parse(
-        client, user_star_gift: raw.types.UserStarGift, users: dict
+        client,
+        user_star_gift: raw.types.UserStarGift,
+        users: dict,
     ) -> UserGift:
         text, entities = None, None
         if getattr(user_star_gift, "message", None):
@@ -102,7 +104,9 @@ class UserGift(Object):
 
     @staticmethod
     async def _parse_action(
-        client, message: raw.base.Message, users: dict
+        client,
+        message: raw.base.Message,
+        users: dict,
     ) -> UserGift:
         action = message.action
 
@@ -132,7 +136,8 @@ class UserGift(Object):
             is_private=getattr(action, "name_hidden", None),
             is_saved=getattr(action, "saved", None),
             sender_user=types.User._parse(
-                client, users.get(utils.get_raw_peer_id(message.peer_id))
+                client,
+                users.get(utils.get_raw_peer_id(message.peer_id)),
             ),
             message_id=message.id,
             text=Str(text).init(entities) if text else None,

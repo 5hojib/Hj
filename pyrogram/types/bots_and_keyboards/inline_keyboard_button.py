@@ -107,7 +107,8 @@ class InlineKeyboardButton(Object):
 
         if isinstance(b, raw.types.KeyboardButtonUrlAuth):
             return InlineKeyboardButton(
-                text=b.text, login_url=types.LoginUrl.read(b)
+                text=b.text,
+                login_url=types.LoginUrl.read(b),
             )
 
         if isinstance(b, raw.types.KeyboardButtonUserProfile):
@@ -123,12 +124,14 @@ class InlineKeyboardButton(Object):
 
         if isinstance(b, raw.types.KeyboardButtonGame):
             return InlineKeyboardButton(
-                text=b.text, callback_game=types.CallbackGame()
+                text=b.text,
+                callback_game=types.CallbackGame(),
             )
 
         if isinstance(b, raw.types.KeyboardButtonWebView):
             return InlineKeyboardButton(
-                text=b.text, web_app=types.WebAppInfo(url=b.url)
+                text=b.text,
+                web_app=types.WebAppInfo(url=b.url),
             )
 
         if isinstance(b, raw.types.KeyboardButtonCopy):
@@ -170,7 +173,8 @@ class InlineKeyboardButton(Object):
 
         if self.switch_inline_query is not None:
             return raw.types.KeyboardButtonSwitchInline(
-                text=self.text, query=self.switch_inline_query
+                text=self.text,
+                query=self.switch_inline_query,
             )
 
         if self.switch_inline_query_current_chat is not None:
@@ -185,10 +189,12 @@ class InlineKeyboardButton(Object):
 
         if self.web_app is not None:
             return raw.types.KeyboardButtonWebView(
-                text=self.text, url=self.web_app.url
+                text=self.text,
+                url=self.web_app.url,
             )
         if self.copy_text is not None:
             return raw.types.KeyboardButtonCopy(
-                text=self.text, copy_text=self.copy_text
+                text=self.text,
+                copy_text=self.copy_text,
             )
         return None

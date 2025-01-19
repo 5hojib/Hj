@@ -105,7 +105,7 @@ class ChatMemberUpdated(Object, Update):
                 client=client,
             )
 
-        chat_id = getattr(update, "chat_id", None) or getattr(update, "channel_id")
+        chat_id = getattr(update, "chat_id", None) or update.channel_id
 
         old_chat_member = None
         new_chat_member = None
@@ -114,12 +114,18 @@ class ChatMemberUpdated(Object, Update):
 
         if update.prev_participant:
             old_chat_member = types.ChatMember._parse(
-                client, update.prev_participant, users, chats
+                client,
+                update.prev_participant,
+                users,
+                chats,
             )
 
         if update.new_participant:
             new_chat_member = types.ChatMember._parse(
-                client, update.new_participant, users, chats
+                client,
+                update.new_participant,
+                users,
+                chats,
             )
 
         if update.invite:

@@ -57,15 +57,17 @@ class PromoteChatMember:
             raw_chat_member = (
                 await self.invoke(
                     raw.functions.channels.GetParticipant(
-                        channel=chat_id, participant=user_id
-                    )
+                        channel=chat_id,
+                        participant=user_id,
+                    ),
                 )
             ).participant
         except errors.RPCError:
             raw_chat_member = None
 
         if not title and isinstance(
-            raw_chat_member, raw.types.ChannelParticipantAdmin
+            raw_chat_member,
+            raw.types.ChannelParticipantAdmin,
         ):
             rank = raw_chat_member.rank
         else:
@@ -93,7 +95,7 @@ class PromoteChatMember:
                     other=privileges.can_manage_chat,
                 ),
                 rank=rank or "",
-            )
+            ),
         )
 
         return True

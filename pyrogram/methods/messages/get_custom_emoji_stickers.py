@@ -27,8 +27,8 @@ class GetCustomEmojiStickers:
 
         result = await self.invoke(
             raw.functions.messages.GetCustomEmojiDocuments(
-                document_id=custom_emoji_ids
-            )
+                document_id=custom_emoji_ids,
+            ),
         )
 
         stickers = pyrogram.types.List()

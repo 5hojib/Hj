@@ -1,8 +1,12 @@
 from __future__ import annotations
 
-from collections import namedtuple
+from typing import NamedTuple
 
-PublicKey = namedtuple("PublicKey", ["m", "e"])
+
+class PublicKey(NamedTuple):
+    m: int
+    e: int
+
 
 server_public_keys = {
     0xC3B42B026CE86B21 - (1 << 64): PublicKey(

@@ -27,5 +27,5 @@ class VideoChatScheduled(Object):
         action: raw.types.MessageActionGroupCallScheduled,
     ) -> VideoChatScheduled:
         return VideoChatScheduled(
-            start_date=utils.timestamp_to_datetime(action.schedule_date)
+            start_date=utils.timestamp_to_datetime(action.schedule_date),
         )

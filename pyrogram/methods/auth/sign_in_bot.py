@@ -34,7 +34,7 @@ class SignInBot:
                         api_id=self.api_id,
                         api_hash=self.api_hash,
                         bot_auth_token=bot_token,
-                    )
+                    ),
                 )
             except UserMigrate as e:
                 await self.session.stop()
@@ -45,7 +45,7 @@ class SignInBot:
                         self,
                         await self.storage.dc_id(),
                         await self.storage.test_mode(),
-                    ).create()
+                    ).create(),
                 )
                 self.session = Session(
                     self,

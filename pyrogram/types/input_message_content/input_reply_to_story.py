@@ -13,7 +13,7 @@ class InputReplyToStory(Object):
             An InputPeer.
 
         story_id (``int``):
-            Unique identifier for the target story.
+            If the message is a reply, ID of the target story.
     """
 
     def __init__(
@@ -29,5 +29,6 @@ class InputReplyToStory(Object):
 
     def write(self):
         return raw.types.InputReplyToStory(
-            peer=self.peer, story_id=self.story_id
+            peer=self.peer,
+            story_id=self.story_id,
         ).write()

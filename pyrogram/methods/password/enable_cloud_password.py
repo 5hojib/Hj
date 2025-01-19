@@ -66,7 +66,7 @@ class EnableCloudPassword:
                     hint=hint,
                     email=email,
                 ),
-            )
+            ),
         )
 
         return True

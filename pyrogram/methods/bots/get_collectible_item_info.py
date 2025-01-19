@@ -40,11 +40,11 @@ class GetCollectibleItemInfo:
             input_collectible = raw.types.InputCollectiblePhone(phone=phone_number)
         else:
             raise ValueError(
-                "No argument supplied. Either pass username OR phone_number"
+                "No argument supplied. Either pass username OR phone_number",
             )
 
         r = await self.invoke(
-            raw.functions.fragment.GetCollectibleInfo(collectible=input_collectible)
+            raw.functions.fragment.GetCollectibleInfo(collectible=input_collectible),
         )
 
         return types.CollectibleItemInfo._parse(r)

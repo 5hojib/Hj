@@ -13,11 +13,11 @@ from .input_phone_contact import InputPhoneContact
 __all__ = [
     "InputMedia",
     "InputMediaAnimation",
+    "InputMediaArea",
+    "InputMediaAreaChannelPost",
     "InputMediaAudio",
     "InputMediaDocument",
     "InputMediaPhoto",
     "InputMediaVideo",
     "InputPhoneContact",
-    "InputMediaArea",
-    "InputMediaAreaChannelPost",
 ]

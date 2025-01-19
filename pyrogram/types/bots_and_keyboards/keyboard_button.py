@@ -152,6 +152,7 @@ class KeyboardButton(Object):
             )
         if self.web_app:
             return raw.types.KeyboardButtonSimpleWebView(
-                text=self.text, url=self.web_app.url
+                text=self.text,
+                url=self.web_app.url,
             )
         return raw.types.KeyboardButton(text=self.text)

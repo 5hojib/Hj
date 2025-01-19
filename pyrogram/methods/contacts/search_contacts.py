@@ -6,7 +6,9 @@ from pyrogram import raw, types
 
 class SearchContacts:
     async def search_contacts(
-        self: pyrogram.Client, query: str, limit: int = 0
+        self: pyrogram.Client,
+        query: str,
+        limit: int = 0,
     ) -> types.FoundContacts:
         """Returns users or channels found by name substring and auxiliary data.
 

@@ -66,7 +66,8 @@ class EditInlineMedia:
         is_uploaded_file = is_bytes_io or Path(media.media).is_file()
 
         is_external_url = not is_uploaded_file and re.match(
-            "^https?://", media.media
+            "^https?://",
+            media.media,
         )
 
         if is_bytes_io and not hasattr(media.media, "name"):
@@ -77,8 +78,8 @@ class EditInlineMedia:
                 raw.types.DocumentAttributeFilename(
                     file_name=media.media.name
                     if is_bytes_io
-                    else Path(media.media).name
-                )
+                    else Path(media.media).name,
+                ),
             ]
         else:
             filename_attribute = []
@@ -91,11 +92,13 @@ class EditInlineMedia:
                 )
             elif is_external_url:
                 media = raw.types.InputMediaPhotoExternal(
-                    url=media.media, spoiler=media.has_spoiler
+                    url=media.media,
+                    spoiler=media.has_spoiler,
                 )
             else:
                 media = utils.get_input_media_from_file_id(
-                    media.media, FileType.PHOTO
+                    media.media,
+                    FileType.PHOTO,
                 )
         elif isinstance(media, types.InputMediaVideo):
             if is_uploaded_file:
@@ -119,11 +122,13 @@ class EditInlineMedia:
                 )
             elif is_external_url:
                 media = raw.types.InputMediaDocumentExternal(
-                    url=media.media, spoiler=media.has_spoiler
+                    url=media.media,
+                    spoiler=media.has_spoiler,
                 )
             else:
                 media = utils.get_input_media_from_file_id(
-                    media.media, FileType.VIDEO
+                    media.media,
+                    FileType.VIDEO,
                 )
         elif isinstance(media, types.InputMediaAudio):
             if is_uploaded_file:
@@ -147,7 +152,8 @@ class EditInlineMedia:
                 media = raw.types.InputMediaDocumentExternal(url=media.media)
             else:
                 media = utils.get_input_media_from_file_id(
-                    media.media, FileType.AUDIO
+                    media.media,
+                    FileType.AUDIO,
                 )
         elif isinstance(media, types.InputMediaAnimation):
             if is_uploaded_file:
@@ -173,11 +179,13 @@ class EditInlineMedia:
                 )
             elif is_external_url:
                 media = raw.types.InputMediaDocumentExternal(
-                    url=media.media, spoiler=media.has_spoiler
+                    url=media.media,
+                    spoiler=media.has_spoiler,
                 )
             else:
                 media = utils.get_input_media_from_file_id(
-                    media.media, FileType.ANIMATION
+                    media.media,
+                    FileType.ANIMATION,
                 )
         elif isinstance(media, types.InputMediaDocument):
             if is_uploaded_file:
@@ -195,7 +203,8 @@ class EditInlineMedia:
                 media = raw.types.InputMediaDocumentExternal(url=media.media)
             else:
                 media = utils.get_input_media_from_file_id(
-                    media.media, FileType.DOCUMENT
+                    media.media,
+                    FileType.DOCUMENT,
                 )
 
         unpacked = utils.unpack_inline_message_id(inline_message_id)
@@ -206,8 +215,9 @@ class EditInlineMedia:
         if is_uploaded_file:
             uploaded_media = await self.invoke(
                 raw.functions.messages.UploadMedia(
-                    peer=raw.types.InputPeerSelf(), media=media
-                )
+                    peer=raw.types.InputPeerSelf(),
+                    media=media,
+                ),
             )
 
             actual_media = (

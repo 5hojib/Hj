@@ -100,8 +100,9 @@ class InlineQueryResultDocument(InlineQueryResult):
                 mime_type="image/jpeg",
                 attributes=[
                     raw.types.DocumentAttributeImageSize(
-                        w=self.thumb_width, h=self.thumb_height
-                    )
+                        w=self.thumb_width,
+                        h=self.thumb_height,
+                    ),
                 ],
             )
             if self.thumb_url

@@ -35,7 +35,9 @@ class GameHighScore(Object):
 
     @staticmethod
     def _parse(
-        client, game_high_score: raw.types.HighScore, users: dict
+        client,
+        game_high_score: raw.types.HighScore,
+        users: dict,
     ) -> GameHighScore:
         users = {i.id: i for i in users}
 

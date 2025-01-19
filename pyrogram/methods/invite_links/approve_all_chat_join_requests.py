@@ -32,7 +32,7 @@ class ApproveAllChatJoinRequests:
                 peer=await self.resolve_peer(chat_id),
                 approved=True,
                 link=invite_link,
-            )
+            ),
         )
 
         return True

@@ -28,6 +28,6 @@ class CloseGeneralTopic:
                 channel=await self.resolve_peer(chat_id),
                 topic_id=1,
                 closed=True,
-            )
+            ),
         )
         return True

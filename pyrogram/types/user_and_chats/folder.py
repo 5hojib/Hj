@@ -106,20 +106,20 @@ class Folder(Object):
         for peer in folder.include_peers:
             with contextlib.suppress(KeyError):
                 included_chats.append(
-                    types.Chat._parse_dialog(client, peer, users, chats)
+                    types.Chat._parse_dialog(client, peer, users, chats),
                 )
 
         if getattr(folder, "exclude_peers", None):
             for peer in folder.exclude_peers:
                 with contextlib.suppress(KeyError):
                     excluded_chats.append(
-                        types.Chat._parse_dialog(client, peer, users, chats)
+                        types.Chat._parse_dialog(client, peer, users, chats),
                     )
 
         for peer in folder.pinned_peers:
             with contextlib.suppress(KeyError):
                 pinned_chats.append(
-                    types.Chat._parse_dialog(client, peer, users, chats)
+                    types.Chat._parse_dialog(client, peer, users, chats),
                 )
 
         return Folder(

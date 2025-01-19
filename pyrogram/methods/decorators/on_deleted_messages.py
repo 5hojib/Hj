@@ -39,7 +39,7 @@ class OnDeletedMessages:
                     (
                         pyrogram.handlers.DeletedMessagesHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

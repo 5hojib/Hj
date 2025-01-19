@@ -13,8 +13,8 @@ def test_html_unparse_bold() -> None:
                 type=pyrogram.enums.MessageEntityType.BOLD,
                 offset=0,
                 length=4,
-            )
-        ]
+            ),
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected
@@ -29,8 +29,8 @@ def test_html_unparse_italic() -> None:
                 type=pyrogram.enums.MessageEntityType.ITALIC,
                 offset=0,
                 length=6,
-            )
-        ]
+            ),
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected
@@ -45,8 +45,8 @@ def test_html_unparse_underline() -> None:
                 type=pyrogram.enums.MessageEntityType.UNDERLINE,
                 offset=0,
                 length=9,
-            )
-        ]
+            ),
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected
@@ -61,8 +61,8 @@ def test_html_unparse_strike() -> None:
                 type=pyrogram.enums.MessageEntityType.STRIKETHROUGH,
                 offset=0,
                 length=6,
-            )
-        ]
+            ),
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected
@@ -77,8 +77,8 @@ def test_html_unparse_spoiler() -> None:
                 type=pyrogram.enums.MessageEntityType.SPOILER,
                 offset=0,
                 length=7,
-            )
-        ]
+            ),
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected
@@ -94,8 +94,8 @@ def test_html_unparse_url() -> None:
                 offset=0,
                 length=3,
                 url="https://pyrogram.org/",
-            )
-        ]
+            ),
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected
@@ -110,8 +110,8 @@ def test_html_unparse_code() -> None:
                 type=pyrogram.enums.MessageEntityType.CODE,
                 offset=0,
                 length=4,
-            )
-        ]
+            ),
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected
@@ -131,8 +131,8 @@ def test_html_unparse_pre() -> None:
                 offset=0,
                 length=32,
                 language="python",
-            )
-        ]
+            ),
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected
@@ -201,7 +201,7 @@ def test_html_unparse_mixed() -> None:
                 offset=57,
                 length=10,
             ),
-        ]
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected
@@ -216,8 +216,8 @@ def test_html_unparse_escaped() -> None:
                 type=pyrogram.enums.MessageEntityType.BOLD,
                 offset=0,
                 length=11,
-            )
-        ]
+            ),
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected
@@ -240,7 +240,7 @@ def test_html_unparse_escaped_nested() -> None:
                 offset=8,
                 length=16,
             ),
-        ]
+        ],
     )
 
     assert HTML.unparse(text=text, entities=entities) == expected

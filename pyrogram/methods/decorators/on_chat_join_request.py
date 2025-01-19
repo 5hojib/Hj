@@ -38,7 +38,7 @@ class OnChatJoinRequest:
                     (
                         pyrogram.handlers.ChatJoinRequestHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

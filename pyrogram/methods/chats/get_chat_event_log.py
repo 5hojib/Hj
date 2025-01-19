@@ -78,7 +78,7 @@ class GetChatEventLog:
                         if user_ids is not None
                         else user_ids
                     ),
-                )
+                ),
             )
 
             if not r.events:

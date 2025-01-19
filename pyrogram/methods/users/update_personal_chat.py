@@ -6,7 +6,8 @@ from pyrogram import raw
 
 class UpdatePersonalChat:
     async def update_personal_chat(
-        self: pyrogram.Client, chat_id: int | str
+        self: pyrogram.Client,
+        chat_id: int | str,
     ) -> bool:
         """Update your birthday details.
 
@@ -28,6 +29,6 @@ class UpdatePersonalChat:
         """
         chat = await self.resolve_peer(chat_id)
         r = await self.invoke(
-            raw.functions.account.UpdatePersonalChannel(channel=chat)
+            raw.functions.account.UpdatePersonalChannel(channel=chat),
         )
         return bool(r)

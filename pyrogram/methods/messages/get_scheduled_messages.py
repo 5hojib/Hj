@@ -14,7 +14,9 @@ log = logging.getLogger(__name__)
 
 class GetScheduledMessages:
     async def get_scheduled_messages(
-        self: pyrogram.Client, chat_id: int | str, message_ids: int | Iterable[int]
+        self: pyrogram.Client,
+        chat_id: int | str,
+        message_ids: int | Iterable[int],
     ) -> types.Message | list[types.Message]:
         """Get one or more scheduled messages from a chat by using message identifiers.
         You can retrieve up to 200 messages at once.

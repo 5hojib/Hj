@@ -62,7 +62,8 @@ class Invoke:
 
         if self.takeout_id:
             query = raw.functions.InvokeWithTakeout(
-                takeout_id=self.takeout_id, query=query
+                takeout_id=self.takeout_id,
+                query=query,
             )
 
         r = await self.session.invoke(

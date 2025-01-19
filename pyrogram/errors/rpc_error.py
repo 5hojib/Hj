@@ -33,7 +33,7 @@ class RPCError(Exception):
                 self.ID or self.NAME,
                 self.MESSAGE.format(value=value),
                 f'(caused by "{rpc_name}")' if rpc_name else "",
-            )
+            ),
         )
 
         try:
@@ -47,7 +47,8 @@ class RPCError(Exception):
 
     @staticmethod
     def raise_it(
-        rpc_error: raw.types.RpcError, rpc_type: type[TLObject]
+        rpc_error: raw.types.RpcError,
+        rpc_type: type[TLObject],
     ) -> NoReturn:
         error_code = rpc_error.error_code
         is_signed = error_code < 0

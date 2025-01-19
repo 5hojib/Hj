@@ -83,7 +83,7 @@ class ReplyKeyboardMarkup(Object):
                         if isinstance(j, str)
                         else j.write()
                         for j in i
-                    ]
+                    ],
                 )
                 for i in self.keyboard
             ],

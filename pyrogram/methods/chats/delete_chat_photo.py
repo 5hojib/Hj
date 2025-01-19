@@ -35,14 +35,14 @@ class DeleteChatPhoto:
                 raw.functions.messages.EditChatPhoto(
                     chat_id=peer.chat_id,
                     photo=raw.types.InputChatPhotoEmpty(),
-                )
+                ),
             )
         elif isinstance(peer, raw.types.InputPeerChannel):
             await self.invoke(
                 raw.functions.channels.EditPhoto(
                     channel=peer,
                     photo=raw.types.InputChatPhotoEmpty(),
-                )
+                ),
             )
         else:
             raise ValueError(f'The chat_id "{chat_id}" belongs to a user')

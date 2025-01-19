@@ -13,6 +13,7 @@ class SendInlineBotResult:
         disable_notification: bool | None = None,
         message_thread_id: int | None = None,
         reply_to_message_id: int | None = None,
+        reply_to_story_id: int | None = None,
         quote_text: str | None = None,
         quote_entities: list[types.MessageEntity] | None = None,
         parse_mode: enums.ParseMode | None = None,
@@ -54,6 +55,9 @@ class SendInlineBotResult:
                 List of special entities that appear in quote_text, which can be specified instead of *parse_mode*.
                 for reply_to_message only.
 
+            reply_to_story_id (``int``, *optional*):
+                If the message is a reply, ID of the target story.
+
             parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
                 By default, quote_text are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
@@ -72,6 +76,7 @@ class SendInlineBotResult:
             client=self,
             chat_id=chat_id,
             reply_to_message_id=reply_to_message_id,
+            reply_to_story_id=reply_to_story_id,
             message_thread_id=message_thread_id,
             quote_text=quote_text,
             quote_entities=quote_entities,
@@ -86,12 +91,13 @@ class SendInlineBotResult:
                 random_id=self.rnd_id(),
                 silent=disable_notification or None,
                 reply_to=reply_to,
-            )
+            ),
         )
 
         for i in r.updates:
             if isinstance(
-                i, raw.types.UpdateNewMessage | raw.types.UpdateNewChannelMessage
+                i,
+                raw.types.UpdateNewMessage | raw.types.UpdateNewChannelMessage,
             ):
                 return await types.Message._parse(
                     self,

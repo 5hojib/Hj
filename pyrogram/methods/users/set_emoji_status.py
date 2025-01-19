@@ -33,8 +33,8 @@ class SetEmojiStatus:
                     emoji_status.write()
                     if emoji_status
                     else raw.types.EmojiStatusEmpty()
-                )
-            )
+                ),
+            ),
         )
 
         return True

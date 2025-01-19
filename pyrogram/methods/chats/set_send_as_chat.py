@@ -37,5 +37,5 @@ class SetSendAsChat:
             raw.functions.messages.SaveDefaultSendAs(
                 peer=await self.resolve_peer(chat_id),
                 send_as=await self.resolve_peer(send_as_chat_id),
-            )
+            ),
         )

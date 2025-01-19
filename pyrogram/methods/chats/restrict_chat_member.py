@@ -15,7 +15,7 @@ class RestrictChatMember:
         chat_id: int | str,
         user_id: int | str,
         permissions: types.ChatPermissions,
-        until_date: datetime = utils.zero_datetime(),
+        until_date: datetime | None = None,
     ) -> types.Chat:
         """Restrict a user in a supergroup.
 
@@ -62,6 +62,8 @@ class RestrictChatMember:
                 await app.restrict_chat_member(chat_id, user_id,
                     ChatPermissions(can_send_messages=True))
         """
+        if until_date is None:
+            until_date = utils.zero_datetime()
 
         if permissions.all_perms is not None:
             send_audios = None
@@ -242,7 +244,7 @@ class RestrictChatMember:
                     send_videos=send_videos,
                     send_voices=send_voices,
                 ),
-            )
+            ),
         )
 
         return types.Chat._parse_chat(self, r.chats[0])

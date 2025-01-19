@@ -17,10 +17,12 @@ async def get_chunk(
     limit: int = 0,
     offset: int = 0,
     from_message_id: int = 0,
-    from_date: datetime = utils.zero_datetime(),
+    from_date: datetime | None = None,
     min_id: int = 0,
     max_id: int = 0,
 ):
+    if from_date is None:
+        from_date = utils.zero_datetime()
     messages = await client.invoke(
         raw.functions.messages.GetHistory(
             peer=await client.resolve_peer(chat_id),
@@ -45,7 +47,7 @@ class GetChatHistory:
         limit: int = 0,
         offset: int = 0,
         offset_id: int = 0,
-        offset_date: datetime = utils.zero_datetime(),
+        offset_date: datetime | None = None,
         min_id: int = 0,
         max_id: int = 0,
     ) -> AsyncGenerator[types.Message, None] | None:
@@ -91,6 +93,8 @@ class GetChatHistory:
                 async for message in app.get_chat_history(chat_id):
                     print(message.text)
         """
+        if offset_date is None:
+            offset_date = utils.zero_datetime()
         current = 0
         total = limit or (1 << 31) - 1
         limit = min(100, total)

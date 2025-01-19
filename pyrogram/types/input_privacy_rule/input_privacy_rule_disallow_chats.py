@@ -37,5 +37,5 @@ class InputPrivacyRuleDisallowChats(InputPrivacyRule):
         chats = await asyncio.gather(*[client.resolve_peer(i) for i in chats])
 
         return raw.types.InputPrivacyValueDisallowChatParticipants(
-            chats=[utils.get_peer_id(i) for i in chats]
+            chats=[utils.get_peer_id(i) for i in chats],
         )

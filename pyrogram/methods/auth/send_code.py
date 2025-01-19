@@ -37,7 +37,7 @@ class SendCode:
                         api_id=self.api_id,
                         api_hash=self.api_hash,
                         settings=raw.types.CodeSettings(),
-                    )
+                    ),
                 )
             except (PhoneMigrate, NetworkMigrate) as e:
                 await self.session.stop()
@@ -48,7 +48,7 @@ class SendCode:
                         self,
                         await self.storage.dc_id(),
                         await self.storage.test_mode(),
-                    ).create()
+                    ).create(),
                 )
                 self.session = Session(
                     self,

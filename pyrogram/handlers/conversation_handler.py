@@ -49,7 +49,10 @@ class ConversationHandler(MessageHandler, CallbackQueryHandler):
                 filtered = await filters(client, update)
             else:
                 filtered = await client.loop.run_in_executor(
-                    client.executor, filters, client, update
+                    client.executor,
+                    filters,
+                    client,
+                    update,
                 )
             if not filtered or waiter["future"].done():
                 return False

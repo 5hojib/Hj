@@ -102,7 +102,7 @@ class InlineQueryResultVideo(InlineQueryResult):
                     duration=self.video_duration,
                     w=self.video_width,
                     h=self.video_height,
-                )
+                ),
             ],
         )
 

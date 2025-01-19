@@ -66,7 +66,7 @@ class SendDice:
                 If the message is a reply, ID of the original message.
 
             reply_to_story_id (``int``, *optional*):
-                Unique identifier for the target story.
+                If the message is a reply, ID of the target story.
 
             reply_to_chat_id (``int`` | ``str``, *optional*):
                 Unique identifier for the origin chat.
@@ -146,8 +146,9 @@ class SendDice:
         if business_connection_id is not None:
             r = await self.invoke(
                 raw.functions.InvokeWithBusinessConnection(
-                    connection_id=business_connection_id, query=rpc
-                )
+                    connection_id=business_connection_id,
+                    query=rpc,
+                ),
             )
         else:
             r = await self.invoke(rpc)

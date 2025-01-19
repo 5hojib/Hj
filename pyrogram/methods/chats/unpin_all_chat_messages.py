@@ -31,8 +31,8 @@ class UnpinAllChatMessages:
         """
         await self.invoke(
             raw.functions.messages.UnpinAllMessages(
-                peer=await self.resolve_peer(chat_id)
-            )
+                peer=await self.resolve_peer(chat_id),
+            ),
         )
 
         return True

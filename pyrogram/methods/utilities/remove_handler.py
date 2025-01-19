@@ -11,7 +11,9 @@ if TYPE_CHECKING:
 
 class RemoveHandler:
     def remove_handler(
-        self: pyrogram.Client, handler: Handler, group: int = 0
+        self: pyrogram.Client,
+        handler: Handler,
+        group: int = 0,
     ) -> None:
         """Remove a previously-registered update handler.
 

@@ -10,7 +10,8 @@ log = logging.getLogger(__name__)
 
 class RecoverPassword:
     async def recover_password(
-        self: pyrogram.Client, recovery_code: str
+        self: pyrogram.Client,
+        recovery_code: str,
     ) -> types.User:
         """Recover your password with a recovery code and log in.
 

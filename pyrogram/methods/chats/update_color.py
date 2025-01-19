@@ -43,7 +43,7 @@ class UpdateColor:
                     for_profile=isinstance(color, enums.ProfileColor),
                     color=color.value,
                     background_emoji_id=background_emoji_id,
-                )
+                ),
             )
         else:
             r = await self.invoke(
@@ -51,7 +51,7 @@ class UpdateColor:
                     channel=peer,
                     color=color.value,
                     background_emoji_id=background_emoji_id,
-                )
+                ),
             )
 
         return bool(r)

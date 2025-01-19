@@ -86,7 +86,7 @@ class SendChatAction:
                 raise ValueError("Invalid Argument Provided")
             if emoji_message_interaction is None:
                 _, sticker_set = await self._get_raw_stickers(
-                    raw.types.InputStickerSetAnimatedEmojiAnimations()
+                    raw.types.InputStickerSetAnimatedEmojiAnimations(),
                 )
                 emoji_message_interaction = raw.types.DataJSON(
                     data=dumps(
@@ -96,10 +96,10 @@ class SendChatAction:
                                 {
                                     "t": 0,
                                     "i": randint(1, sticker_set.count),
-                                }
+                                },
                             ],
-                        }
-                    )
+                        },
+                    ),
                 )
             action = action.value(
                 emoticon=emoji,
@@ -116,7 +116,8 @@ class SendChatAction:
         if business_connection_id:
             return await self.invoke(
                 raw.functions.InvokeWithBusinessConnection(
-                    connection_id=business_connection_id, query=rpc
-                )
+                    connection_id=business_connection_id,
+                    query=rpc,
+                ),
             )
         return await self.invoke(rpc)

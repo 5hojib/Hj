@@ -24,12 +24,12 @@ class GetChatMenuButton:
             r = await self.invoke(
                 raw.functions.bots.GetBotMenuButton(
                     user_id=await self.resolve_peer(chat_id),
-                )
+                ),
             )
         else:
             r = (
                 await self.invoke(
-                    raw.functions.users.GetFullUser(id=raw.types.InputUserSelf())
+                    raw.functions.users.GetFullUser(id=raw.types.InputUserSelf()),
                 )
             ).full_user.bot_info.menu_button
 
@@ -41,6 +41,7 @@ class GetChatMenuButton:
 
         if isinstance(r, raw.types.BotMenuButton):
             return types.MenuButtonWebApp(
-                text=r.text, web_app=types.WebAppInfo(url=r.url)
+                text=r.text,
+                web_app=types.WebAppInfo(url=r.url),
             )
         return None

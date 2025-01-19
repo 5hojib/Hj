@@ -82,7 +82,10 @@ class EditMessageMedia:
         if caption is not None:
             message, entities = (
                 await utils.parse_text_entities(
-                    self, caption, parse_mode, caption_entities
+                    self,
+                    caption,
+                    parse_mode,
+                    caption_entities,
                 )
             ).values()
 
@@ -95,7 +98,7 @@ class EditMessageMedia:
                             file=await self.save_file(media.media),
                             spoiler=media.has_spoiler,
                         ),
-                    )
+                    ),
                 )
 
                 media = raw.types.InputMediaPhoto(
@@ -108,11 +111,13 @@ class EditMessageMedia:
                 )
             elif re.match("^https?://", media.media):
                 media = raw.types.InputMediaPhotoExternal(
-                    url=media.media, spoiler=media.has_spoiler
+                    url=media.media,
+                    spoiler=media.has_spoiler,
                 )
             else:
                 media = utils.get_input_media_from_file_id(
-                    media.media, FileType.PHOTO
+                    media.media,
+                    FileType.PHOTO,
                 )
         elif isinstance(media, types.InputMediaVideo):
             if isinstance(media.media, io.BytesIO) or Path(media.media).is_file():
@@ -134,11 +139,11 @@ class EditMessageMedia:
                                     h=media.height,
                                 ),
                                 raw.types.DocumentAttributeFilename(
-                                    file_name=file_name or Path(media.media).name
+                                    file_name=file_name or Path(media.media).name,
                                 ),
                             ],
                         ),
-                    )
+                    ),
                 )
 
                 media = raw.types.InputMediaDocument(
@@ -151,11 +156,13 @@ class EditMessageMedia:
                 )
             elif re.match("^https?://", media.media):
                 media = raw.types.InputMediaDocumentExternal(
-                    url=media.media, spoiler=media.has_spoiler
+                    url=media.media,
+                    spoiler=media.has_spoiler,
                 )
             else:
                 media = utils.get_input_media_from_file_id(
-                    media.media, FileType.VIDEO
+                    media.media,
+                    FileType.VIDEO,
                 )
         elif isinstance(media, types.InputMediaAudio):
             if isinstance(media.media, io.BytesIO) or Path(media.media).is_file():
@@ -174,11 +181,11 @@ class EditMessageMedia:
                                     title=media.title,
                                 ),
                                 raw.types.DocumentAttributeFilename(
-                                    file_name=file_name or Path(media.media).name
+                                    file_name=file_name or Path(media.media).name,
                                 ),
                             ],
                         ),
-                    )
+                    ),
                 )
 
                 media = raw.types.InputMediaDocument(
@@ -186,13 +193,14 @@ class EditMessageMedia:
                         id=media.document.id,
                         access_hash=media.document.access_hash,
                         file_reference=media.document.file_reference,
-                    )
+                    ),
                 )
             elif re.match("^https?://", media.media):
                 media = raw.types.InputMediaDocumentExternal(url=media.media)
             else:
                 media = utils.get_input_media_from_file_id(
-                    media.media, FileType.AUDIO
+                    media.media,
+                    FileType.AUDIO,
                 )
         elif isinstance(media, types.InputMediaAnimation):
             if isinstance(media.media, io.BytesIO) or Path(media.media).is_file():
@@ -213,12 +221,12 @@ class EditMessageMedia:
                                     h=media.height,
                                 ),
                                 raw.types.DocumentAttributeFilename(
-                                    file_name=file_name or Path(media.media).name
+                                    file_name=file_name or Path(media.media).name,
                                 ),
                                 raw.types.DocumentAttributeAnimated(),
                             ],
                         ),
-                    )
+                    ),
                 )
 
                 media = raw.types.InputMediaDocument(
@@ -231,11 +239,13 @@ class EditMessageMedia:
                 )
             elif re.match("^https?://", media.media):
                 media = raw.types.InputMediaDocumentExternal(
-                    url=media.media, spoiler=media.has_spoiler
+                    url=media.media,
+                    spoiler=media.has_spoiler,
                 )
             else:
                 media = utils.get_input_media_from_file_id(
-                    media.media, FileType.ANIMATION
+                    media.media,
+                    FileType.ANIMATION,
                 )
         elif isinstance(media, types.InputMediaDocument):
             if isinstance(media.media, io.BytesIO) or Path(media.media).is_file():
@@ -249,11 +259,11 @@ class EditMessageMedia:
                             file=await self.save_file(media.media),
                             attributes=[
                                 raw.types.DocumentAttributeFilename(
-                                    file_name=file_name or Path(media.media).name
-                                )
+                                    file_name=file_name or Path(media.media).name,
+                                ),
                             ],
                         ),
-                    )
+                    ),
                 )
 
                 media = raw.types.InputMediaDocument(
@@ -261,13 +271,14 @@ class EditMessageMedia:
                         id=media.document.id,
                         access_hash=media.document.access_hash,
                         file_reference=media.document.file_reference,
-                    )
+                    ),
                 )
             elif re.match("^https?://", media.media):
                 media = raw.types.InputMediaDocumentExternal(url=media.media)
             else:
                 media = utils.get_input_media_from_file_id(
-                    media.media, FileType.DOCUMENT
+                    media.media,
+                    FileType.DOCUMENT,
                 )
 
         rpc = raw.functions.messages.EditMessage(
@@ -282,8 +293,9 @@ class EditMessageMedia:
         if business_connection_id is not None:
             r = await self.invoke(
                 raw.functions.InvokeWithBusinessConnection(
-                    connection_id=business_connection_id, query=rpc
-                )
+                    connection_id=business_connection_id,
+                    query=rpc,
+                ),
             )
         else:
             r = await self.invoke(rpc)

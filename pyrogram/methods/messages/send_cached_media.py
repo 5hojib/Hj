@@ -78,7 +78,7 @@ class SendCachedMedia:
                 If the message is a reply, ID of the original message.
 
             reply_to_story_id (``int``, *optional*):
-                Unique identifier for the target story.
+                If the message is a reply, ID of the target story.
 
             reply_to_chat_id (``int`` | ``str``, *optional*):
                 Unique identifier for the origin chat.
@@ -151,9 +151,12 @@ class SendCachedMedia:
                 if reply_markup
                 else None,
                 **await utils.parse_text_entities(
-                    self, caption, parse_mode, caption_entities
+                    self,
+                    caption,
+                    parse_mode,
+                    caption_entities,
                 ),
-            )
+            ),
         )
 
         for i in r.updates:

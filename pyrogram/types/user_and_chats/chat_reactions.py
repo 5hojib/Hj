@@ -39,7 +39,9 @@ class ChatReactions(Object):
 
     @staticmethod
     def _parse(
-        client, chat_reactions: raw.base.ChatReactions, reactions_limit: int = 11
+        client,
+        chat_reactions: raw.base.ChatReactions,
+        reactions_limit: int = 11,
     ) -> ChatReactions | None:
         if isinstance(chat_reactions, raw.types.ChatReactionsAll):
             return ChatReactions(

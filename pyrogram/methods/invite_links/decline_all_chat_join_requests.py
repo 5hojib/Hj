@@ -32,7 +32,7 @@ class DeclineAllChatJoinRequests:
                 peer=await self.resolve_peer(chat_id),
                 approved=False,
                 link=invite_link,
-            )
+            ),
         )
 
         return True

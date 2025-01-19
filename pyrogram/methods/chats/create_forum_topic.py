@@ -45,7 +45,7 @@ class CreateForumTopic:
                 random_id=self.rnd_id(),
                 icon_color=icon_color,
                 icon_emoji_id=icon_emoji_id,
-            )
+            ),
         )
 
         return types.ForumTopicCreated._parse(r.updates[1].message)

@@ -25,6 +25,6 @@ class SetAccountTTL:
         """
         return await self.invoke(
             raw.functions.account.SetAccountTTL(
-                ttl=raw.types.AccountDaysTTL(days=days)
-            )
+                ttl=raw.types.AccountDaysTTL(days=days),
+            ),
         )

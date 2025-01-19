@@ -151,7 +151,7 @@ class Poll(Object, Update):
                     data=answer.option,
                     entities=option_entities,
                     client=client,
-                )
+                ),
             )
 
         q_entities = (
@@ -221,7 +221,7 @@ class Poll(Object, Update):
                     voter_count=result.voters,
                     data=result.option,
                     client=client,
-                )
+                ),
             )
 
         return Poll(

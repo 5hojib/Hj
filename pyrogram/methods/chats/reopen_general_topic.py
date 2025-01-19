@@ -6,7 +6,8 @@ from pyrogram import raw
 
 class ReopenGeneralTopic:
     async def reopen_general_topic(
-        self: pyrogram.Client, chat_id: int | str
+        self: pyrogram.Client,
+        chat_id: int | str,
     ) -> bool:
         """Reopen a general forum topic.
 
@@ -30,6 +31,6 @@ class ReopenGeneralTopic:
                 channel=await self.resolve_peer(chat_id),
                 topic_id=1,
                 closed=False,
-            )
+            ),
         )
         return True

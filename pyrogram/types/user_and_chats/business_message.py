@@ -100,7 +100,9 @@ class BusinessMessage(Object):
             no_activity_days=getattr(message, "no_activity_days", None),
             offline_only=getattr(message, "offline_only", None),
             recipients=types.BusinessRecipients._parse(
-                client, message.recipients, users
+                client,
+                message.recipients,
+                users,
             ),
             schedule=schedule,
             start_date=utils.timestamp_to_datetime(message.schedule.start_date)

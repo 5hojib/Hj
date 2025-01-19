@@ -67,24 +67,6 @@ packages = [
     "pyrogram"
 ]
 
-[tool.rye]
-managed = true
-dev-dependencies = [
-    "ruff",
-    "pytest",
-    "pytest-asyncio",
-    "pytest-cov",
-    "twine",
-    "pre-commit",
-]
-
-[tool.rye.scripts]
-clean = { chain = ["clean:api"] }
-"clean:api" = { cmd = "rm -rf pyrogram/errors/exceptions pyrogram/raw/all.py pyrogram/raw/base pyrogram/raw/functions pyrogram/raw/types" }
-api = { chain = ["api:raw", "api:errors"] }
-"api:raw" = { call = "compiler.api.compiler:start" }
-"api:errors" = { call = "compiler.errors.compiler:start" }
-
 [tool.ruff]
 fix = true
 unsafe-fixes = true
@@ -94,27 +76,36 @@ target-version = "py310"
 [tool.ruff.lint.isort]
 required-imports = ["from __future__ import annotations"]
 
+[tool.ruff.lint.mccabe]
+max-complexity = 50
+
 [tool.ruff.lint]
 select = [
-    "FURB",     # refurb
-    "I",        # isort
     "E",        # pycodestyle: error
-    "W",        # pycodestyle: warning
-    "UP",       # pyupgrade
     "F",        # pyflakes
-    "SIM",      # flake8-simplify
-    "RET",      # flake8-return
-    "C4",       # flake8-comprehensions
-    "PTH",      # flake8-use-pathlib
-    "PERF",     # perflint
-    "N",        # pep8-naming
-    "RUF",      # ruff
+    "I",        # isort
+    "W",        # pycodestyle: warning
+    "B",        # flake8-bugbear
     "G",        # flake8-logging-format
-    "TID",      # flake8-tidy-imports
-    "TCH",      # flake8-type-checking
+    "N",        # pep8-naming
+    "C4",       # flake8-comprehensions
+    "UP",       # pyupgrade
     "FA",       # flake8-future-annotations
     "PL",       # pylint
+    "PIE",      # flake8-pie
+    "PYI",      # flake8-pyi
+    "PTH",      # flake8-use-pathlib
+    "RET",      # flake8-return
+    "RUF",      # ruff
+    "SIM",      # flake8-simplify
+    "TCH",      # flake8-type-checking
+    "TID",      # flake8-tidy-imports
     "ARG",      # flake8-unused-arguments
+    "C90",      # mccabe
+    "COM",      # flake8-commas
+    "FURB",     # refurb
+    "PERF",     # perflint
+    "ASYNC",    # flake8-async
 ]
 
 ignore = [

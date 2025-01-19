@@ -154,7 +154,8 @@ class SendInvoice:
                         prices_total += price.amount
                     text = f"Pay ⭐️{prices_total}"
                 reply_markup.inline_keyboard.insert(
-                    0, [types.InlineKeyboardButtonBuy(text=text)]
+                    0,
+                    [types.InlineKeyboardButtonBuy(text=text)],
                 )
 
         reply_to = await utils.get_reply_to(
@@ -185,7 +186,7 @@ class SendInvoice:
                     payload=encoded_payload,
                     provider=provider,
                     provider_data=raw.types.DataJSON(
-                        data=provider_data if provider_data else "{}"
+                        data=provider_data if provider_data else "{}",
                     ),
                     photo=raw.types.InputWebDocument(
                         url=photo_url,
@@ -205,12 +206,13 @@ class SendInvoice:
                 reply_markup=await reply_markup.write(self)
                 if reply_markup is not None
                 else None,
-            )
+            ),
         )
 
         for i in r.updates:
             if isinstance(
-                i, raw.types.UpdateNewMessage | raw.types.UpdateNewChannelMessage
+                i,
+                raw.types.UpdateNewMessage | raw.types.UpdateNewChannelMessage,
             ):
                 return await types.Message._parse(
                     self,

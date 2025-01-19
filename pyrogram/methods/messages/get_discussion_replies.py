@@ -55,7 +55,7 @@ class GetDiscussionReplies:
                     max_id=0,
                     min_id=0,
                     hash=0,
-                )
+                ),
             )
 
             users = {u.id: u for u in r.users}
@@ -67,7 +67,11 @@ class GetDiscussionReplies:
 
             for message in messages:
                 yield await types.Message._parse(
-                    self, message, users, chats, replies=0
+                    self,
+                    message,
+                    users,
+                    chats,
+                    replies=0,
                 )
 
                 current += 1

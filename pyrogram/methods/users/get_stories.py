@@ -61,7 +61,7 @@ class GetStories:
 
         if is_iterable:
             return types.List(
-                [await types.Story._parse(self, story, peer) for story in r.stories]
+                [await types.Story._parse(self, story, peer) for story in r.stories],
             )
         return (
             await types.Story._parse(self, r.stories[0], peer)

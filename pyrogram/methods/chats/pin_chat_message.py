@@ -52,7 +52,7 @@ class PinChatMessage:
                 id=message_id,
                 silent=disable_notification or None,
                 pm_oneside=not both_sides or None,
-            )
+            ),
         )
 
         users = {u.id: u for u in r.users}

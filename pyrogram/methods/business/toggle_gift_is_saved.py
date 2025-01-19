@@ -43,6 +43,8 @@ class ToggleGiftIsSaved:
 
         return await self.invoke(
             raw.functions.payments.SaveStarGift(
-                user_id=peer, msg_id=message_id, unsave=not is_saved
-            )
+                user_id=peer,
+                msg_id=message_id,
+                unsave=not is_saved,
+            ),
         )

@@ -59,7 +59,8 @@ def generate(source_path, base) -> None:
                 full_name = f"{(namespace + '.') if namespace else ''}{name}"
 
                 Path(DESTINATION, full_path).parent.mkdir(
-                    parents=True, exist_ok=True
+                    parents=True,
+                    exist_ok=True,
                 )
 
                 with Path(DESTINATION, full_path).open("w", encoding="utf-8") as f:
@@ -68,9 +69,9 @@ def generate(source_path, base) -> None:
                             title=full_name,
                             title_markup="=" * len(full_name),
                             full_class_path="pyrogram.raw.{}".format(
-                                ".".join(full_path.split("/")[:-1]) + "." + name
+                                ".".join(full_path.split("/")[:-1]) + "." + name,
                             ),
-                        )
+                        ),
                     )
 
                 if last not in all_entities:
@@ -106,7 +107,7 @@ def generate(source_path, base) -> None:
                     title_markup="=" * len(k),
                     module=module,
                     entities="\n    ".join(entities),
-                )
+                ),
             )
 
             f.write("\n")
@@ -746,6 +747,9 @@ def pyrogram_api() -> None:
             Message.react
             Message.wait_for_click
             Message.pay
+        """,
+        "usergift": """
+        UserGift
             UserGift.toggle
         """,
         "chat": """
@@ -854,8 +858,8 @@ def pyrogram_api() -> None:
                 {
                     f"{k}_hlist": "\n    ".join(
                         f"- :meth:`~{bm}`" for bm in bound_methods
-                    )
-                }
+                    ),
+                },
             )
 
             fmt_keys.update(
@@ -863,8 +867,8 @@ def pyrogram_api() -> None:
                     f"{k}_toctree": "\n    ".join(
                         "{} <{}>".format(bm.split(".")[1], bm)
                         for bm in bound_methods
-                    )
-                }
+                    ),
+                },
             )
 
             for bm in bound_methods:

@@ -42,7 +42,10 @@ def pack(
 
 
 def unpack(
-    b: BytesIO, session_id: bytes, auth_key: bytes, auth_key_id: bytes
+    b: BytesIO,
+    session_id: bytes,
+    auth_key: bytes,
+    auth_key_id: bytes,
 ) -> Message:
     SecurityCheckMismatch.check(b.read(8) == auth_key_id, "b.read(8) == auth_key_id")
 
@@ -52,7 +55,8 @@ def unpack(
     data.read(8)
 
     SecurityCheckMismatch.check(
-        data.read(8) == session_id, "data.read(8) == session_id"
+        data.read(8) == session_id,
+        "data.read(8) == session_id",
     )
 
     try:
@@ -60,8 +64,8 @@ def unpack(
     except KeyError as e:
         if e.args[0] == 0:
             raise ConnectionError(
-                "Received empty data. Check your internet connection."
-            )
+                "Received empty data. Check your internet connection.",
+            ) from e
 
         left = data.read().hex()
 
@@ -70,8 +74,8 @@ def unpack(
         left = "\n".join(" ".join(x for x in left) for left in left)
 
         raise ValueError(
-            f"The server sent an unknown constructor: {hex(e.args[0])}\n{left}"
-        )
+            f"The server sent an unknown constructor: {hex(e.args[0])}\n{left}",
+        ) from e
 
     SecurityCheckMismatch.check(
         msg_key == sha256(auth_key[96 : 96 + 32] + data.getvalue()).digest()[8:24],
@@ -82,7 +86,8 @@ def unpack(
     payload = data.read()
     padding = payload[message.length :]
     SecurityCheckMismatch.check(
-        12 <= len(padding) <= 1024, "12 <= len(padding) <= 1024"
+        12 <= len(padding) <= 1024,
+        "12 <= len(padding) <= 1024",
     )
     SecurityCheckMismatch.check(len(payload) % 4 == 0, "len(payload) % 4 == 0")
 

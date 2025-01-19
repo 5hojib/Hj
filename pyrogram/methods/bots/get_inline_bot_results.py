@@ -63,7 +63,7 @@ class GetInlineBotResults:
                     geo_point=raw.types.InputGeoPoint(lat=latitude, long=longitude)
                     if (latitude is not None and longitude is not None)
                     else None,
-                )
+                ),
             )
         except UnknownError as e:
             if e.value.error_code == -503 and e.value.error_message == "Timeout":

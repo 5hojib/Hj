@@ -35,7 +35,7 @@ class DeclineChatJoinRequest:
                 peer=await self.resolve_peer(chat_id),
                 user_id=await self.resolve_peer(user_id),
                 approved=False,
-            )
+            ),
         )
 
         return True

@@ -108,7 +108,7 @@ class GetChatMembers:
 
         if isinstance(peer, raw.types.InputPeerChat):
             r = await self.invoke(
-                raw.functions.messages.GetFullChat(chat_id=peer.chat_id)
+                raw.functions.messages.GetFullChat(chat_id=peer.chat_id),
             )
 
             members = getattr(r.full_chat.participants, "participants", [])

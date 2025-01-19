@@ -54,7 +54,7 @@ class ExportChatInviteLink:
                     period=subscription_period,
                     amount=subscription_price,
                 ),
-            )
+            ),
         )
 
         return types.ChatInviteLink._parse(self, r)

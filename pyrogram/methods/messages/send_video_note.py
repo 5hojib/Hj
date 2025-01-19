@@ -88,7 +88,7 @@ class SendVideoNote:
                 If the message is a reply, ID of the original message.
 
             reply_to_story_id (``int``, *optional*):
-                Unique identifier for the target story.
+                If the message is a reply, ID of the target story.
 
             message_effect_id (``int`` ``64-bit``, *optional*):
                 Unique identifier of the message effect to be added to the message; for private chats only.
@@ -201,13 +201,14 @@ class SendVideoNote:
                                 duration=duration,
                                 w=length,
                                 h=length,
-                            )
+                            ),
                         ],
                         ttl_seconds=ttl_seconds,
                     )
                 else:
                     media = utils.get_input_media_from_file_id(
-                        video_note, FileType.VIDEO_NOTE
+                        video_note,
+                        FileType.VIDEO_NOTE,
                     )
             else:
                 thumb = await self.save_file(thumb)
@@ -226,7 +227,7 @@ class SendVideoNote:
                             duration=duration,
                             w=length,
                             h=length,
-                        )
+                        ),
                     ],
                 )
 
@@ -252,13 +253,15 @@ class SendVideoNote:
                             raw.functions.InvokeWithBusinessConnection(
                                 connection_id=business_connection_id,
                                 query=rpc,
-                            )
+                            ),
                         )
                     else:
                         r = await self.invoke(rpc)
                 except FilePartMissing as e:
                     await self.save_file(
-                        video_note, file_id=file.id, file_part=e.value
+                        video_note,
+                        file_id=file.id,
+                        file_part=e.value,
                     )
                 else:
                     for i in r.updates:

@@ -6,7 +6,9 @@ from pyrogram import raw
 
 class SellGift:
     async def sell_gift(
-        self: pyrogram.Client, sender_user_id: int | str, message_id: int
+        self: pyrogram.Client,
+        sender_user_id: int | str,
+        message_id: int,
     ) -> bool:
         """Sells a gift received by the current user for Telegram Stars.
 
@@ -37,5 +39,5 @@ class SellGift:
             raise ValueError("sender_user_id must belong to a user.")
 
         return await self.invoke(
-            raw.functions.payments.ConvertStarGift(user_id=peer, msg_id=message_id)
+            raw.functions.payments.ConvertStarGift(user_id=peer, msg_id=message_id),
         )

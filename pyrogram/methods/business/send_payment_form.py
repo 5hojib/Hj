@@ -47,7 +47,8 @@ class SendPaymentForm:
 
         if isinstance(message_id, int):
             invoice = raw.types.InputInvoiceMessage(
-                peer=await self.resolve_peer(chat_id), msg_id=message_id
+                peer=await self.resolve_peer(chat_id),
+                msg_id=message_id,
             )
         elif isinstance(message_id, str):
             match = re.match(
@@ -63,7 +64,7 @@ class SendPaymentForm:
 
         # if form.invoice.currency == "XTR":
         await self.invoke(
-            raw.functions.payments.SendStarsForm(form_id=form.id, invoice=invoice)
+            raw.functions.payments.SendStarsForm(form_id=form.id, invoice=invoice),
         )
         # TODO: Add support for regular invoices (credentials)
         # else:

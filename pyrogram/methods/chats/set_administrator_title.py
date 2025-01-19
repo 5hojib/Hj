@@ -46,8 +46,9 @@ class SetAdministratorTitle:
         r = (
             await self.invoke(
                 raw.functions.channels.GetParticipant(
-                    channel=chat_id, participant=user_id
-                )
+                    channel=chat_id,
+                    participant=user_id,
+                ),
             )
         ).participant
 
@@ -57,7 +58,7 @@ class SetAdministratorTitle:
             admin_rights = r.admin_rights
         else:
             raise ValueError(
-                "Custom titles can only be applied to owners or administrators of supergroups"
+                "Custom titles can only be applied to owners or administrators of supergroups",
             )
 
         await self.invoke(
@@ -66,7 +67,7 @@ class SetAdministratorTitle:
                 user_id=user_id,
                 admin_rights=admin_rights,
                 rank=title,
-            )
+            ),
         )
 
         return True

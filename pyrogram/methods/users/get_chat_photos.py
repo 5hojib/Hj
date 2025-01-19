@@ -47,13 +47,14 @@ class GetChatPhotos:
 
         if isinstance(peer_id, raw.types.InputPeerChannel):
             r = await self.invoke(
-                raw.functions.channels.GetFullChannel(channel=peer_id)
+                raw.functions.channels.GetFullChannel(channel=peer_id),
             )
 
             current = types.Photo._parse(self, r.full_chat.chat_photo) or []
             current = [current]
             current_animation = types.Animation._parse_chat_animation(
-                self, r.full_chat.chat_photo
+                self,
+                r.full_chat.chat_photo,
             )
             if current_animation:
                 current = [*current, current_animation]
@@ -74,7 +75,7 @@ class GetChatPhotos:
                             max_id=0,
                             min_id=0,
                             hash=0,
-                        )
+                        ),
                     ),
                 )
 
@@ -116,14 +117,15 @@ class GetChatPhotos:
                         offset=offset,
                         max_id=0,
                         limit=limit,
-                    )
+                    ),
                 )
 
                 photos = []
                 for photo in r.photos:
                     photos.append(types.Photo._parse(self, photo))
                     current_animation = types.Animation._parse_chat_animation(
-                        self, photo
+                        self,
+                        photo,
                     )
                     if current_animation:
                         photos.append(current_animation)

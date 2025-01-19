@@ -37,7 +37,7 @@ class PaidMedia(Object):
                 extended_media.append(types.ExtendedMediaPreview._parse(client, m))
             elif isinstance(m.media, raw.types.MessageMediaPhoto):
                 extended_media.append(
-                    types.Photo._parse(client, m.media.photo, m.media.ttl_seconds)
+                    types.Photo._parse(client, m.media.photo, m.media.ttl_seconds),
                 )
             elif isinstance(m.media, raw.types.MessageMediaDocument):
                 attributes = {type(i): i for i in m.media.document.attributes}
@@ -48,7 +48,8 @@ class PaidMedia(Object):
                 )
                 if raw.types.DocumentAttributeAnimated in attributes:
                     video_attributes = attributes.get(
-                        raw.types.DocumentAttributeVideo, None
+                        raw.types.DocumentAttributeVideo,
+                        None,
                     )
                     extended_media.append(
                         types.Animation._parse(
@@ -56,7 +57,7 @@ class PaidMedia(Object):
                             m.media.document,
                             video_attributes,
                             file_name,
-                        )
+                        ),
                     )
                 else:
                     video_attributes = attributes[raw.types.DocumentAttributeVideo]
@@ -67,7 +68,7 @@ class PaidMedia(Object):
                             video_attributes,
                             file_name,
                             m.media.ttl_seconds,
-                        )
+                        ),
                     )
         return PaidMedia(
             stars_amount=media.stars_amount,

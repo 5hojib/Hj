@@ -6,7 +6,8 @@ from pyrogram import raw
 
 class GetChatPhotosCount:
     async def get_chat_photos_count(
-        self: pyrogram.Client, chat_id: int | str
+        self: pyrogram.Client,
+        chat_id: int | str,
     ) -> int:
         """Get the total count of photos for a chat.
 
@@ -36,14 +37,17 @@ class GetChatPhotosCount:
                 raw.functions.messages.GetSearchCounters(
                     peer=peer_id,
                     filters=[raw.types.InputMessagesFilterChatPhotos()],
-                )
+                ),
             )
 
             return r[0].count
         r = await self.invoke(
             raw.functions.photos.GetUserPhotos(
-                user_id=peer_id, offset=0, max_id=0, limit=1
-            )
+                user_id=peer_id,
+                offset=0,
+                max_id=0,
+                limit=1,
+            ),
         )
 
         if isinstance(r, raw.types.photos.Photos):

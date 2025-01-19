@@ -37,13 +37,14 @@ class ArchiveChats:
 
         folder_peers = [
             raw.types.InputFolderPeer(
-                peer=await self.resolve_peer(chat), folder_id=1
+                peer=await self.resolve_peer(chat),
+                folder_id=1,
             )
             for chat in chat_ids
         ]
 
         await self.invoke(
-            raw.functions.folders.EditPeerFolders(folder_peers=folder_peers)
+            raw.functions.folders.EditPeerFolders(folder_peers=folder_peers),
         )
 
         return True

@@ -132,8 +132,9 @@ class InputInvoiceMessageContent(InputMessageContent):
                 size=self.photo_size,
                 attributes=[
                     raw.types.DocumentAttributeImageSize(
-                        w=self.photo_width, h=self.photo_height
-                    )
+                        w=self.photo_width,
+                        h=self.photo_height,
+                    ),
                 ],
             )
             if self.photo_url
@@ -155,7 +156,7 @@ class InputInvoiceMessageContent(InputMessageContent):
             else self.payload,
             provider=self.provider_token,
             provider_data=raw.types.DataJSON(
-                data=self.provider_data if self.provider_data else "{}"
+                data=self.provider_data if self.provider_data else "{}",
             ),
             reply_markup=await reply_markup.write(client) if reply_markup else None,
         )

@@ -129,7 +129,7 @@ class ChatMember(Object):
                 user=types.User._parse(client, users[member.user_id]),
                 joined_date=utils.timestamp_to_datetime(member.date),
                 until_date=utils.timestamp_to_datetime(
-                    member.subscription_until_date
+                    member.subscription_until_date,
                 ),
                 client=client,
             )
@@ -174,7 +174,7 @@ class ChatMember(Object):
                 user=user,
                 chat=chat,
                 until_date=utils.timestamp_to_datetime(
-                    member.banned_rights.until_date
+                    member.banned_rights.until_date,
                 ),
                 joined_date=utils.timestamp_to_datetime(member.date),
                 is_member=not member.left,
@@ -219,7 +219,7 @@ class ChatMember(Object):
                 joined_date=utils.timestamp_to_datetime(member.date),
                 invited_by=types.User._parse(client, users[member.inviter_id]),
                 until_date=utils.timestamp_to_datetime(
-                    member.subscription_until_date
+                    member.subscription_until_date,
                 ),
                 client=client,
             )

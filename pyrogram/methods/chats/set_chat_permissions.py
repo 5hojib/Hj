@@ -225,7 +225,7 @@ class SetChatPermissions:
                     send_videos=send_videos,
                     send_voices=send_voices,
                 ),
-            )
+            ),
         )
 
         return types.Chat._parse_chat(self, r.chats[0])

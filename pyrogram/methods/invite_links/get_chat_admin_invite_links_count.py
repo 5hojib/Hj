@@ -40,7 +40,7 @@ class GetChatAdminInviteLinksCount:
                 admin_id=await self.resolve_peer(admin_id),
                 limit=1,
                 revoked=revoked,
-            )
+            ),
         )
 
         return r.count

@@ -28,6 +28,6 @@ class GetBotInfo:
         if bot:
             peer = await self.resolve_peer(bot)
         r = await self.invoke(
-            raw.functions.bots.GetBotInfo(lang_code=lang_code, bot=peer)
+            raw.functions.bots.GetBotInfo(lang_code=lang_code, bot=peer),
         )
         return pyrogram.types.BotInfo._parse(r)

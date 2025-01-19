@@ -42,7 +42,8 @@ def start() -> None:
             with (
                 Path(HOME, "source", i).open(encoding="utf-8") as f_csv,
                 Path(DEST, f"{name.lower()}_{code}.py").open(
-                    "w", encoding="utf-8"
+                    "w",
+                    encoding="utf-8",
                 ) as f_class,
             ):
                 reader = csv.reader(f_csv, delimiter="\t")
@@ -52,7 +53,7 @@ def start() -> None:
                     [
                         str(i.capitalize())
                         for i in re.sub(r"_", " ", name).lower().split(" ")
-                    ]
+                    ],
                 )
 
                 sub_classes = []
@@ -79,12 +80,12 @@ def start() -> None:
                     sub_classes.append((sub_class, error_id, error_message))
 
                 with Path(HOME, "template/class.txt").open(
-                    encoding="utf-8"
+                    encoding="utf-8",
                 ) as f_class_template:
                     class_template = f_class_template.read()
 
                     with Path(HOME, "template/sub_class.txt").open(
-                        encoding="utf-8"
+                        encoding="utf-8",
                     ) as f_sub_class_template:
                         sub_class_template = f_sub_class_template.read()
 
@@ -101,7 +102,7 @@ def start() -> None:
                                     docstring=f'"""{k[2]}"""',
                                 )
                                 for k in sub_classes
-                            ]
+                            ],
                         ),
                     )
 

@@ -116,10 +116,14 @@ class ForumTopic(Object):
             read_outbox_max_id=getattr(forum_topic, "read_outbox_max_id", None),
             unread_count=getattr(forum_topic, "unread_count", None),
             unread_mentions_count=getattr(
-                forum_topic, "unread_mentions_count", None
+                forum_topic,
+                "unread_mentions_count",
+                None,
             ),
             unread_reactions_count=getattr(
-                forum_topic, "unread_reactions_count", None
+                forum_topic,
+                "unread_reactions_count",
+                None,
             ),
             from_id=peer,
             my=getattr(forum_topic, "my", None),

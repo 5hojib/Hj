@@ -70,7 +70,7 @@ class EditChatInviteLink:
                 usage_limit=member_limit,
                 title=name,
                 request_needed=creates_join_request,
-            )
+            ),
         )
 
         users = {i.id: i for i in r.users}

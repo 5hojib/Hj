@@ -66,7 +66,7 @@ class SetGameScore:
                 user_id=await self.resolve_peer(user_id),
                 force=force or None,
                 edit_message=not disable_edit_message or None,
-            )
+            ),
         )
 
         for i in r.updates:

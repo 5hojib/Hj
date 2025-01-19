@@ -40,7 +40,7 @@ class MemoryStorage(SQLiteStorage):
                         else self.OLD_SESSION_STRING_FORMAT_64
                     ),
                     base64.urlsafe_b64decode(
-                        self.session_string + "=" * (-len(self.session_string) % 4)
+                        self.session_string + "=" * (-len(self.session_string) % 4),
                     ),
                 )
 
@@ -52,7 +52,7 @@ class MemoryStorage(SQLiteStorage):
                 await self.date(0)
 
                 log.warning(
-                    "You are using an old session string format. Use export_session_string to update"
+                    "You are using an old session string format. Use export_session_string to update",
                 )
                 return
             if self.is_telethon_string:
@@ -60,7 +60,8 @@ class MemoryStorage(SQLiteStorage):
                 string = self.session_string[1:]
                 ip_len = 4 if len(string) == 352 else 16
                 dc_id, ip, port, auth_key = struct.unpack(
-                    f">B{ip_len}sH256s", base64.urlsafe_b64decode(string)
+                    f">B{ip_len}sH256s",
+                    base64.urlsafe_b64decode(string),
                 )
                 api_id = 0
                 test_mode = False
@@ -70,7 +71,7 @@ class MemoryStorage(SQLiteStorage):
                 dc_id, api_id, test_mode, auth_key, user_id, is_bot = struct.unpack(
                     self.SESSION_STRING_FORMAT,
                     base64.urlsafe_b64decode(
-                        self.session_string + "=" * (-len(self.session_string) % 4)
+                        self.session_string + "=" * (-len(self.session_string) % 4),
                     ),
                 )
 

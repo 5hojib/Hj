@@ -91,7 +91,8 @@ class ChatJoinRequest(Object, Update):
             RPCError: In case of a Telegram RPC error.
         """
         return await self._client.approve_chat_join_request(
-            chat_id=self.chat.id, user_id=self.from_user.id
+            chat_id=self.chat.id,
+            user_id=self.from_user.id,
         )
 
     async def decline(self) -> bool:
@@ -118,5 +119,6 @@ class ChatJoinRequest(Object, Update):
             RPCError: In case of a Telegram RPC error.
         """
         return await self._client.decline_chat_join_request(
-            chat_id=self.chat.id, user_id=self.from_user.id
+            chat_id=self.chat.id,
+            user_id=self.from_user.id,
         )

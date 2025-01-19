@@ -71,7 +71,7 @@ class EditInlineText:
                 if reply_markup
                 else None,
                 **await self.parser.parse(text, parse_mode),
+                invert_media=invert_media,
             ),
             sleep_threshold=self.sleep_threshold,
-            invert_media=invert_media,
         )

@@ -39,13 +39,15 @@ class Storage(ABC):
 
     @abstractmethod
     async def update_peers(
-        self, peers: list[tuple[int, int, str, list[str], str]]
+        self,
+        peers: list[tuple[int, int, str, list[str], str]],
     ) -> NoReturn:
         raise NotImplementedError
 
     @abstractmethod
     async def update_state(
-        self, update_state: tuple[int, int, int, int, int] = object
+        self,
+        update_state: tuple[int, int, int, int, int] = object,
     ) -> NoReturn:
         raise NotImplementedError
 

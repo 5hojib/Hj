@@ -39,7 +39,7 @@ class OnCallbackQuery:
                     (
                         pyrogram.handlers.CallbackQueryHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func

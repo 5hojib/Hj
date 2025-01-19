@@ -7,7 +7,8 @@ from pyrogram.file_id import FileType
 
 class DeleteProfilePhotos:
     async def delete_profile_photos(
-        self: pyrogram.Client, photo_ids: str | list[str]
+        self: pyrogram.Client,
+        photo_ids: str | list[str],
     ) -> bool:
         """Delete your own profile photos.
 
@@ -40,5 +41,5 @@ class DeleteProfilePhotos:
         ]
 
         return bool(
-            await self.invoke(raw.functions.photos.DeletePhotos(id=input_photos))
+            await self.invoke(raw.functions.photos.DeletePhotos(id=input_photos)),
         )

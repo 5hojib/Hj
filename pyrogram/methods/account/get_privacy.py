@@ -6,7 +6,8 @@ from pyrogram import enums, raw, types
 
 class GetPrivacy:
     async def get_privacy(
-        self: pyrogram.Client, key: enums.PrivacyKey
+        self: pyrogram.Client,
+        key: enums.PrivacyKey,
     ) -> types.PrivacyRule:
         """Get account privacy rules.
 

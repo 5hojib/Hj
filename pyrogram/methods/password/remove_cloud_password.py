@@ -39,7 +39,7 @@ class RemoveCloudPassword:
                     new_password_hash=b"",
                     hint="",
                 ),
-            )
+            ),
         )
 
         return True

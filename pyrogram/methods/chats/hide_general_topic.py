@@ -28,6 +28,6 @@ class HideGeneralTopic:
                 channel=await self.resolve_peer(chat_id),
                 topic_id=1,
                 hidden=True,
-            )
+            ),
         )
         return True

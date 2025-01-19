@@ -87,7 +87,7 @@ class SendReaction:
                     reaction=reaction,
                     big=big,
                     add_to_recent=add_to_recent,
-                )
+                ),
             )
             for i in r.updates:
                 if isinstance(i, raw.types.UpdateMessageReactions):
@@ -102,7 +102,7 @@ class SendReaction:
                     if emoji
                     else None,
                     add_to_recent=add_to_recent,
-                )
+                ),
             )
             return True
         raise ValueError("You need to pass one of message_id!")

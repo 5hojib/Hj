@@ -80,7 +80,7 @@ class ChatEventFilter(Object):
         video_chats: bool = False,
         forum_changes: bool = False,
         subscription_extensions: bool = False,
-    ):
+    ) -> None:
         super().__init__()
 
         self.new_restrictions = new_restrictions

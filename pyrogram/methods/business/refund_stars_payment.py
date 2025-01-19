@@ -31,7 +31,7 @@ class RefundStarPayment:
             raw.functions.payments.RefundStarsCharge(
                 user_id=await self.resolve_peer(user_id),
                 charge_id=telegram_payment_charge_id,
-            )
+            ),
         )
 
         return True

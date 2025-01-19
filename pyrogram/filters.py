@@ -45,7 +45,10 @@ class InvertFilter(Filter):
             x = await self.base(client, update)
         else:
             x = await client.loop.run_in_executor(
-                client.executor, self.base, client, update
+                client.executor,
+                self.base,
+                client,
+                update,
             )
 
         return not x
@@ -61,7 +64,10 @@ class AndFilter(Filter):
             x = await self.base(client, update)
         else:
             x = await client.loop.run_in_executor(
-                client.executor, self.base, client, update
+                client.executor,
+                self.base,
+                client,
+                update,
             )
 
         if not x:
@@ -71,7 +77,10 @@ class AndFilter(Filter):
             y = await self.other(client, update)
         else:
             y = await client.loop.run_in_executor(
-                client.executor, self.other, client, update
+                client.executor,
+                self.other,
+                client,
+                update,
             )
 
         return x and y
@@ -87,7 +96,10 @@ class OrFilter(Filter):
             x = await self.base(client, update)
         else:
             x = await client.loop.run_in_executor(
-                client.executor, self.base, client, update
+                client.executor,
+                self.base,
+                client,
+                update,
             )
 
         if x:
@@ -97,7 +109,10 @@ class OrFilter(Filter):
             y = await self.other(client, update)
         else:
             y = await client.loop.run_in_executor(
-                client.executor, self.other, client, update
+                client.executor,
+                self.other,
+                client,
+                update,
             )
 
         return x or y
@@ -145,7 +160,9 @@ all = create(all_filter)
 
 
 async def me_filter(_, __, m: Message):
-    return bool(m.from_user and m.from_user.is_self or getattr(m, "outgoing", False))
+    return bool(
+        (m.from_user and m.from_user.is_self) or getattr(m, "outgoing", False),
+    )
 
 
 me = create(me_filter)
@@ -386,7 +403,7 @@ media_spoiler = create(media_spoiler_filter)
 
 async def private_filter(_, __, m: Message):
     return bool(
-        m.chat and m.chat.type in {enums.ChatType.PRIVATE, enums.ChatType.BOT}
+        m.chat and m.chat.type in {enums.ChatType.PRIVATE, enums.ChatType.BOT},
     )
 
 
@@ -396,7 +413,7 @@ private = create(private_filter)
 
 async def group_filter(_, __, m: Message):
     return bool(
-        m.chat and m.chat.type in {enums.ChatType.GROUP, enums.ChatType.SUPERGROUP}
+        m.chat and m.chat.type in {enums.ChatType.GROUP, enums.ChatType.SUPERGROUP},
     )
 
 

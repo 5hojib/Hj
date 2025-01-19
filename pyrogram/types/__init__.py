@@ -10,6 +10,7 @@ from .input_privacy_rule import *
 from .list import List
 from .messages_and_media import *
 from .object import Object
+from .payments import *
 from .update import *
 from .user_and_chats import *
 

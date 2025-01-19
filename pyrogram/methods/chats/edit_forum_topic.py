@@ -44,6 +44,6 @@ class EditForumTopic:
                 topic_id=topic_id,
                 title=title,
                 icon_emoji_id=icon_emoji_id,
-            )
+            ),
         )
         return True

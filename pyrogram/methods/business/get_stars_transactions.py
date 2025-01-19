@@ -68,6 +68,6 @@ class GetStarsTransactions:
                 inbound=is_inbound,
                 outbound=is_outbound,
                 ascending=is_ascending,
-            )
+            ),
         )
         return types.StarsStatus._parse(self, r)

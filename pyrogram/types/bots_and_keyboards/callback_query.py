@@ -74,7 +74,9 @@ class CallbackQuery(Object, Update):
 
     @staticmethod
     async def _parse(
-        client: pyrogram.Client, callback_query, users
+        client: pyrogram.Client,
+        callback_query,
+        users,
     ) -> CallbackQuery:
         message = None
         inline_message_id = None
@@ -208,7 +210,9 @@ class CallbackQuery(Object, Update):
                 disable_web_page_preview=disable_web_page_preview,
                 reply_markup=reply_markup,
                 business_connection_id=getattr(
-                    self.message, "business_connection_id", None
+                    self.message,
+                    "business_connection_id",
+                    None,
                 ),
             )
         return await self._client.edit_inline_text(
@@ -257,7 +261,9 @@ class CallbackQuery(Object, Update):
             parse_mode,
             reply_markup=reply_markup,
             business_connection_id=getattr(
-                self.message, "business_connection_id", None
+                self.message,
+                "business_connection_id",
+                None,
             )
             if business_connection_id is None
             else business_connection_id,
@@ -298,7 +304,9 @@ class CallbackQuery(Object, Update):
                 media=media,
                 reply_markup=reply_markup,
                 business_connection_id=getattr(
-                    self.message, "business_connection_id", None
+                    self.message,
+                    "business_connection_id",
+                    None,
                 )
                 if business_connection_id is None
                 else business_connection_id,
@@ -339,7 +347,9 @@ class CallbackQuery(Object, Update):
                 message_id=self.message.id,
                 reply_markup=reply_markup,
                 business_connection_id=getattr(
-                    self.message, "business_connection_id", None
+                    self.message,
+                    "business_connection_id",
+                    None,
                 )
                 if business_connection_id is None
                 else business_connection_id,

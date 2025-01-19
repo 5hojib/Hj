@@ -49,7 +49,7 @@ class GetFolders:
             folder
             for folder in dialog_filters.filters
             if not isinstance(folder, raw.types.DialogFilterDefault)
-            and (is_iterable and folder.id in ids or not is_iterable)
+            and ((is_iterable and folder.id in ids) or not is_iterable)
         ]
 
         raw_peers = {}
@@ -67,8 +67,8 @@ class GetFolders:
             chunk = list(raw_peers.values())[i : i + 100]
             r = await self.invoke(
                 raw.functions.messages.GetPeerDialogs(
-                    peers=[raw.types.InputDialogPeer(peer=peer) for peer in chunk]
-                )
+                    peers=[raw.types.InputDialogPeer(peer=peer) for peer in chunk],
+                ),
             )
             users.update({i.id: i for i in r.users})
             chats.update({i.id: i for i in r.chats})

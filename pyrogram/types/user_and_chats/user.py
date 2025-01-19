@@ -273,15 +273,18 @@ class User(Object, Update):
             dc_id=getattr(user.photo, "dc_id", None),
             phone_number=user.phone,
             photo=types.ChatPhoto._parse(
-                client, user.photo, user.id, user.access_hash
+                client,
+                user.photo,
+                user.id,
+                user.access_hash,
             ),
             restrictions=types.List(
-                [types.Restriction._parse(r) for r in user.restriction_reason]
+                [types.Restriction._parse(r) for r in user.restriction_reason],
             )
             or None,
             reply_color=types.ChatColor._parse(getattr(user, "color", None)),
             profile_color=types.ChatColor._parse_profile_color(
-                getattr(user, "profile_color", None)
+                getattr(user, "profile_color", None),
             ),
             active_users=active_users,
             client=client,

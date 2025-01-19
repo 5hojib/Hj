@@ -92,7 +92,8 @@ def get_input_peer(peer_id: int, access_hash: int, peer_type: str):
 
     if peer_type in ["channel", "supergroup"]:
         return raw.types.InputPeerChannel(
-            channel_id=utils.get_channel_id(peer_id), access_hash=access_hash
+            channel_id=utils.get_channel_id(peer_id),
+            access_hash=access_hash,
         )
 
     raise ValueError(f"Invalid peer type: {peer_type}")
@@ -130,7 +131,8 @@ class SQLiteStorage(Storage):
         raise NotImplementedError
 
     async def update_peers(
-        self, peers: list[tuple[int, int, str, str, str]]
+        self,
+        peers: list[tuple[int, int, str, str, str]],
     ) -> None:
         with contextlib.suppress(Exception):
             await self.conn.executemany(
@@ -143,10 +145,12 @@ class SQLiteStorage(Storage):
         await self.conn.executescript(UNAME_SCHEMA)
         for user in usernames:
             await self.conn.execute(
-                "DELETE FROM usernames WHERE peer_id=?", (user[0],)
+                "DELETE FROM usernames WHERE peer_id=?",
+                (user[0],),
             )
         await self.conn.executemany(
-            "REPLACE INTO usernames (peer_id, id)" "VALUES (?, ?)", usernames
+            "REPLACE INTO usernames (peer_id, id)" "VALUES (?, ?)",
+            usernames,
         )
 
     async def update_state(self, value: tuple[int, int, int, int, int] = object):
@@ -154,12 +158,13 @@ class SQLiteStorage(Storage):
             return await (
                 await self.conn.execute(
                     "SELECT id, pts, qts, date, seq FROM update_state "
-                    "ORDER BY date ASC"
+                    "ORDER BY date ASC",
                 )
             ).fetchall()
         if isinstance(value, int):
             await self.conn.execute(
-                "DELETE FROM update_state WHERE id = ?", (value,)
+                "DELETE FROM update_state WHERE id = ?",
+                (value,),
             )
         else:
             await self.conn.execute(
@@ -172,7 +177,8 @@ class SQLiteStorage(Storage):
 
     async def get_peer_by_id(self, peer_id: int):
         q = await self.conn.execute(
-            "SELECT id, access_hash, type FROM peers WHERE id = ?", (peer_id,)
+            "SELECT id, access_hash, type FROM peers WHERE id = ?",
+            (peer_id,),
         )
         r = await q.fetchone()
 

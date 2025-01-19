@@ -43,7 +43,7 @@ class OnPreCheckoutQuery:
                     (
                         pyrogram.handlers.PreCheckoutQueryHandler(func, self),
                         group if filters is None else filters,
-                    )
+                    ),
                 )
 
             return func
