@@ -6,6 +6,7 @@ jobs:
   build:
     permissions:
       id-token: write
+      contents: write
     name: scrape-errors
     runs-on: ubuntu-latest
     steps:
