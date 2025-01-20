@@ -20,6 +20,7 @@ CHAT_SEND_ROUNDVIDEOS_FORBIDDEN	You can't send round videos to this chat.
 CHAT_SEND_STICKERS_FORBIDDEN	You can't send stickers in this chat
 CHAT_SEND_VIDEOS_FORBIDDEN	You can't send videos in this chat
 CHAT_SEND_VOICES_FORBIDDEN	You can't send voice recordings in this chat
+CHAT_TYPE_INVALID	The specified user type is invalid.
 CHAT_WRITE_FORBIDDEN	You can't write in this chat
 EDIT_BOT_INVITE_FORBIDDEN	Bots' chat invite links can't be edited
 GROUPCALL_ALREADY_STARTED	The groupcall has already started, you can join directly using phone.joinGroupCall
@@ -31,6 +32,7 @@ MESSAGE_DELETE_FORBIDDEN	You don't have rights to delete messages in this chat, 
 NOT_ALLOWED	Not allowed
 NOT_ELIGIBLE	You are not eligible for this action
 PARTICIPANT_JOIN_MISSING	Trying to enable a presentation, when the user hasn't joined the Video Chat with phone.joinGroupCall
+PEER_ID_INVALID	The provided peer id is invalid.
 POLL_VOTE_REQUIRED	Cast a vote in the poll before calling this method
 PREMIUM_ACCOUNT_REQUIRED	This action requires a premium account
 PRIVACY_PREMIUM_REQUIRED	The user has restricted from sending messages OR This action requires a premium account
